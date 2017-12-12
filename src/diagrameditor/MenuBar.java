@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package diagrameditor;
 
 import com.mxgraph.analysis.mxAnalysisGraph;
@@ -34,15 +30,6 @@ public class MenuBar extends JMenuBar {
 
         menu.add(menuItem);
         
-        /* Creates the file menu
-         menu = add(new JMenu(mxResources.get("file")));
-         menu.add(editor.bind(mxResources.get("new"), new NewAction(), "/images/new.gif"));
-         menu.add(editor.bind(mxResources.get("openFile"), new OpenAction(), "/images/open.gif"));
-	
-         menu.add(editor.bind(mxResources.get("save"), new SaveAction(false), "/images/save.gif"));
-         menu.add(editor.bind(mxResources.get("saveAs"), new SaveAction(true), "/images/saveas.gif"));
-
-         menu.addSeparator();*/
     }
 
 }
