@@ -13,9 +13,12 @@ import java.awt.BorderLayout;
 import java.awt.PopupMenu;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -42,10 +45,12 @@ public class DiagramEditor extends JPanel {
         final mxGraph graph = graphComponent.getGraph();
         this.setWindowPanels();
         setShapeOptions(graph);
+        setMouseListener(graphComponent);
     }
 
     public static void main(String[] args) {
-        DiagramEditor editor = new DiagramEditor("mxGraph Editor", new CustomGraphComponent(new CustomGraph()));
+        CustomGraphComponent graphComponent = new CustomGraphComponent(new CustomGraph());
+        DiagramEditor editor = new DiagramEditor("mxGraph Editor", graphComponent);
         editor.setLookAndFeel();
         editor.createFrame(new MenuBar(editor)).setVisible(true);
     }
@@ -97,6 +102,9 @@ public class DiagramEditor extends JPanel {
         shapeOptions.addOption("Rectangle", new ImageIcon(
                 DiagramEditor.class.getResource("/images/rectangle.png")),
                 null, 160, 120, "");
+        shapeOptions.addOption("Rectangle2", new ImageIcon(
+                DiagramEditor.class.getResource("/images/rectangle.png")),
+                "fillColor=red", 160, 120, "");
         shapeOptions.addOption("Ellipse", new ImageIcon(
                 DiagramEditor.class
                 .getResource("/images/ellipse.png")),
@@ -126,6 +134,26 @@ public class DiagramEditor extends JPanel {
 
     public mxGraphComponent getGraphComponent() {
         return graphComponent;
+    }
+    
+    public void setMouseListener(mxGraphComponent graphComponent){
+        // MouseListener that Prints the Cell on Doubleclick
+        graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+              if (e.getClickCount() == 2) {
+                // Get Cell under Mousepointer
+                myCell cell =(myCell) getGraphComponent().getCellAt(e.getX(), e.getY());
+                String name = cell.getMyGeometry().getName();
+                String id = cell.getId();
+                // Print Cell Label
+                if (cell != null) {
+                    JOptionPane.showMessageDialog(null, "Name: "+name+" Id: "+id+" location: "+cell.getGeometry());
+                  System.out.println(cell);
+                }
+              }
+            }
+        });
     }
 
 }

@@ -24,6 +24,7 @@ import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
@@ -57,7 +58,7 @@ public class EditorOptionsMenu extends JPanel {
 
     public void addOption(final String nameP, ImageIcon icon, String style,
             int width, int height, Object value) {
-        mxCell cell = new mxCell(value, new mxGeometry(0, 0, width, height), style);
+        myCell cell = new myCell(value, new mymxGeometry(0, 0, width, height, nameP), style);
         cell.setVertex(true);
         name = nameP;
         addOption(icon, cell);
@@ -65,18 +66,18 @@ public class EditorOptionsMenu extends JPanel {
     
     public void addEdgeOption(final String nameP, ImageIcon icon,
         String style, int width, int height, Object value) {
-        mxGeometry geometry = new mxGeometry(0, 0, width, height);
+        mymxGeometry geometry = new mymxGeometry(0, 0, width, height, nameP);
         geometry.setTerminalPoint(new mxPoint(0, height), true);
         geometry.setTerminalPoint(new mxPoint(width, 0), false);
         geometry.setRelative(true);
 
-        mxCell cell = new mxCell(value, geometry, style);
+        myCell cell = new myCell(value, geometry, style);
         cell.setEdge(true);
         name = nameP;
         addOption(icon, cell);
     }
 
-    public void addOption(ImageIcon icon, mxCell cell) {
+    public void addOption(ImageIcon icon, myCell cell) {
         icon = scaleIconImage(icon);
         JLabel label = new JLabel(icon);
         setLabel(cell, label);
@@ -92,12 +93,12 @@ public class EditorOptionsMenu extends JPanel {
         return icon;
     }
 
-    private void setLabel(mxCell cell, JLabel label) {
-        mxRectangle bounds = (mxGeometry) cell.getGeometry().clone();
+    private void setLabel(myCell cell, JLabel label) {
+        mxRectangle bounds = (mymxGeometry) cell.getMyGeometry().clone();
         final mxGraphTransferable t = new mxGraphTransferable(
                 new Object[]{cell}, bounds);
         setLabelFormat(label);
-        setMouseListener(label, t);
+        setMouseListener(label, t, cell.getMyGeometry().getName());
         InstallDragNodeHandler(label, t);
     }
 
@@ -112,7 +113,7 @@ public class EditorOptionsMenu extends JPanel {
         label.setText(name);
     }
 
-    private void setMouseListener(JLabel label, mxGraphTransferable t) {
+    private void setMouseListener(JLabel label, mxGraphTransferable t, String name) {
 
         label.addMouseListener(new MouseListener() {
             @Override
