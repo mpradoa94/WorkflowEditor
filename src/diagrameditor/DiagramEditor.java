@@ -99,6 +99,9 @@ public class DiagramEditor extends JPanel {
     private void setShapeOptions(mxGraph graph) {
         EditorOptionsMenu shapeOptions = insertOptionsMenu(mxResources.get("shapes"));
 
+        shapeOptions.addOption("Container", new ImageIcon(
+                DiagramEditor.class.getResource("/images/rectangle.png")),
+                "swimlane", 160, 120, "Container");
         shapeOptions.addOption("Rectangle", new ImageIcon(
                 DiagramEditor.class.getResource("/images/rectangle.png")),
                 null, 160, 120, "");
@@ -129,29 +132,42 @@ public class DiagramEditor extends JPanel {
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         libraryPane.add(title, scrollPanel);
+        update_pane_width(scrollPanel, optionsMenu);
         return optionsMenu;
+    }
+    
+    private void update_pane_width(JScrollPane scrollPanel, EditorOptionsMenu menu)
+    {
+        // Updates the widths of the palettes if the container size changes
+        libraryPane.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                int w = scrollPanel.getWidth()
+                        - scrollPanel.getVerticalScrollBar().getWidth();
+                menu.setPreferredWidth(w);
+            }
+
+        });
     }
 
     public mxGraphComponent getGraphComponent() {
         return graphComponent;
     }
-    
-    public void setMouseListener(mxGraphComponent graphComponent){
+
+    public void setMouseListener(mxGraphComponent graphComponent) {
         // MouseListener that Prints the Cell on Doubleclick
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseReleased(MouseEvent e) {
-              if (e.getClickCount() == 2) {
-                // Get Cell under Mousepointer
-                myCell cell =(myCell) getGraphComponent().getCellAt(e.getX(), e.getY());
-                String name = cell.getMyGeometry().getName();
-                String id = cell.getId();
-                // Print Cell Label
-                if (cell != null) {
-                    JOptionPane.showMessageDialog(null, "Name: "+name+" Id: "+id+" location: "+cell.getGeometry());
-                  System.out.println(cell);
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    // Get Cell under Mousepointer
+                    mxCell cell = (mxCell) getGraphComponent().getCellAt(e.getX(), e.getY());
+                    String id = cell.getId();
+                    // Print Cell Label
+                    if (cell != null) {
+                        JOptionPane.showMessageDialog(null, "Id: " + id + " location: " + cell.getGeometry());
+                        System.out.println(cell);
+                    }
                 }
-              }
             }
         });
     }
