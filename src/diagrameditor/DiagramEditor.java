@@ -1,6 +1,8 @@
 package diagrameditor;
 
 import com.mxgraph.model.mxCell;
+import com.mxgraph.swing.handler.mxKeyboardHandler;
+import com.mxgraph.swing.handler.mxRubberband;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.mxGraphOutline;
 import com.mxgraph.swing.util.mxGraphTransferable;
@@ -51,6 +53,10 @@ public class DiagramEditor extends JPanel {
     public static void main(String[] args) {
         CustomGraphComponent graphComponent = new CustomGraphComponent(new CustomGraph());
         DiagramEditor editor = new DiagramEditor("mxGraph Editor", graphComponent);
+        
+        new mxRubberband(graphComponent);
+        new mxKeyboardHandler(graphComponent);
+        
         editor.setLookAndFeel();
         editor.createFrame(new MenuBar(editor)).setVisible(true);
     }
@@ -99,15 +105,15 @@ public class DiagramEditor extends JPanel {
     private void setShapeOptions(mxGraph graph) {
         EditorOptionsMenu shapeOptions = insertOptionsMenu(mxResources.get("shapes"));
 
-        shapeOptions.addOption("Container", new ImageIcon(
-                DiagramEditor.class.getResource("/images/rectangle.png")),
-                "swimlane", 160, 120, "Container");
+        shapeOptions.addOption("Condition", new ImageIcon(
+                DiagramEditor.class.getResource("/images/swimlane.png")),
+                "swimlane", 160, 120, "Condition");
+        shapeOptions.addOption("Other", new ImageIcon(
+                DiagramEditor.class.getResource("/images/swimlane.png")),
+                "swimlane", 160, 120, "Other");
         shapeOptions.addOption("Rectangle", new ImageIcon(
                 DiagramEditor.class.getResource("/images/rectangle.png")),
                 null, 160, 120, "");
-        shapeOptions.addOption("Rectangle2", new ImageIcon(
-                DiagramEditor.class.getResource("/images/rectangle.png")),
-                "fillColor=red", 160, 120, "");
         shapeOptions.addOption("Ellipse", new ImageIcon(
                 DiagramEditor.class
                 .getResource("/images/ellipse.png")),
