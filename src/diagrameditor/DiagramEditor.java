@@ -119,7 +119,7 @@ public class DiagramEditor extends JPanel {
                 "swimlane", 160, 120, flow);
         shapeOptions.addOption("Role", new ImageIcon(
                 DiagramEditor.class.getResource("/images/swimlane.png")),
-                "swimlane", 160, 120, role);
+                "swimlane;horizontal=0;", 160, 120, role);
         shapeOptions.addOption("Start", new ImageIcon(
                 DiagramEditor.class
                 .getResource("/images/ellipse.png")),
