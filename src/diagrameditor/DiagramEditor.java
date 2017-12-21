@@ -12,11 +12,13 @@ import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxResources;
 import com.mxgraph.view.mxGraph;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.PopupMenu;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -97,36 +99,37 @@ public class DiagramEditor extends JPanel {
         outer.setDividerLocation(200);
         outer.setDividerSize(6);
         outer.setBorder(null);
-
+    	
         setLayout(new BorderLayout());
         add(outer, BorderLayout.CENTER);
     }
 
     private void setShapeOptions(mxGraph graph) {
         EditorOptionsMenu shapeOptions = insertOptionsMenu(mxResources.get("shapes"));
-
-        shapeOptions.addOption("Condition", new ImageIcon(
+        
+        FlowVertex flujo = new FlowVertex("Flujo");
+        shapeOptions.createCell("Condition", new ImageIcon(
                 DiagramEditor.class.getResource("/images/swimlane.png")),
-                "swimlane", 160, 120, "Condition");
-        shapeOptions.addOption("Other", new ImageIcon(
+                "swimlane", 160, 120, flujo);
+        shapeOptions.createCell("Other", new ImageIcon(
                 DiagramEditor.class.getResource("/images/swimlane.png")),
                 "swimlane", 160, 120, "Other");
-        shapeOptions.addOption("Rectangle", new ImageIcon(
+        shapeOptions.createCell("Rectangle", new ImageIcon(
                 DiagramEditor.class.getResource("/images/rectangle.png")),
                 null, 160, 120, "");
-        shapeOptions.addOption("Ellipse", new ImageIcon(
+        shapeOptions.createCell("Ellipse", new ImageIcon(
                 DiagramEditor.class
                 .getResource("/images/ellipse.png")),
                 "ellipse", 160, 160, "");
-        shapeOptions.addOption("Rhombus", new ImageIcon(
+        shapeOptions.createCell("Rhombus", new ImageIcon(
                 DiagramEditor.class
                 .getResource("/images/rhombus.png")),
                 "rhombus", 160, 160, "");
-        shapeOptions.addEdgeOption("Horizontal Connector", new ImageIcon(
+        shapeOptions.createCell("Horizontal Connector", new ImageIcon(
                 DiagramEditor.class
                 .getResource("/images/connect.png")),
                 null, 100, 100, "");
-        shapeOptions.addEdgeOption("Vertical Connector", new ImageIcon(
+        shapeOptions.createCell("Vertical Connector", new ImageIcon(
                 DiagramEditor.class
                 .getResource("/images/vertical.png")),
                 "vertical", 100, 100, "");

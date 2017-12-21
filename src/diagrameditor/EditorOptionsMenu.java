@@ -9,6 +9,7 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxRectangle;
+import java.util.HashMap;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -21,6 +22,9 @@ import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -56,12 +60,13 @@ public class EditorOptionsMenu extends JPanel {
         eventSource.addListener(eventName, listener);
     }
 
-    public void addOption(final String nameP, ImageIcon icon, String style,
+    public mxCell createCell(final String nameP, ImageIcon icon, String style,
             int width, int height, Object value) {
         mxCell cell = new mxCell(value, new mxGeometry(0, 0, width, height), style);
         cell.setVertex(true);
         name = nameP;
         addOption(icon, cell);
+        return cell;
     }
     
     public void addEdgeOption(final String nameP, ImageIcon icon,
@@ -76,7 +81,7 @@ public class EditorOptionsMenu extends JPanel {
         name = nameP;
         addOption(icon, cell);
     }
-
+    
     public void addOption(ImageIcon icon, mxCell cell) {
         icon = scaleIconImage(icon);
         JLabel label = new JLabel(icon);

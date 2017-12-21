@@ -24,6 +24,22 @@ class CustomGraph extends mxGraph {
     public void setEdgeTemplate(Object template) {
         edgeTemplate = template;
     }
+    
+    @Override
+    public String convertValueToString(Object cell)
+    {
+            Object result = model.getValue(cell);
+            if(result instanceof String){
+                return (result != null) ? result.toString() : "";
+            }
+            else if(result instanceof CustomVertex){
+                CustomVertex custom = (CustomVertex)result;
+                return custom.getLabel();
+            }
+            else{
+                return "";          
+            }
+    }
 
     public String getToolTipForCell(Object cell) {
         String tip = "<html>";
@@ -95,6 +111,8 @@ class CustomGraph extends mxGraph {
                 + ", translate=[x=" + numberFormat.format(trans.getX())
                 + ",y=" + numberFormat.format(trans.getY()) + "]";
         tip += "<br>childs= " + mxcell.getChildCount();
+        FlowVertex custom = (FlowVertex)mxcell.getValue();
+        tip += "<br>lalal= " + custom.getNameFlow();
         tip += "</html>";
 
         return tip;
