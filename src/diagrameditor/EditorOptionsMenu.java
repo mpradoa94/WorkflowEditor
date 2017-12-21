@@ -60,7 +60,7 @@ public class EditorOptionsMenu extends JPanel {
         eventSource.addListener(eventName, listener);
     }
 
-    public mxCell createCell(final String nameP, ImageIcon icon, String style,
+    public mxCell addOption(final String nameP, ImageIcon icon, String style,
             int width, int height, Object value) {
         mxCell cell = new mxCell(value, new mxGeometry(0, 0, width, height), style);
         cell.setVertex(true);

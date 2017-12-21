@@ -12,23 +12,19 @@ package diagrameditor;
  */
 public class FlowVertex extends CustomVertex{
     
-    private String label;
     private int idFlow;
     private String nameFlow;
     private int idVersion;
     
     public FlowVertex(String label, int idF, String nameF, int idV) {
-        super(label);
+        setLabel(label);
         setIdFlow(idF);
         setNameFlow(nameF);
         setIdVersion(idV);
     }
     
     public FlowVertex(String label) {
-        super(label);
-        setIdFlow(0);
-        setNameFlow("aaa");
-        setIdVersion(0);
+        this(label, 0, "", 0);
     }
 
     @Override
@@ -41,44 +37,26 @@ public class FlowVertex extends CustomVertex{
         return label;
     }
 
-    /**
-     * @return the idFlow
-     */
     public int getIdFlow() {
         return idFlow;
     }
 
-    /**
-     * @param idFlow the idFlow to set
-     */
     public void setIdFlow(int idFlow) {
         this.idFlow = idFlow;
     }
 
-    /**
-     * @return the nameFlow
-     */
     public String getNameFlow() {
         return nameFlow;
     }
 
-    /**
-     * @param nameFlow the nameFlow to set
-     */
     public void setNameFlow(String nameFlow) {
         this.nameFlow = nameFlow;
     }
 
-    /**
-     * @return the idVersion
-     */
     public int getIdVersion() {
         return idVersion;
     }
 
-    /**
-     * @param idVersion the idVersion to set
-     */
     public void setIdVersion(int idVersion) {
         this.idVersion = idVersion;
     }

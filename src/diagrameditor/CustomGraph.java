@@ -111,8 +111,7 @@ class CustomGraph extends mxGraph {
                 + ", translate=[x=" + numberFormat.format(trans.getX())
                 + ",y=" + numberFormat.format(trans.getY()) + "]";
         tip += "<br>childs= " + mxcell.getChildCount();
-        FlowVertex custom = (FlowVertex)mxcell.getValue();
-        tip += "<br>lalal= " + custom.getNameFlow();
+        tip += "<br>lalal= " + mxcell.getAttribute("name", "");
         tip += "</html>";
 
         return tip;

@@ -6,17 +6,10 @@
 
 package diagrameditor;
 
-import java.io.Serializable;
-
 /**
  *
  * @author MPA
  */
-public abstract class CustomVertex implements Serializable{
-    
-    protected String label;
-    
-    public abstract void setLabel(String value);
-    public abstract String getLabel();
-    
+public enum NodeType {
+    START, END, PROCESS, IF, SPLIT, MERGE
 }
