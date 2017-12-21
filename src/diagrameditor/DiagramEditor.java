@@ -9,8 +9,10 @@ import com.mxgraph.swing.util.mxGraphTransferable;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
+import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxResources;
 import com.mxgraph.view.mxGraph;
+import com.mxgraph.view.mxGraphSelectionModel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.PopupMenu;
@@ -20,7 +22,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -53,14 +57,32 @@ public class DiagramEditor extends JPanel {
     }
 
     public static void main(String[] args) {
-        CustomGraphComponent graphComponent = new CustomGraphComponent(new CustomGraph());
+        CustomGraph graph = new CustomGraph();
+        CustomGraphComponent graphComponent = new CustomGraphComponent(graph);
         DiagramEditor editor = new DiagramEditor("mxGraph Editor", graphComponent);
-        
+        setListenerToGraph(graph);
         new mxRubberband(graphComponent);
         new mxKeyboardHandler(graphComponent);
         
         editor.setLookAndFeel();
         editor.createFrame(new MenuBar(editor)).setVisible(true);
+    }
+    
+    public static void setListenerToGraph(CustomGraph graph){
+        graph.getSelectionModel().addListener(mxEvent.CHANGE, new mxIEventListener() {
+
+            @Override
+            public void invoke(Object sender, mxEventObject evt) {
+                System.out.println("evt.toString() = " + evt.toString());
+                System.out.println("Selection in graph component");
+                if (sender instanceof mxGraphSelectionModel) {
+                    for (Object cell : ((mxGraphSelectionModel)sender).getCells()) {
+                        System.out.println("cell=" + graph.getLabel(cell));
+                    }
+                }
+            }
+            
+        });
     }
 
     public void setLookAndFeel() {
@@ -99,9 +121,14 @@ public class DiagramEditor extends JPanel {
         outer.setDividerLocation(200);
         outer.setDividerSize(6);
         outer.setBorder(null);
+        
+        JPanel panel1 = new JPanel();
+        panel1.setPreferredSize( new Dimension(150, 150) );
+        panel1.add( new JLabel("Shape properties") );
     	
         setLayout(new BorderLayout());
         add(outer, BorderLayout.CENTER);
+        add(panel1, BorderLayout.EAST);
     }
 
     private void setShapeOptions(mxGraph graph) {
