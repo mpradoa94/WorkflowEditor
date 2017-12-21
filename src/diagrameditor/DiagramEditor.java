@@ -20,6 +20,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,6 +48,8 @@ public class DiagramEditor extends JPanel {
     protected mxGraphOutline graphOutline;
     protected final JTabbedPane libraryPane;
 
+    private JPanel propertiesPanel;
+
     public DiagramEditor(String appTitle, mxGraphComponent component) {
         this.appTitle = appTitle;
         graphComponent = component;
@@ -60,15 +65,15 @@ public class DiagramEditor extends JPanel {
         CustomGraph graph = new CustomGraph();
         CustomGraphComponent graphComponent = new CustomGraphComponent(graph);
         DiagramEditor editor = new DiagramEditor("mxGraph Editor", graphComponent);
-        setListenerToGraph(graph);
+        editor.setListenerToGraph(graph);
         new mxRubberband(graphComponent);
         new mxKeyboardHandler(graphComponent);
-        
+
         editor.setLookAndFeel();
         editor.createFrame(new MenuBar(editor)).setVisible(true);
     }
-    
-    public static void setListenerToGraph(CustomGraph graph){
+
+    public void setListenerToGraph(CustomGraph graph) {
         graph.getSelectionModel().addListener(mxEvent.CHANGE, new mxIEventListener() {
 
             @Override
@@ -76,12 +81,28 @@ public class DiagramEditor extends JPanel {
                 System.out.println("evt.toString() = " + evt.toString());
                 System.out.println("Selection in graph component");
                 if (sender instanceof mxGraphSelectionModel) {
-                    for (Object cell : ((mxGraphSelectionModel)sender).getCells()) {
+                    for (Object cell : ((mxGraphSelectionModel) sender).getCells()) {
+                        //TODO: new function for this
                         System.out.println("cell=" + graph.getLabel(cell));
+                        propertiesPanel.add(new JLabel(graph.getLabel(cell)));
+                        propertiesPanel.add(new JLabel("properties: "));
+
+                        mxCell mxcell = (mxCell) cell;
+                        Field[] fields = mxcell.getValue().getClass().getDeclaredFields();
+                        System.out.printf("%d fields:%n", fields.length);
+                        for (Field field : fields) {
+                            System.out.printf("%s %s %s%n",
+                                    Modifier.toString(field.getModifiers()),
+                                    field.getType().getSimpleName(),
+                                    field.getName()
+                            );
+                        }
+                        propertiesPanel.add(new JLabel(mxcell.getAttribute("type", "")));
+                        propertiesPanel.revalidate();
                     }
                 }
             }
-            
+
         });
     }
 
@@ -121,26 +142,26 @@ public class DiagramEditor extends JPanel {
         outer.setDividerLocation(200);
         outer.setDividerSize(6);
         outer.setBorder(null);
-        
-        JPanel panel1 = new JPanel();
-        panel1.setPreferredSize( new Dimension(150, 150) );
-        panel1.add( new JLabel("Shape properties") );
-    	
+
+        propertiesPanel = new JPanel();
+        propertiesPanel.setPreferredSize(new Dimension(150, 150));
+        propertiesPanel.add(new JLabel("Shape properties"));
+
         setLayout(new BorderLayout());
         add(outer, BorderLayout.CENTER);
-        add(panel1, BorderLayout.EAST);
+        add(propertiesPanel, BorderLayout.EAST);
     }
 
     private void setShapeOptions(mxGraph graph) {
         EditorOptionsMenu shapeOptions = insertOptionsMenu(mxResources.get("shapes"));
-        
+
         FlowVertex flow = new FlowVertex("Flow");
         RoleVertex role = new RoleVertex("Role", "", "");
         NodeVertex start = new NodeVertex("Start", "", NodeType.START);
         NodeVertex process = new NodeVertex("Process", "", NodeType.PROCESS);
         NodeVertex ifNode = new NodeVertex("Process", "", NodeType.IF);
         NodeVertex end = new NodeVertex("End", "", NodeType.END);
-        
+
         shapeOptions.addOption("Flowchart", new ImageIcon(
                 DiagramEditor.class.getResource("/images/swimlane.png")),
                 "swimlane", 160, 120, flow);
@@ -181,9 +202,8 @@ public class DiagramEditor extends JPanel {
         update_pane_width(scrollPanel, optionsMenu);
         return optionsMenu;
     }
-    
-    private void update_pane_width(JScrollPane scrollPanel, EditorOptionsMenu menu)
-    {
+
+    private void update_pane_width(JScrollPane scrollPanel, EditorOptionsMenu menu) {
         // Updates the widths of the palettes if the container size changes
         libraryPane.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
