@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package diagrameditor;
 
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFormattedTextField;
@@ -19,15 +19,17 @@ import javax.swing.text.NumberFormatter;
  *
  * @author MPA
  */
-public class RoleVertex extends CustomVertex{
-    
+public class RoleVertex extends CustomVertex {
+
     private String key;
     private String name;
-    
+    private JPanel propertiesPanel;
+
     public RoleVertex(String label, String key, String name) {
         this.label = label;
         this.key = key;
         this.name = name;
+        setPropertiesPanel();
     }
 
     @Override
@@ -40,65 +42,43 @@ public class RoleVertex extends CustomVertex{
         return label;
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
     @Override
     public JPanel getPropertiesPanel() {
-        JPanel propertiesPanel = new JPanel();
-        propertiesPanel.setPreferredSize(new Dimension(150, 150));
-        propertiesPanel.add(new JLabel("Role vertex"));
-        propertiesPanel.add(new JLabel("Properties"));
-        createTextFields(propertiesPanel);
-
         return propertiesPanel;
+    }
+    
+    private void setPropertiesPanel() {
+        propertiesPanel = new JPanel(new GridLayout(0, 1));
+        propertiesPanel.add(new JLabel("<html><h3>Role vertex</h3></html>"));
+        propertiesPanel.add(new JLabel("<html><h4>Properties</h4></html>"));
+        createTextFields(propertiesPanel);
+        propertiesPanel.validate();
     }
 
     private void createTextFields(JPanel panel) {
-        JTextField textFieldName = new JTextField(10);
-        JTextField textFieldId = new JTextField(10);
-        JTextField textFieldVersion = new JTextField(10);
-        NumberFormatter formatter = new NumberFormatter(); //create the formatter
-        formatter.setAllowsInvalid(false); //must specify that invalid chars are not allowed
+        JTextField fieldName = new JTextField(10);
+        fieldName.setText(this.name);
+        JTextField fieldKey = new JTextField(10);
+        fieldKey.setText(this.key);
 
-        JFormattedTextField field = new JFormattedTextField(formatter);
-
-        textFieldName.addActionListener(new ActionListener() {
+        fieldName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                System.out.println("The entered text is: " + textFieldName.getText());
+                System.out.println("The entered text is: " + fieldName.getText());
             }
         });
 
-        textFieldId.addActionListener(new ActionListener() {
+        fieldKey.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                System.out.println("The entered text is: " + textFieldId.getText());
+                System.out.println("The entered text is: " + fieldKey.getText());
             }
         });
 
-        textFieldVersion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                System.out.println("The entered text is: " + textFieldVersion.getText());
-            }
-        });
-
-        panel.add(textFieldName);
+        panel.add(new JLabel("Name"));
+        panel.add(fieldName);
+        panel.add(new JLabel("Key"));
+        panel.add(fieldKey);
     }
 
-    
 }

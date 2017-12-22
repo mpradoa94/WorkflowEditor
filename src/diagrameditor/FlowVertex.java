@@ -5,14 +5,16 @@
  */
 package diagrameditor;
 
-import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFormattedTextField;
+import javafx.beans.value.ObservableValue;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.text.NumberFormatter;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -20,15 +22,17 @@ import javax.swing.text.NumberFormatter;
  */
 public class FlowVertex extends CustomVertex {
 
-    private int idFlow;
-    private String nameFlow;
+    private int id;
+    private String name;
     private int idVersion;
+    private static JPanel propertiesPanel;
 
-    public FlowVertex(String label, int idF, String nameF, int idV) {
-        setLabel(label);
-        setIdFlow(idF);
-        setNameFlow(nameF);
-        setIdVersion(idV);
+    public FlowVertex(String label, int id, String name, int idVersion) {
+        this.label = label;
+        this.id = id;
+        this.name = name;
+        this.idVersion = idVersion;
+        setPropertiesPanel();
     }
 
     public FlowVertex(String label) {
@@ -45,71 +49,58 @@ public class FlowVertex extends CustomVertex {
         return label;
     }
 
-    public int getIdFlow() {
-        return idFlow;
-    }
-
-    public void setIdFlow(int idFlow) {
-        this.idFlow = idFlow;
-    }
-
-    public String getNameFlow() {
-        return nameFlow;
-    }
-
-    public void setNameFlow(String nameFlow) {
-        this.nameFlow = nameFlow;
-    }
-
-    public int getIdVersion() {
-        return idVersion;
-    }
-
-    public void setIdVersion(int idVersion) {
-        this.idVersion = idVersion;
-    }
-
     @Override
-    public JPanel getPropertiesPanel() {
-        JPanel propertiesPanel = new JPanel();
-        propertiesPanel.setPreferredSize(new Dimension(150, 150));
-        propertiesPanel.add(new JLabel("<html>Flow vertex<br>Properties</html>"));
-        createTextFields(propertiesPanel);
-
+    public JPanel getPropertiesPanel() {     
         return propertiesPanel;
+    }
+    
+    private void setPropertiesPanel() {
+        propertiesPanel = new JPanel(new GridLayout(0, 1));
+        propertiesPanel.add(new JLabel("<html><h3>Flow vertex</h3></html>"));
+        propertiesPanel.add(new JLabel("<html><h4>Properties</h4></html>"));
+        createTextFields(propertiesPanel);
+        propertiesPanel.validate();
     }
 
     private void createTextFields(JPanel panel) {
-        JTextField textFieldName = new JTextField(10);
-        JTextField textFieldId = new JTextField(10);
-        JTextField textFieldVersion = new JTextField(10);
-        NumberFormatter formatter = new NumberFormatter(); //create the formatter
-        formatter.setAllowsInvalid(false); //must specify that invalid chars are not allowed
+        JTextField fieldName = new JTextField(10);
+        fieldName.setText(this.name);
+        JSpinner fieldId = new JSpinner();
+        fieldId.setValue(this.id);
+        JSpinner fieldVersion = new JSpinner();
+        fieldId.setValue(this.idVersion);
 
-        JFormattedTextField field = new JFormattedTextField(formatter);
-
-        textFieldName.addActionListener(new ActionListener() {
+        fieldName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                System.out.println("The entered text is: " + textFieldName.getText());
+                FlowVertex.this.name = fieldName.getText();
+                System.out.println("Name: " + FlowVertex.this.name);
             }
         });
 
-        textFieldId.addActionListener(new ActionListener() {
+        fieldId.addChangeListener(new ChangeListener() {
             @Override
-            public void actionPerformed(ActionEvent event) {
-                System.out.println("The entered text is: " + textFieldId.getText());
+            public void stateChanged(ChangeEvent e) {
+                FlowVertex.this.id = (int) fieldId.getValue();
+                System.out.println("Id: " + FlowVertex.this.id);
             }
         });
 
-        textFieldVersion.addActionListener(new ActionListener() {
+        fieldVersion.addChangeListener(new ChangeListener() {
+
             @Override
-            public void actionPerformed(ActionEvent event) {
-                System.out.println("The entered text is: " + textFieldVersion.getText());
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("The entered text is: " + fieldVersion.getValue().toString());
+                FlowVertex.this.id = (int) fieldVersion.getValue();
             }
         });
 
-        panel.add(textFieldName);
+        panel.add(new JLabel("Name"));
+        panel.add(fieldName);
+        panel.add(new JLabel("Id"));
+        panel.add(fieldId);
+        panel.add(new JLabel("Version"));
+        panel.add(fieldVersion);
     }
 
 }

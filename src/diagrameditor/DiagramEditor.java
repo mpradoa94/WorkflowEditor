@@ -83,8 +83,7 @@ public class DiagramEditor extends JPanel {
 
             @Override
             public void invoke(Object sender, mxEventObject evt) {
-                System.out.println("evt.toString() = " + evt.toString());
-                System.out.println("Selection in graph component");
+                System.out.println("Selection in graph component"+sender.toString());
                 if (sender instanceof mxGraphSelectionModel) {
                     for (Object cell : ((mxGraphSelectionModel) sender).getCells()) {
                         addNewCellPanel((mxCell) cell);
@@ -98,6 +97,8 @@ public class DiagramEditor extends JPanel {
     public void addNewCellPanel(mxCell cell) {
         Object value = cell.getValue();
         if (value instanceof CustomVertex) {
+            System.out.println("Clearing...");
+            propertiesPanel.removeAll();
             CustomVertex custom = (CustomVertex) value;
             JPanel newPane = custom.getPropertiesPanel();
             propertiesPanel.add(newPane);
@@ -144,8 +145,6 @@ public class DiagramEditor extends JPanel {
         outer.setBorder(null);
 
         propertiesPanel = new JPanel();
-        propertiesPanel.setPreferredSize(new Dimension(150, 150));
-        propertiesPanel.add(new JLabel("Shape properties"));
 
         setLayout(new BorderLayout());
         add(outer, BorderLayout.CENTER);
