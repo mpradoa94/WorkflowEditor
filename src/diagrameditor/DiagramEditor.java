@@ -16,6 +16,8 @@ import com.mxgraph.view.mxGraphSelectionModel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.PopupMenu;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -23,6 +25,8 @@ import java.awt.event.MouseEvent;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,6 +38,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -82,28 +87,23 @@ public class DiagramEditor extends JPanel {
                 System.out.println("Selection in graph component");
                 if (sender instanceof mxGraphSelectionModel) {
                     for (Object cell : ((mxGraphSelectionModel) sender).getCells()) {
-                        //TODO: new function for this
-                        System.out.println("cell=" + graph.getLabel(cell));
-                        propertiesPanel.add(new JLabel(graph.getLabel(cell)));
-                        propertiesPanel.add(new JLabel("properties: "));
-
-                        mxCell mxcell = (mxCell) cell;
-                        Field[] fields = mxcell.getValue().getClass().getDeclaredFields();
-                        System.out.printf("%d fields:%n", fields.length);
-                        for (Field field : fields) {
-                            System.out.printf("%s %s %s%n",
-                                    Modifier.toString(field.getModifiers()),
-                                    field.getType().getSimpleName(),
-                                    field.getName()
-                            );
-                        }
-                        propertiesPanel.add(new JLabel(mxcell.getAttribute("type", "")));
-                        propertiesPanel.revalidate();
+                        addNewCellPanel((mxCell) cell);
                     }
                 }
             }
 
         });
+    }
+
+    public void addNewCellPanel(mxCell cell) {
+        Object value = cell.getValue();
+        if (value instanceof CustomVertex) {
+            CustomVertex custom = (CustomVertex) value;
+            JPanel newPane = custom.getPropertiesPanel();
+            propertiesPanel.add(newPane);
+        }
+        propertiesPanel.revalidate();
+
     }
 
     public void setLookAndFeel() {

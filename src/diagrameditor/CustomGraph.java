@@ -2,6 +2,7 @@ package diagrameditor;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
+import com.mxgraph.model.mxICell;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
@@ -47,6 +48,16 @@ class CustomGraph extends mxGraph {
         mxCellState state = getView().getState(cell);
         NumberFormat numberFormat = NumberFormat.getInstance();
         mxCell mxcell = (mxCell) cell;
+        
+        //TODO: move to more logical location
+        if (mxcell.getValue() instanceof NodeVertex){
+            NodeVertex node = (NodeVertex) mxcell.getValue();
+            mxICell parent = mxcell.getParent();
+            if (parent.getValue() instanceof RoleVertex){
+                node.setRole((RoleVertex) parent.getValue());
+                this.getView().validate();
+            }
+        }
         
         if (getModel().isEdge(cell)) {
             tip += "points={";

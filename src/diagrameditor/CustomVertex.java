@@ -7,6 +7,7 @@
 package diagrameditor;
 
 import java.io.Serializable;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,5 +19,6 @@ public abstract class CustomVertex implements Serializable{
     
     public abstract void setLabel(String value);
     public abstract String getLabel();
+    public abstract JPanel getPropertiesPanel();
     
 }
