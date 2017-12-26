@@ -104,7 +104,7 @@ public class DiagramEditor extends JPanel {
             propertiesPanel.add(newPane);
         }
         propertiesPanel.revalidate();
-
+        propertiesPanel.repaint();
     }
 
     public void setLookAndFeel() {

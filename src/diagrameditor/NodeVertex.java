@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package diagrameditor;
 
 import java.awt.Dimension;
@@ -25,8 +24,7 @@ import javax.swing.event.ChangeListener;
  * @author MPA
  */
 public class NodeVertex extends CustomVertex {
-    
-    
+
     private String label;
     private int id;
     private String name;
@@ -34,19 +32,19 @@ public class NodeVertex extends CustomVertex {
     private int timeNodeMax;
     private NodeType type;
     private RoleVertex role;
-    private static JPanel propertiesPanel;
-    
-    public NodeVertex(String label, String name, NodeType type, int timeNode, int timeNodeMax) {
+    private JPanel propertiesPanel;
+
+    public NodeVertex(String label, String name, int id, NodeType type, int timeNode, int timeNodeMax) {
         this.label = label;
+        this.id = id;
         this.name = name;
         this.type = type;
         this.timeNode = timeNode;
         this.timeNodeMax = timeNodeMax;
-        setPropertiesPanel();
     }
-    
+
     public NodeVertex(String label, String name, NodeType type) {
-        this(label, name, type, 0, 0);
+        this(label, name, 0, type, 0, 0);
     }
 
     @Override
@@ -61,6 +59,7 @@ public class NodeVertex extends CustomVertex {
 
     @Override
     public JPanel getPropertiesPanel() {
+        setPropertiesPanel();
         return propertiesPanel;
     }
     
@@ -71,26 +70,24 @@ public class NodeVertex extends CustomVertex {
         createTextFields(propertiesPanel);
         propertiesPanel.validate();
     }
-    
+
     private void createTextFields(JPanel panel) {
         JTextField fieldName = new JTextField(10);
+        fieldName.setText(this.name);
         JSpinner fieldId = new JSpinner();
+        fieldId.setValue(this.id);
         JSpinner fieldTime = new JSpinner();
+        fieldTime.setValue(this.timeNode);
         JSpinner fieldTimeMax = new JSpinner();
+        fieldTimeMax.setValue(this.timeNodeMax);
+        JTextField fieldType = new JTextField(10);
+        fieldType.setText(this.type.toString());
+        fieldType.setEditable(false);
         JTextField fieldRole = new JTextField(10);
-        fieldRole.enableInputMethods(false);
-        
-        List<String> typeStrings = new ArrayList<>();
-        for (NodeType type : NodeType.values()){
-            typeStrings.add(type.name());
-        }
-        SpinnerListModel typeModel = new SpinnerListModel(typeStrings);     
-        JSpinner fieldType = new JSpinner(typeModel);
-        
-        if (role != null)
-        {
-            String t = role.getLabel();
-            fieldRole.setText(role.getLabel());
+        fieldRole.setEditable(false);
+
+        if (role != null) {
+            fieldRole.setText(role.getName());
         }
 
         fieldName.addActionListener(new ActionListener() {
@@ -100,43 +97,35 @@ public class NodeVertex extends CustomVertex {
                 System.out.println("Name: " + NodeVertex.this.name);
             }
         });
-        
+
         fieldId.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                NodeVertex.this.id = (int) fieldId.getValue();
+                NodeVertex.this.id = (Integer) fieldId.getValue();
                 System.out.println("Id: " + NodeVertex.this.id);
             }
         });
-        
+
         fieldTime.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                NodeVertex.this.timeNode = (int) fieldTime.getValue();
+                NodeVertex.this.timeNode = (Integer) fieldTime.getValue();
                 System.out.println("Time node: " + NodeVertex.this.timeNode);
             }
         });
-        
+
         fieldTimeMax.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                NodeVertex.this.timeNodeMax = (int) fieldTime.getValue();
+                NodeVertex.this.timeNodeMax = (Integer) fieldTime.getValue();
                 System.out.println("Time max: " + NodeVertex.this.timeNodeMax);
             }
         });
-        
-        fieldType.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                NodeVertex.this.type = (NodeType) fieldType.getValue();
-                System.out.println("Type: " + NodeVertex.this.type);
-            }
-        });
 
-        panel.add(new JLabel("Name"));
-        panel.add(fieldName);
-        panel.add(new JLabel("Id"));
-        panel.add(fieldId);
+        propertiesPanel.add(new JLabel("Name"));
+        propertiesPanel.add(fieldName);
+        propertiesPanel.add(new JLabel("Node num"));
+        propertiesPanel.add(fieldId);
         panel.add(new JLabel("Type"));
         panel.add(fieldType);
         panel.add(new JLabel("Time"));
@@ -154,5 +143,5 @@ public class NodeVertex extends CustomVertex {
     public void setRole(RoleVertex role) {
         this.role = role;
     }
-    
+
 }

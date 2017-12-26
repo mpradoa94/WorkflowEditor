@@ -29,7 +29,6 @@ public class RoleVertex extends CustomVertex {
         this.label = label;
         this.key = key;
         this.name = name;
-        setPropertiesPanel();
     }
 
     @Override
@@ -41,9 +40,14 @@ public class RoleVertex extends CustomVertex {
     public String getLabel() {
         return label;
     }
+    
+    public String getName(){
+        return name;
+    }
 
     @Override
     public JPanel getPropertiesPanel() {
+        setPropertiesPanel();
         return propertiesPanel;
     }
     
@@ -65,13 +69,16 @@ public class RoleVertex extends CustomVertex {
             @Override
             public void actionPerformed(ActionEvent event) {
                 System.out.println("The entered text is: " + fieldName.getText());
+                RoleVertex.this.name = fieldName.getText();
+                System.out.println("Name: " + RoleVertex.this.name);
             }
         });
 
         fieldKey.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                System.out.println("The entered text is: " + fieldKey.getText());
+                RoleVertex.this.key = fieldKey.getText();
+                System.out.println("Name: " + RoleVertex.this.key);
             }
         });
 
@@ -80,5 +87,4 @@ public class RoleVertex extends CustomVertex {
         panel.add(new JLabel("Key"));
         panel.add(fieldKey);
     }
-
 }

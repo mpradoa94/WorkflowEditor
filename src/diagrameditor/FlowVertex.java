@@ -25,14 +25,13 @@ public class FlowVertex extends CustomVertex {
     private int id;
     private String name;
     private int idVersion;
-    private static JPanel propertiesPanel;
+    private JPanel propertiesPanel;
 
     public FlowVertex(String label, int id, String name, int idVersion) {
         this.label = label;
         this.id = id;
         this.name = name;
         this.idVersion = idVersion;
-        setPropertiesPanel();
     }
 
     public FlowVertex(String label) {
@@ -50,7 +49,8 @@ public class FlowVertex extends CustomVertex {
     }
 
     @Override
-    public JPanel getPropertiesPanel() {     
+    public JPanel getPropertiesPanel() {
+        setPropertiesPanel();
         return propertiesPanel;
     }
     
@@ -68,7 +68,7 @@ public class FlowVertex extends CustomVertex {
         JSpinner fieldId = new JSpinner();
         fieldId.setValue(this.id);
         JSpinner fieldVersion = new JSpinner();
-        fieldId.setValue(this.idVersion);
+        fieldVersion.setValue(this.idVersion);
 
         fieldName.addActionListener(new ActionListener() {
             @Override
@@ -81,7 +81,7 @@ public class FlowVertex extends CustomVertex {
         fieldId.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                FlowVertex.this.id = (int) fieldId.getValue();
+                FlowVertex.this.id = (Integer) fieldId.getValue();
                 System.out.println("Id: " + FlowVertex.this.id);
             }
         });
@@ -91,7 +91,7 @@ public class FlowVertex extends CustomVertex {
             @Override
             public void stateChanged(ChangeEvent e) {
                 System.out.println("The entered text is: " + fieldVersion.getValue().toString());
-                FlowVertex.this.id = (int) fieldVersion.getValue();
+                FlowVertex.this.idVersion = (Integer) fieldVersion.getValue();
             }
         });
 
