@@ -5,7 +5,9 @@ import com.mxgraph.analysis.mxAnalysisGraph;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxResources;
 import com.mxgraph.view.mxGraph;
+import diagrameditor.EditorMenuActions.SaveAction;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -25,11 +27,11 @@ public class MenuBar extends JMenuBar {
 
         JMenu menu = add(new JMenu("File"));
 
-        JMenuItem menuItem = new JMenuItem("A text-only menu item",
-                KeyEvent.VK_T);
+        JMenuItem saveAsOpt = new JMenuItem("Save as", KeyEvent.VK_T);
 
-        menu.add(menuItem);
+        menu.add(saveAsOpt);
         
+        saveAsOpt.addActionListener(new SaveAction(true, editor, graph));
     }
 
 }
