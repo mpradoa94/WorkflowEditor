@@ -31,7 +31,6 @@ public class NodeVertex extends CustomVertex {
     private int timeNodeMax;
     private NodeType type;
     private RoleVertex role;
-    private JPanel propertiesPanel;
 
     public NodeVertex(String label, String name, int id, NodeType type, int timeNode, int timeNodeMax) {
         this.label = label;
@@ -62,16 +61,12 @@ public class NodeVertex extends CustomVertex {
 
     @Override
     public JPanel getPropertiesPanel() {
-        setPropertiesPanel();
-        return propertiesPanel;
-    }
-    
-    private void setPropertiesPanel() {
-        propertiesPanel = new JPanel(new GridLayout(0, 1));
+        JPanel propertiesPanel = new JPanel(new GridLayout(0, 1));
         propertiesPanel.add(new JLabel("<html><h3>Node vertex</h3></html>"));
         propertiesPanel.add(new JLabel("<html><h4>Properties</h4></html>"));
         createTextFields(propertiesPanel);
         propertiesPanel.validate();
+        return propertiesPanel;
     }
 
     private void createTextFields(JPanel panel) {
@@ -125,10 +120,10 @@ public class NodeVertex extends CustomVertex {
             }
         });
 
-        propertiesPanel.add(new JLabel("Name"));
-        propertiesPanel.add(fieldName);
-        propertiesPanel.add(new JLabel("Node num"));
-        propertiesPanel.add(fieldId);
+        panel.add(new JLabel("Name"));
+        panel.add(fieldName);
+        panel.add(new JLabel("Node num"));
+        panel.add(fieldId);
         panel.add(new JLabel("Type"));
         panel.add(fieldType);
         panel.add(new JLabel("Time"));

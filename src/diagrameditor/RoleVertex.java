@@ -23,7 +23,6 @@ public class RoleVertex extends CustomVertex {
 
     private String key;
     private String name;
-    private JPanel propertiesPanel;
 
     public RoleVertex(String label, String key, String name) {
         this.label = label;
@@ -51,16 +50,12 @@ public class RoleVertex extends CustomVertex {
 
     @Override
     public JPanel getPropertiesPanel() {
-        setPropertiesPanel();
-        return propertiesPanel;
-    }
-    
-    private void setPropertiesPanel() {
-        propertiesPanel = new JPanel(new GridLayout(0, 1));
+        JPanel propertiesPanel = new JPanel(new GridLayout(0, 1));
         propertiesPanel.add(new JLabel("<html><h3>Role vertex</h3></html>"));
         propertiesPanel.add(new JLabel("<html><h4>Properties</h4></html>"));
         createTextFields(propertiesPanel);
         propertiesPanel.validate();
+        return propertiesPanel;
     }
 
     private void createTextFields(JPanel panel) {

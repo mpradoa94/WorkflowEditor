@@ -25,7 +25,6 @@ public class FlowVertex extends CustomVertex {
     private int idFlow;
     private String name;
     private int idVersion;
-    private JPanel propertiesPanel;
 
     public FlowVertex(String label, int id, String name, int idVersion) {
         this.label = label;
@@ -54,16 +53,12 @@ public class FlowVertex extends CustomVertex {
 
     @Override
     public JPanel getPropertiesPanel() {
-        setPropertiesPanel();
-        return propertiesPanel;
-    }
-    
-    private void setPropertiesPanel() {
-        propertiesPanel = new JPanel(new GridLayout(0, 1));
+        JPanel propertiesPanel = new JPanel(new GridLayout(0, 1));
         propertiesPanel.add(new JLabel("<html><h3>Flow vertex</h3></html>"));
         propertiesPanel.add(new JLabel("<html><h4>Properties</h4></html>"));
         createTextFields(propertiesPanel);
         propertiesPanel.validate();
+        return propertiesPanel;
     }
 
     private void createTextFields(JPanel panel) {
