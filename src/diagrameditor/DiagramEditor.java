@@ -169,19 +169,19 @@ public class DiagramEditor extends JPanel {
                 "swimlane;horizontal=0;", 160, 120, role);
         shapeOptions.addOption("Start", new ImageIcon(
                 DiagramEditor.class
-                .getResource("/images/ellipse.png")),
-                "shape=ellipse;strokeColor=green;fillColor=green", 60, 60, start);
+                .getResource("/images/swimlane.png")),
+                "swimlane", 60, 60, start);
         shapeOptions.addOption("Process", new ImageIcon(
-                DiagramEditor.class.getResource("/images/rectangle.png")),
+                DiagramEditor.class.getResource("/images/swimlane.png")),
                 null, 160, 120, process);
         shapeOptions.addOption("If", new ImageIcon(
                 DiagramEditor.class
-                .getResource("/images/rhombus.png")),
-                "rhombus", 160, 160, ifNode);
+                .getResource("/images/swimlane.png")),
+                "swimlane", 160, 160, ifNode);
         shapeOptions.addOption("End", new ImageIcon(
                 DiagramEditor.class
-                .getResource("/images/ellipse.png")),
-                "ellipse", 60, 60, end);
+                .getResource("/images/swimlane.png")),
+                "swimlane", 60, 60, end);
         shapeOptions.addOption("Horizontal Connector", new ImageIcon(
                 DiagramEditor.class
                 .getResource("/images/connect.png")),
