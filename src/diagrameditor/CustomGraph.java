@@ -41,6 +41,25 @@ class CustomGraph extends mxGraph {
                 return "";          
             }
     }
+    
+    public void setRoleToVertex(Object cell)
+    {
+        mxCell mxcell = (mxCell) cell;
+        Object value = mxcell.getValue();
+        mxICell parent = mxcell.getParent();
+        if (value instanceof NodeVertex){
+            NodeVertex node = (NodeVertex) value; 
+            if (parent.getValue() instanceof RoleVertex){
+                node.setRole((RoleVertex) parent.getValue());
+            }
+        }
+        else if (value instanceof ConditionVertex){
+            ConditionVertex node = (ConditionVertex) value;         
+            if (parent.getValue() instanceof RoleVertex){
+                node.setRole((RoleVertex) parent.getValue());
+            }
+        }
+    }
 
     public String getToolTipForCell(Object cell) {
         String tip = "<html>";
@@ -48,16 +67,6 @@ class CustomGraph extends mxGraph {
         mxCellState state = getView().getState(cell);
         NumberFormat numberFormat = NumberFormat.getInstance();
         mxCell mxcell = (mxCell) cell;
-        
-        //TODO: move to more logical location
-        if (mxcell.getValue() instanceof NodeVertex){
-            NodeVertex node = (NodeVertex) mxcell.getValue();
-            mxICell parent = mxcell.getParent();
-            if (parent.getValue() instanceof RoleVertex){
-                node.setRole((RoleVertex) parent.getValue());
-                this.getView().validate();
-            }
-        }
         
         if (getModel().isEdge(cell)) {
             tip += "points={";

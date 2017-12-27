@@ -3,7 +3,7 @@
 		<add as="fillColor" value="#adc5ff"/>
 		<add as="gradientColor" value="#7d85df"/>
 		<add as="strokeColor" value="#5d65df"/>
-		<add as="fontSize" value="12"/>
+		<add as="fontSize" value="20"/>
 		<add as="fontColor" value="#1d258f"/>
 		<add as="fontFamily" value="Verdana"/>
 	</add>
@@ -83,7 +83,7 @@
 	</add>
 	<add as="line">
 		<add as="shape" value="line"/>
-		<add as="strokeWidth" value="4"/>
+		<add as="strokeWidth" value="10"/>
 		<add as="labelBackgroundColor" value="white"/>
 		<add as="verticalAlign" value="top"/>
 		<add as="spacingTop" value="8"/>

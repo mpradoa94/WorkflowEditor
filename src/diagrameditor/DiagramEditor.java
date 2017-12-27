@@ -86,6 +86,7 @@ public class DiagramEditor extends JPanel {
                 System.out.println("Selection in graph component"+sender.toString());
                 if (sender instanceof mxGraphSelectionModel) {
                     for (Object cell : ((mxGraphSelectionModel) sender).getCells()) {
+                        graph.setRoleToVertex((mxCell) cell);
                         addNewCellPanel((mxCell) cell);
                     }
                 }
@@ -158,7 +159,7 @@ public class DiagramEditor extends JPanel {
         RoleVertex role = new RoleVertex("Role", "", "");
         NodeVertex start = new NodeVertex("Start", "", NodeType.START);
         NodeVertex process = new NodeVertex("Process", "", NodeType.PROCESS);
-        NodeVertex ifNode = new NodeVertex("Process", "", NodeType.IF);
+        ConditionVertex ifNode = new ConditionVertex("Condition", "", NodeType.IF);
         NodeVertex end = new NodeVertex("End", "", NodeType.END);
 
         shapeOptions.addOption("Flowchart", new ImageIcon(
@@ -182,11 +183,11 @@ public class DiagramEditor extends JPanel {
                 DiagramEditor.class
                 .getResource("/images/ellipse.png")),
                 "ellipse", 60, 60, end);
-        shapeOptions.addOption("Horizontal Connector", new ImageIcon(
+        shapeOptions.addEdgeOption("Horizontal Connector", new ImageIcon(
                 DiagramEditor.class
                 .getResource("/images/connect.png")),
                 null, 100, 100, "");
-        shapeOptions.addOption("Vertical Connector", new ImageIcon(
+        shapeOptions.addEdgeOption("Vertical Connector", new ImageIcon(
                 DiagramEditor.class
                 .getResource("/images/vertical.png")),
                 "vertical", 100, 100, "");
