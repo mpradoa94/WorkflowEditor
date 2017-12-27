@@ -22,20 +22,24 @@ import javax.swing.event.ChangeListener;
  */
 public class FlowVertex extends CustomVertex {
 
-    private int id;
+    private int idFlow;
     private String name;
     private int idVersion;
     private JPanel propertiesPanel;
 
     public FlowVertex(String label, int id, String name, int idVersion) {
         this.label = label;
-        this.id = id;
+        this.idFlow = id;
         this.name = name;
         this.idVersion = idVersion;
     }
 
     public FlowVertex(String label) {
         this(label, 0, "", 0);
+    }
+    
+    //Empty constructor needed for saving/loading this obj properties in graph
+    public FlowVertex(){
     }
 
     @Override
@@ -64,25 +68,25 @@ public class FlowVertex extends CustomVertex {
 
     private void createTextFields(JPanel panel) {
         JTextField fieldName = new JTextField(10);
-        fieldName.setText(this.name);
+        fieldName.setText(this.getName());
         JSpinner fieldId = new JSpinner();
-        fieldId.setValue(this.id);
+        fieldId.setValue(this.getIdFlow());
         JSpinner fieldVersion = new JSpinner();
-        fieldVersion.setValue(this.idVersion);
+        fieldVersion.setValue(this.getIdVersion());
 
         fieldName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                FlowVertex.this.name = fieldName.getText();
-                System.out.println("Name: " + FlowVertex.this.name);
+                FlowVertex.this.setName(fieldName.getText());
+                System.out.println("Name: " + FlowVertex.this.getName());
             }
         });
 
         fieldId.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                FlowVertex.this.id = (Integer) fieldId.getValue();
-                System.out.println("Id: " + FlowVertex.this.id);
+                FlowVertex.this.setIdFlow((int) (Integer) fieldId.getValue());
+                System.out.println("Id: " + FlowVertex.this.getIdFlow());
             }
         });
 
@@ -91,7 +95,7 @@ public class FlowVertex extends CustomVertex {
             @Override
             public void stateChanged(ChangeEvent e) {
                 System.out.println("The entered text is: " + fieldVersion.getValue().toString());
-                FlowVertex.this.idVersion = (Integer) fieldVersion.getValue();
+                FlowVertex.this.setIdVersion((int) (Integer) fieldVersion.getValue());
             }
         });
 
@@ -101,6 +105,30 @@ public class FlowVertex extends CustomVertex {
         panel.add(fieldId);
         panel.add(new JLabel("Version"));
         panel.add(fieldVersion);
+    }
+
+    public int getIdFlow() {
+        return idFlow;
+    }
+
+    public void setIdFlow(int idFlow) {
+        this.idFlow = idFlow;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getIdVersion() {
+        return idVersion;
+    }
+
+    public void setIdVersion(int idVersion) {
+        this.idVersion = idVersion;
     }
 
 }

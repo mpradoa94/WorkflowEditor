@@ -30,6 +30,10 @@ public class RoleVertex extends CustomVertex {
         this.key = key;
         this.name = name;
     }
+    
+    //Empty constructor needed for saving/loading this obj properties in graph
+    public RoleVertex(){
+    }
 
     @Override
     public void setLabel(String value) {
@@ -61,24 +65,24 @@ public class RoleVertex extends CustomVertex {
 
     private void createTextFields(JPanel panel) {
         JTextField fieldName = new JTextField(10);
-        fieldName.setText(this.name);
+        fieldName.setText(this.getName());
         JTextField fieldKey = new JTextField(10);
-        fieldKey.setText(this.key);
+        fieldKey.setText(this.getKey());
 
         fieldName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
                 System.out.println("The entered text is: " + fieldName.getText());
-                RoleVertex.this.name = fieldName.getText();
-                System.out.println("Name: " + RoleVertex.this.name);
+                RoleVertex.this.setName(fieldName.getText());
+                System.out.println("Name: " + RoleVertex.this.getName());
             }
         });
 
         fieldKey.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                RoleVertex.this.key = fieldKey.getText();
-                System.out.println("Name: " + RoleVertex.this.key);
+                RoleVertex.this.setKey(fieldKey.getText());
+                System.out.println("Name: " + RoleVertex.this.getKey());
             }
         });
 
@@ -86,5 +90,17 @@ public class RoleVertex extends CustomVertex {
         panel.add(fieldName);
         panel.add(new JLabel("Key"));
         panel.add(fieldKey);
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

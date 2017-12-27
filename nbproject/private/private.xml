@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/MenuBar.java</file>
             <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/RoleVertex.java</file>
             <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/DiagramEditor.java</file>
             <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/FlowVertex.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/EditorMenuActions.java</file>
             <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/NodeVertex.java</file>
         </group>
     </open-files>

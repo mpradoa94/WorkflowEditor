@@ -25,8 +25,7 @@ import javax.swing.event.ChangeListener;
  */
 public class NodeVertex extends CustomVertex {
 
-    private String label;
-    private int id;
+    private int num;
     private String name;
     private int timeNode;
     private int timeNodeMax;
@@ -36,7 +35,7 @@ public class NodeVertex extends CustomVertex {
 
     public NodeVertex(String label, String name, int id, NodeType type, int timeNode, int timeNodeMax) {
         this.label = label;
-        this.id = id;
+        this.num = id;
         this.name = name;
         this.type = type;
         this.timeNode = timeNode;
@@ -45,6 +44,10 @@ public class NodeVertex extends CustomVertex {
 
     public NodeVertex(String label, String name, NodeType type) {
         this(label, name, 0, type, 0, 0);
+    }
+    
+    //Empty constructor needed for saving/loading this obj properties in graph
+    public NodeVertex(){
     }
 
     @Override
@@ -73,52 +76,52 @@ public class NodeVertex extends CustomVertex {
 
     private void createTextFields(JPanel panel) {
         JTextField fieldName = new JTextField(10);
-        fieldName.setText(this.name);
+        fieldName.setText(this.getName());
         JSpinner fieldId = new JSpinner();
-        fieldId.setValue(this.id);
+        fieldId.setValue(this.getNum());
         JSpinner fieldTime = new JSpinner();
-        fieldTime.setValue(this.timeNode);
+        fieldTime.setValue(this.getTimeNode());
         JSpinner fieldTimeMax = new JSpinner();
-        fieldTimeMax.setValue(this.timeNodeMax);
+        fieldTimeMax.setValue(this.getTimeNodeMax());
         JTextField fieldType = new JTextField(10);
-        fieldType.setText(this.type.toString());
+        fieldType.setText(this.getType().toString());
         fieldType.setEditable(false);
         JTextField fieldRole = new JTextField(10);
         fieldRole.setEditable(false);
 
-        if (role != null) {
-            fieldRole.setText(role.getName());
+        if (getRole() != null) {
+            fieldRole.setText(getRole().getName());
         }
 
         fieldName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                NodeVertex.this.name = fieldName.getText();
-                System.out.println("Name: " + NodeVertex.this.name);
+                NodeVertex.this.setName(fieldName.getText());
+                System.out.println("Name: " + NodeVertex.this.getName());
             }
         });
 
         fieldId.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                NodeVertex.this.id = (Integer) fieldId.getValue();
-                System.out.println("Id: " + NodeVertex.this.id);
+                NodeVertex.this.setNum((int) (Integer) fieldId.getValue());
+                System.out.println("Id: " + NodeVertex.this.getNum());
             }
         });
 
         fieldTime.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                NodeVertex.this.timeNode = (Integer) fieldTime.getValue();
-                System.out.println("Time node: " + NodeVertex.this.timeNode);
+                NodeVertex.this.setTimeNode((int) (Integer) fieldTime.getValue());
+                System.out.println("Time node: " + NodeVertex.this.getTimeNode());
             }
         });
 
         fieldTimeMax.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                NodeVertex.this.timeNodeMax = (Integer) fieldTime.getValue();
-                System.out.println("Time max: " + NodeVertex.this.timeNodeMax);
+                NodeVertex.this.setTimeNodeMax((int) (Integer) fieldTime.getValue());
+                System.out.println("Time max: " + NodeVertex.this.getTimeNodeMax());
             }
         });
 
@@ -142,6 +145,46 @@ public class NodeVertex extends CustomVertex {
 
     public void setRole(RoleVertex role) {
         this.role = role;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getTimeNode() {
+        return timeNode;
+    }
+
+    public void setTimeNode(int timeNode) {
+        this.timeNode = timeNode;
+    }
+
+    public int getTimeNodeMax() {
+        return timeNodeMax;
+    }
+
+    public void setTimeNodeMax(int timeNodeMax) {
+        this.timeNodeMax = timeNodeMax;
+    }
+
+    public NodeType getType() {
+        return type;
+    }
+
+    public void setType(NodeType type) {
+        this.type = type;
     }
 
 }
