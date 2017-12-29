@@ -11,5 +11,5 @@ package diagrameditor;
  * @author MPA
  */
 public enum NodeType {
-    START, END, PROCESS, IF, SPLIT, MERGE
+    START, END, PROCESS, IF, SPLIT, MERGE, TESTNODE
 }

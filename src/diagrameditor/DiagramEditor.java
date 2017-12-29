@@ -219,7 +219,7 @@ public class DiagramEditor extends JPanel {
         return graphComponent;
     }
 
-    public void setMouseListener(mxGraphComponent graphComponent) {
+    private void setMouseListener(mxGraphComponent graphComponent) {
         // MouseListener that Prints the Cell on Doubleclick
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
             @Override

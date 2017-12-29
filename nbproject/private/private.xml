@@ -6,9 +6,10 @@
             <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/MenuBar.java</file>
             <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/RoleVertex.java</file>
             <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/DiagramEditor.java</file>
-            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/FlowVertex.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/ConditionVertex.java</file>
             <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/EditorMenuActions.java</file>
             <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/NodeVertex.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/CustomGraph.java</file>
         </group>
     </open-files>
 </project-private>
