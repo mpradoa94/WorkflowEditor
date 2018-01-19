@@ -13,6 +13,10 @@ import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxResources;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxGraphSelectionModel;
+import core.webmet.EJBWebServicev20;
+import core.webmet.EJBWebServicev20_Service;
+import core.webmet.LogInIndata;
+import core.webmet.LogInResponse;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.PopupMenu;
@@ -67,15 +71,22 @@ public class DiagramEditor extends JPanel {
     }
 
     public static void main(String[] args) {
+        
+        LoginFrame login = new LoginFrame();
+        login.setVisible(true);
+        LogInResponse response = login.getResponse();
+    }
+    
+    public static void startDiagramEditor(){
         CustomGraph graph = new CustomGraph();
-        CustomGraphComponent graphComponent = new CustomGraphComponent(graph);
-        DiagramEditor editor = new DiagramEditor("mxGraph Editor", graphComponent);
-        editor.setListenerToGraph(graph);
-        new mxRubberband(graphComponent);
-        new mxKeyboardHandler(graphComponent);
+            CustomGraphComponent graphComponent = new CustomGraphComponent(graph);
+            DiagramEditor editor = new DiagramEditor("mxGraph Editor", graphComponent);
+            editor.setListenerToGraph(graph);
+            new mxRubberband(graphComponent);
+            new mxKeyboardHandler(graphComponent);
 
-        editor.setLookAndFeel();
-        editor.createFrame(new MenuBar(editor)).setVisible(true);
+            editor.setLookAndFeel();
+            editor.createFrame(new MenuBar(editor)).setVisible(true);
     }
 
     public void setListenerToGraph(CustomGraph graph) {

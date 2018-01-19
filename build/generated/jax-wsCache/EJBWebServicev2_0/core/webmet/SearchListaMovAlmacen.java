@@ -1,0 +1,178 @@
+
+package core.webmet;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Clase Java para searchListaMovAlmacen complex type.
+ * 
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * 
+ * <pre>
+ * &lt;complexType name="searchListaMovAlmacen">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="ID_INSTANCIA" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="NM_ITM" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="ID_ITM_PS" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="ID_LCN" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="ID_STRGRP" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="preparado" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "searchListaMovAlmacen", propOrder = {
+    "idinstancia",
+    "nmitm",
+    "iditmps",
+    "idlcn",
+    "idstrgrp",
+    "preparado"
+})
+public class SearchListaMovAlmacen {
+
+    @XmlElement(name = "ID_INSTANCIA")
+    protected int idinstancia;
+    @XmlElement(name = "NM_ITM", required = true)
+    protected String nmitm;
+    @XmlElement(name = "ID_ITM_PS", required = true)
+    protected String iditmps;
+    @XmlElement(name = "ID_LCN")
+    protected int idlcn;
+    @XmlElement(name = "ID_STRGRP")
+    protected int idstrgrp;
+    @XmlElement(required = true)
+    protected String preparado;
+
+    /**
+     * Obtiene el valor de la propiedad idinstancia.
+     * 
+     */
+    public int getIDINSTANCIA() {
+        return idinstancia;
+    }
+
+    /**
+     * Define el valor de la propiedad idinstancia.
+     * 
+     */
+    public void setIDINSTANCIA(int value) {
+        this.idinstancia = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad nmitm.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getNMITM() {
+        return nmitm;
+    }
+
+    /**
+     * Define el valor de la propiedad nmitm.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setNMITM(String value) {
+        this.nmitm = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad iditmps.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIDITMPS() {
+        return iditmps;
+    }
+
+    /**
+     * Define el valor de la propiedad iditmps.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIDITMPS(String value) {
+        this.iditmps = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad idlcn.
+     * 
+     */
+    public int getIDLCN() {
+        return idlcn;
+    }
+
+    /**
+     * Define el valor de la propiedad idlcn.
+     * 
+     */
+    public void setIDLCN(int value) {
+        this.idlcn = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad idstrgrp.
+     * 
+     */
+    public int getIDSTRGRP() {
+        return idstrgrp;
+    }
+
+    /**
+     * Define el valor de la propiedad idstrgrp.
+     * 
+     */
+    public void setIDSTRGRP(int value) {
+        this.idstrgrp = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad preparado.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPreparado() {
+        return preparado;
+    }
+
+    /**
+     * Define el valor de la propiedad preparado.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPreparado(String value) {
+        this.preparado = value;
+    }
+
+}

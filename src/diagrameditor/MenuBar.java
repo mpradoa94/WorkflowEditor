@@ -5,6 +5,7 @@ import com.mxgraph.analysis.mxAnalysisGraph;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxResources;
 import com.mxgraph.view.mxGraph;
+import diagrameditor.EditorMenuActions.FitToPageAction;
 import diagrameditor.EditorMenuActions.LoadAction;
 import diagrameditor.EditorMenuActions.SaveAction;
 import java.awt.event.ActionEvent;
@@ -25,7 +26,7 @@ public class MenuBar extends JMenuBar {
         final mxGraphComponent graphComponent = editor.getGraphComponent();
         final mxGraph graph = graphComponent.getGraph();
         mxAnalysisGraph aGraph = new mxAnalysisGraph();
-
+        
         JMenu menu = add(new JMenu("File"));
 
         JMenuItem saveOpt = new JMenuItem("Save", KeyEvent.VK_T);
@@ -36,6 +37,14 @@ public class MenuBar extends JMenuBar {
         
         saveOpt.addActionListener(new SaveAction(true, editor, graphComponent));
         loadOpt.addActionListener(new LoadAction(editor, graphComponent));
+        
+        /*menu = add(new JMenu("Edit"));
+        
+        JMenuItem fitOpt = new JMenuItem("Fit to page");
+        
+        menu.add(fitOpt);
+        
+        fitOpt.addActionListener(new FitToPageAction(graphComponent));*/
     }
 
 }

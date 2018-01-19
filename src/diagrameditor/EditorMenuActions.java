@@ -15,12 +15,14 @@ import com.mxgraph.io.mxObjectCodec;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxCellRenderer;
 import com.mxgraph.util.mxDomUtils;
+import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxResources;
 import com.mxgraph.util.mxUtils;
 import com.mxgraph.util.mxXmlUtils;
 import com.mxgraph.util.png.mxPngEncodeParam;
 import com.mxgraph.util.png.mxPngImageEncoder;
 import com.mxgraph.view.mxGraph;
+import com.mxgraph.view.mxGraphView;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -171,5 +173,27 @@ public class EditorMenuActions {
                 }
             }
         }
+    }
+    
+    public static class FitToPageAction extends AbstractAction{
+        
+        private mxGraphComponent graphComponent;
+        
+        public FitToPageAction(mxGraphComponent graphComponent){
+            this.graphComponent = graphComponent;
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            fit();
+        }
+        
+        public void fit() {          
+            mxGraphView view = graphComponent.getGraph().getView();
+            int compLen = graphComponent.getWidth();
+            int viewLen = (int)view.getGraphBounds().getWidth();
+            view.setScale((double)compLen/viewLen * view.getScale());
+        }
+        
     }
 }
