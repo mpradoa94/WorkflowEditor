@@ -287,10 +287,11 @@ public class ObjectFactory {
     private final static QName _GetInventarioPerpetuo_QNAME = new QName("http://Webmet.core/", "getInventarioPerpetuo");
     private final static QName _ABCLectoresW_QNAME = new QName("http://Webmet.core/", "ABC_LectoresW");
     private final static QName _AbcOperatorGroup_QNAME = new QName("http://Webmet.core/", "abcOperatorGroup");
+    private final static QName _ActualizaxmlW_QNAME = new QName("http://Webmet.core/", "actualizaxmlW");
     private final static QName _ALLWorkstationlistWResponse_QNAME = new QName("http://Webmet.core/", "ALL_WorkstationlistWResponse");
     private final static QName _AbcBrandWResponse_QNAME = new QName("http://Webmet.core/", "Abc_BrandWResponse");
-    private final static QName _ABCUsuariosEIWResponse_QNAME = new QName("http://Webmet.core/", "ABC_UsuariosEIWResponse");
     private final static QName _StockLedgerResponse_QNAME = new QName("http://Webmet.core/", "StockLedgerResponse");
+    private final static QName _ABCUsuariosEIWResponse_QNAME = new QName("http://Webmet.core/", "ABC_UsuariosEIWResponse");
     private final static QName _ABCUOMWResponse_QNAME = new QName("http://Webmet.core/", "ABC_UOMWResponse");
     private final static QName _GETReporteExistenciasWResponse_QNAME = new QName("http://Webmet.core/", "GET_ReporteExistenciasWResponse");
     private final static QName _ABCOrdenProduccionWResponse_QNAME = new QName("http://Webmet.core/", "ABC_OrdenProduccionWResponse");
@@ -300,6 +301,7 @@ public class ObjectFactory {
     private final static QName _SearchWorkGroupW_QNAME = new QName("http://Webmet.core/", "Search_WorkGroupW");
     private final static QName _ABCRecipeWResponse_QNAME = new QName("http://Webmet.core/", "ABC_RecipeWResponse");
     private final static QName _GETImpuestoGeneral_QNAME = new QName("http://Webmet.core/", "GET_ImpuestoGeneral");
+    private final static QName _GETPregunasW_QNAME = new QName("http://Webmet.core/", "GET_PregunasW");
     private final static QName _ABCFacturasW_QNAME = new QName("http://Webmet.core/", "ABC_facturasW");
     private final static QName _ChangePricePOSW_QNAME = new QName("http://Webmet.core/", "ChangePricePOSW");
     private final static QName _ABCProcesarResourceWResponse_QNAME = new QName("http://Webmet.core/", "ABC_ProcesarResourceWResponse");
@@ -351,8 +353,8 @@ public class ObjectFactory {
     private final static QName _UpdateImpuestosGeneralesW_QNAME = new QName("http://Webmet.core/", "Update_ImpuestosGeneralesW");
     private final static QName _ABCBankW_QNAME = new QName("http://Webmet.core/", "ABC_BankW");
     private final static QName _GETListaAntiLavadoW_QNAME = new QName("http://Webmet.core/", "GET_ListaAntiLavadoW");
-    private final static QName _StockLedger_QNAME = new QName("http://Webmet.core/", "StockLedger");
     private final static QName _GETFormatoXMLWResponse_QNAME = new QName("http://Webmet.core/", "GET_FormatoXMLWResponse");
+    private final static QName _StockLedger_QNAME = new QName("http://Webmet.core/", "StockLedger");
     private final static QName _SearchBankAccountWResponse_QNAME = new QName("http://Webmet.core/", "Search_BankAccountWResponse");
     private final static QName _SearchPrepadosW_QNAME = new QName("http://Webmet.core/", "Search_PrepadosW");
     private final static QName _ABCOperatorArranqueResponseWResponse_QNAME = new QName("http://Webmet.core/", "ABC_OperatorArranqueResponseWResponse");
@@ -411,10 +413,10 @@ public class ObjectFactory {
     private final static QName _SearchOperatorWResponse_QNAME = new QName("http://Webmet.core/", "Search_OperatorWResponse");
     private final static QName _ABCEventW_QNAME = new QName("http://Webmet.core/", "ABC_EventW");
     private final static QName _ABCRetailStoreGroupWResponse_QNAME = new QName("http://Webmet.core/", "ABC_RetailStoreGroupWResponse");
-    private final static QName _GETRolesProcesoW_QNAME = new QName("http://Webmet.core/", "GET_RolesProcesoW");
     private final static QName _ReporteAdeudosGeneradosResponse_QNAME = new QName("http://Webmet.core/", "ReporteAdeudosGeneradosResponse");
-    private final static QName _GETInventarioVentaDashWResponse_QNAME = new QName("http://Webmet.core/", "GET_InventarioVentaDashWResponse");
+    private final static QName _GETRolesProcesoW_QNAME = new QName("http://Webmet.core/", "GET_RolesProcesoW");
     private final static QName _GETReporteFaltantesW_QNAME = new QName("http://Webmet.core/", "GET_ReporteFaltantesW");
+    private final static QName _GETInventarioVentaDashWResponse_QNAME = new QName("http://Webmet.core/", "GET_InventarioVentaDashWResponse");
     private final static QName _GETJustificacionInventarioW_QNAME = new QName("http://Webmet.core/", "GET_JustificacionInventarioW");
     private final static QName _ABCItemSellPriceChangePOSIWResponse_QNAME = new QName("http://Webmet.core/", "ABC_ItemSellPriceChangePOSIWResponse");
     private final static QName _SearchLisMovAlmacenWResponse_QNAME = new QName("http://Webmet.core/", "Search_LisMovAlmacenWResponse");
@@ -499,6 +501,7 @@ public class ObjectFactory {
     private final static QName _AbcValidaItem_QNAME = new QName("http://Webmet.core/", "abcValidaItem");
     private final static QName _GETLockersW_QNAME = new QName("http://Webmet.core/", "GET_LockersW");
     private final static QName _ValidaOPeratorW_QNAME = new QName("http://Webmet.core/", "ValidaOPeratorW");
+    private final static QName _ActualizaxmlWResponse_QNAME = new QName("http://Webmet.core/", "actualizaxmlWResponse");
     private final static QName _GETProcesosVEWResponse_QNAME = new QName("http://Webmet.core/", "GET_ProcesosVEWResponse");
     private final static QName _GETStockForListIDW_QNAME = new QName("http://Webmet.core/", "GET_StockForListIDW");
     private final static QName _GETReporteVentaXHoraW_QNAME = new QName("http://Webmet.core/", "GET_ReporteVentaXHoraW");
@@ -884,6 +887,7 @@ public class ObjectFactory {
     private final static QName _AbcScheduleEmployee_QNAME = new QName("http://Webmet.core/", "abcScheduleEmployee");
     private final static QName _GETCustomer2W_QNAME = new QName("http://Webmet.core/", "GET_Customer2W");
     private final static QName _GETItemWResponse_QNAME = new QName("http://Webmet.core/", "GET_ItemWResponse");
+    private final static QName _GETPregunasWResponse_QNAME = new QName("http://Webmet.core/", "GET_PregunasWResponse");
     private final static QName _SearchEventWResponse_QNAME = new QName("http://Webmet.core/", "Search_EventWResponse");
     private final static QName _ABCGpersonWResponse_QNAME = new QName("http://Webmet.core/", "ABC_GpersonWResponse");
     private final static QName _GETAnexosCuestionarioW_QNAME = new QName("http://Webmet.core/", "GET_AnexosCuestionarioW");
@@ -1833,6 +1837,14 @@ public class ObjectFactory {
      */
     public GETLockersW createGETLockersW() {
         return new GETLockersW();
+    }
+
+    /**
+     * Create an instance of {@link ActualizaxmlWResponse }
+     * 
+     */
+    public ActualizaxmlWResponse createActualizaxmlWResponse() {
+        return new ActualizaxmlWResponse();
     }
 
     /**
@@ -4164,6 +4176,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GETPregunasWResponse }
+     * 
+     */
+    public GETPregunasWResponse createGETPregunasWResponse() {
+        return new GETPregunasWResponse();
+    }
+
+    /**
      * Create an instance of {@link GETItemWResponse }
      * 
      */
@@ -6396,19 +6416,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ABCUsuariosEIWResponse }
-     * 
-     */
-    public ABCUsuariosEIWResponse createABCUsuariosEIWResponse() {
-        return new ABCUsuariosEIWResponse();
-    }
-
-    /**
      * Create an instance of {@link StockLedgerResponse }
      * 
      */
     public StockLedgerResponse createStockLedgerResponse() {
         return new StockLedgerResponse();
+    }
+
+    /**
+     * Create an instance of {@link ABCUsuariosEIWResponse }
+     * 
+     */
+    public ABCUsuariosEIWResponse createABCUsuariosEIWResponse() {
+        return new ABCUsuariosEIWResponse();
     }
 
     /**
@@ -6465,6 +6485,14 @@ public class ObjectFactory {
      */
     public ABCRecipeWResponse createABCRecipeWResponse() {
         return new ABCRecipeWResponse();
+    }
+
+    /**
+     * Create an instance of {@link GETPregunasW }
+     * 
+     */
+    public GETPregunasW createGETPregunasW() {
+        return new GETPregunasW();
     }
 
     /**
@@ -6953,6 +6981,14 @@ public class ObjectFactory {
      */
     public AbcOperatorGroup createAbcOperatorGroup() {
         return new AbcOperatorGroup();
+    }
+
+    /**
+     * Create an instance of {@link ActualizaxmlW }
+     * 
+     */
+    public ActualizaxmlW createActualizaxmlW() {
+        return new ActualizaxmlW();
     }
 
     /**
@@ -7780,19 +7816,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GETFormatoXMLWResponse }
-     * 
-     */
-    public GETFormatoXMLWResponse createGETFormatoXMLWResponse() {
-        return new GETFormatoXMLWResponse();
-    }
-
-    /**
      * Create an instance of {@link StockLedger }
      * 
      */
     public StockLedger createStockLedger() {
         return new StockLedger();
+    }
+
+    /**
+     * Create an instance of {@link GETFormatoXMLWResponse }
+     * 
+     */
+    public GETFormatoXMLWResponse createGETFormatoXMLWResponse() {
+        return new GETFormatoXMLWResponse();
     }
 
     /**
@@ -8756,6 +8792,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Comparative2DTO }
+     * 
+     */
+    public Comparative2DTO createComparative2DTO() {
+        return new Comparative2DTO();
+    }
+
+    /**
      * Create an instance of {@link GetFormatosFiltro }
      * 
      */
@@ -9308,6 +9352,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CondicionDTO }
+     * 
+     */
+    public CondicionDTO createCondicionDTO() {
+        return new CondicionDTO();
+    }
+
+    /**
      * Create an instance of {@link ControlTransaction }
      * 
      */
@@ -9553,6 +9605,14 @@ public class ObjectFactory {
      */
     public AbcUsersRol createAbcUsersRol() {
         return new AbcUsersRol();
+    }
+
+    /**
+     * Create an instance of {@link PreguntaDTO }
+     * 
+     */
+    public PreguntaDTO createPreguntaDTO() {
+        return new PreguntaDTO();
     }
 
     /**
@@ -10188,19 +10248,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SearchInventoryControlDocumentResponse }
-     * 
-     */
-    public SearchInventoryControlDocumentResponse createSearchInventoryControlDocumentResponse() {
-        return new SearchInventoryControlDocumentResponse();
-    }
-
-    /**
      * Create an instance of {@link GetProductoNoRecibidoResponse }
      * 
      */
     public GetProductoNoRecibidoResponse createGetProductoNoRecibidoResponse() {
         return new GetProductoNoRecibidoResponse();
+    }
+
+    /**
+     * Create an instance of {@link SearchInventoryControlDocumentResponse }
+     * 
+     */
+    public SearchInventoryControlDocumentResponse createSearchInventoryControlDocumentResponse() {
+        return new SearchInventoryControlDocumentResponse();
     }
 
     /**
@@ -10748,6 +10808,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link OpcionDTO }
+     * 
+     */
+    public OpcionDTO createOpcionDTO() {
+        return new OpcionDTO();
+    }
+
+    /**
      * Create an instance of {@link SearchSuplierResponse }
      * 
      */
@@ -11020,6 +11088,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link PreguntaCerradaDTO }
+     * 
+     */
+    public PreguntaCerradaDTO createPreguntaCerradaDTO() {
+        return new PreguntaCerradaDTO();
+    }
+
+    /**
      * Create an instance of {@link ServicioProveedorDash }
      * 
      */
@@ -11169,6 +11245,14 @@ public class ObjectFactory {
      */
     public ButtonTemp createButtonTemp() {
         return new ButtonTemp();
+    }
+
+    /**
+     * Create an instance of {@link OpcionesDTO }
+     * 
+     */
+    public OpcionesDTO createOpcionesDTO() {
+        return new OpcionesDTO();
     }
 
     /**
@@ -11601,6 +11685,14 @@ public class ObjectFactory {
      */
     public AbcEmployeeResponse createAbcEmployeeResponse() {
         return new AbcEmployeeResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetPreguntasResponse }
+     * 
+     */
+    public GetPreguntasResponse createGetPreguntasResponse() {
+        return new GetPreguntasResponse();
     }
 
     /**
@@ -12233,6 +12325,14 @@ public class ObjectFactory {
      */
     public AbcOrdenProduccion createAbcOrdenProduccion() {
         return new AbcOrdenProduccion();
+    }
+
+    /**
+     * Create an instance of {@link PreguntaRenglonDTO }
+     * 
+     */
+    public PreguntaRenglonDTO createPreguntaRenglonDTO() {
+        return new PreguntaRenglonDTO();
     }
 
     /**
@@ -13396,6 +13496,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link PreguntaAbiertaDTO }
+     * 
+     */
+    public PreguntaAbiertaDTO createPreguntaAbiertaDTO() {
+        return new PreguntaAbiertaDTO();
+    }
+
+    /**
      * Create an instance of {@link GetZonaResponse }
      * 
      */
@@ -13617,6 +13725,14 @@ public class ObjectFactory {
      */
     public GetGpersonaResponse createGetGpersonaResponse() {
         return new GetGpersonaResponse();
+    }
+
+    /**
+     * Create an instance of {@link ComparativeDTO }
+     * 
+     */
+    public ComparativeDTO createComparativeDTO() {
+        return new ComparativeDTO();
     }
 
     /**
@@ -14121,6 +14237,14 @@ public class ObjectFactory {
      */
     public ContratosList createContratosList() {
         return new ContratosList();
+    }
+
+    /**
+     * Create an instance of {@link PreguntaMatrizDTO }
+     * 
+     */
+    public PreguntaMatrizDTO createPreguntaMatrizDTO() {
+        return new PreguntaMatrizDTO();
     }
 
     /**
@@ -16715,6 +16839,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ActualizaxmlW }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "actualizaxmlW")
+    public JAXBElement<ActualizaxmlW> createActualizaxmlW(ActualizaxmlW value) {
+        return new JAXBElement<ActualizaxmlW>(_ActualizaxmlW_QNAME, ActualizaxmlW.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ALLWorkstationlistWResponse }{@code >}}
      * 
      */
@@ -16733,21 +16866,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ABCUsuariosEIWResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://Webmet.core/", name = "ABC_UsuariosEIWResponse")
-    public JAXBElement<ABCUsuariosEIWResponse> createABCUsuariosEIWResponse(ABCUsuariosEIWResponse value) {
-        return new JAXBElement<ABCUsuariosEIWResponse>(_ABCUsuariosEIWResponse_QNAME, ABCUsuariosEIWResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link StockLedgerResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://Webmet.core/", name = "StockLedgerResponse")
     public JAXBElement<StockLedgerResponse> createStockLedgerResponse(StockLedgerResponse value) {
         return new JAXBElement<StockLedgerResponse>(_StockLedgerResponse_QNAME, StockLedgerResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ABCUsuariosEIWResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "ABC_UsuariosEIWResponse")
+    public JAXBElement<ABCUsuariosEIWResponse> createABCUsuariosEIWResponse(ABCUsuariosEIWResponse value) {
+        return new JAXBElement<ABCUsuariosEIWResponse>(_ABCUsuariosEIWResponse_QNAME, ABCUsuariosEIWResponse.class, null, value);
     }
 
     /**
@@ -16829,6 +16962,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://Webmet.core/", name = "GET_ImpuestoGeneral")
     public JAXBElement<GETImpuestoGeneral> createGETImpuestoGeneral(GETImpuestoGeneral value) {
         return new JAXBElement<GETImpuestoGeneral>(_GETImpuestoGeneral_QNAME, GETImpuestoGeneral.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GETPregunasW }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "GET_PregunasW")
+    public JAXBElement<GETPregunasW> createGETPregunasW(GETPregunasW value) {
+        return new JAXBElement<GETPregunasW>(_GETPregunasW_QNAME, GETPregunasW.class, null, value);
     }
 
     /**
@@ -17291,21 +17433,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link StockLedger }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://Webmet.core/", name = "StockLedger")
-    public JAXBElement<StockLedger> createStockLedger(StockLedger value) {
-        return new JAXBElement<StockLedger>(_StockLedger_QNAME, StockLedger.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GETFormatoXMLWResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://Webmet.core/", name = "GET_FormatoXMLWResponse")
     public JAXBElement<GETFormatoXMLWResponse> createGETFormatoXMLWResponse(GETFormatoXMLWResponse value) {
         return new JAXBElement<GETFormatoXMLWResponse>(_GETFormatoXMLWResponse_QNAME, GETFormatoXMLWResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link StockLedger }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "StockLedger")
+    public JAXBElement<StockLedger> createStockLedger(StockLedger value) {
+        return new JAXBElement<StockLedger>(_StockLedger_QNAME, StockLedger.class, null, value);
     }
 
     /**
@@ -17831,15 +17973,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GETRolesProcesoW }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://Webmet.core/", name = "GET_RolesProcesoW")
-    public JAXBElement<GETRolesProcesoW> createGETRolesProcesoW(GETRolesProcesoW value) {
-        return new JAXBElement<GETRolesProcesoW>(_GETRolesProcesoW_QNAME, GETRolesProcesoW.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ReporteAdeudosGeneradosResponse }{@code >}}
      * 
      */
@@ -17849,12 +17982,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GETInventarioVentaDashWResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GETRolesProcesoW }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://Webmet.core/", name = "GET_InventarioVentaDashWResponse")
-    public JAXBElement<GETInventarioVentaDashWResponse> createGETInventarioVentaDashWResponse(GETInventarioVentaDashWResponse value) {
-        return new JAXBElement<GETInventarioVentaDashWResponse>(_GETInventarioVentaDashWResponse_QNAME, GETInventarioVentaDashWResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "GET_RolesProcesoW")
+    public JAXBElement<GETRolesProcesoW> createGETRolesProcesoW(GETRolesProcesoW value) {
+        return new JAXBElement<GETRolesProcesoW>(_GETRolesProcesoW_QNAME, GETRolesProcesoW.class, null, value);
     }
 
     /**
@@ -17864,6 +17997,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://Webmet.core/", name = "GET_ReporteFaltantesW")
     public JAXBElement<GETReporteFaltantesW> createGETReporteFaltantesW(GETReporteFaltantesW value) {
         return new JAXBElement<GETReporteFaltantesW>(_GETReporteFaltantesW_QNAME, GETReporteFaltantesW.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GETInventarioVentaDashWResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "GET_InventarioVentaDashWResponse")
+    public JAXBElement<GETInventarioVentaDashWResponse> createGETInventarioVentaDashWResponse(GETInventarioVentaDashWResponse value) {
+        return new JAXBElement<GETInventarioVentaDashWResponse>(_GETInventarioVentaDashWResponse_QNAME, GETInventarioVentaDashWResponse.class, null, value);
     }
 
     /**
@@ -18620,6 +18762,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://Webmet.core/", name = "ValidaOPeratorW")
     public JAXBElement<ValidaOPeratorW> createValidaOPeratorW(ValidaOPeratorW value) {
         return new JAXBElement<ValidaOPeratorW>(_ValidaOPeratorW_QNAME, ValidaOPeratorW.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ActualizaxmlWResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "actualizaxmlWResponse")
+    public JAXBElement<ActualizaxmlWResponse> createActualizaxmlWResponse(ActualizaxmlWResponse value) {
+        return new JAXBElement<ActualizaxmlWResponse>(_ActualizaxmlWResponse_QNAME, ActualizaxmlWResponse.class, null, value);
     }
 
     /**
@@ -22085,6 +22236,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://Webmet.core/", name = "GET_ItemWResponse")
     public JAXBElement<GETItemWResponse> createGETItemWResponse(GETItemWResponse value) {
         return new JAXBElement<GETItemWResponse>(_GETItemWResponse_QNAME, GETItemWResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GETPregunasWResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "GET_PregunasWResponse")
+    public JAXBElement<GETPregunasWResponse> createGETPregunasWResponse(GETPregunasWResponse value) {
+        return new JAXBElement<GETPregunasWResponse>(_GETPregunasWResponse_QNAME, GETPregunasWResponse.class, null, value);
     }
 
     /**

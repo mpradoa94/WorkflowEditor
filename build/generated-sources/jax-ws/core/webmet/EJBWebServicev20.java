@@ -27,6 +27,36 @@ public interface EJBWebServicev20 {
 
     /**
      * 
+     * @param parameter
+     * @return
+     *     returns core.webmet.AbcOperacionwordResponse
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "actualizaxmlW", targetNamespace = "http://Webmet.core/", className = "core.webmet.ActualizaxmlW")
+    @ResponseWrapper(localName = "actualizaxmlWResponse", targetNamespace = "http://Webmet.core/", className = "core.webmet.ActualizaxmlWResponse")
+    @Action(input = "http://Webmet.core/EJBWebServicev2_0/actualizaxmlWRequest", output = "http://Webmet.core/EJBWebServicev2_0/actualizaxmlWResponse")
+    public AbcOperacionwordResponse actualizaxmlW(
+        @WebParam(name = "parameter", targetNamespace = "")
+        AbcOperacionWord parameter);
+
+    /**
+     * 
+     * @param parameter
+     * @return
+     *     returns core.webmet.GetPreguntasResponse
+     */
+    @WebMethod(operationName = "GET_PregunasW")
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "GET_PregunasW", targetNamespace = "http://Webmet.core/", className = "core.webmet.GETPregunasW")
+    @ResponseWrapper(localName = "GET_PregunasWResponse", targetNamespace = "http://Webmet.core/", className = "core.webmet.GETPregunasWResponse")
+    @Action(input = "http://Webmet.core/EJBWebServicev2_0/GET_PregunasWRequest", output = "http://Webmet.core/EJBWebServicev2_0/GET_PregunasWResponse")
+    public GetPreguntasResponse getPregunasW(
+        @WebParam(name = "parameter", targetNamespace = "")
+        GetModelo parameter);
+
+    /**
+     * 
      * @param tend
      * @return
      *     returns core.webmet.AbcTenderResponse

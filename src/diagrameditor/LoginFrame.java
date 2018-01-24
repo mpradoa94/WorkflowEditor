@@ -41,7 +41,7 @@ public class LoginFrame extends javax.swing.JFrame {
         nameTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         passwordTextField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        submitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,15 +61,15 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Login");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        submitButton.setText("Login");
+        submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                submitButtonMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                submitButtonActionPerformed(evt);
             }
         });
 
@@ -84,7 +84,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(submitButton)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(nameTextField)
                         .addComponent(passwordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)))
@@ -102,7 +102,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(jButton1)
+                .addComponent(submitButton)
                 .addContainerGap(103, Short.MAX_VALUE))
         );
 
@@ -120,20 +120,24 @@ public class LoginFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordTextFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_submitButtonActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        EJBWebServicev20_Service service = new EJBWebServicev20_Service();
-        EJBWebServicev20 port = service.getEJBWebServicev20Port();
+    private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
+        EJBWebServicev20 port = DiagramEditor.getPort();
+        System.out.println("Port"+port);
         LogInIndata a= new LogInIndata();
         a.setNmopr(nameTextField.getText());
         a.setPwd(passwordTextField.getText());
         
         response = port.logInW(a);
+        response.getINSTANCIA();
+        response.getOper();
+        response.getNmStrRt();
+        response.getNmOper();
         evaluateResponse(response);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_submitButtonMouseClicked
 
     public LogInResponse getResponse(){
         return response;
@@ -142,6 +146,8 @@ public class LoginFrame extends javax.swing.JFrame {
     private void evaluateResponse(LogInResponse response){
         if (response.getResultado() > 0){
             DiagramEditor.startDiagramEditor();
+            DiagramEditor.setInstance(response.getINSTANCIA());
+            DiagramEditor.modelOptions(); 
         }
         else
         {
@@ -152,10 +158,10 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JTextField passwordTextField;
+    private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }

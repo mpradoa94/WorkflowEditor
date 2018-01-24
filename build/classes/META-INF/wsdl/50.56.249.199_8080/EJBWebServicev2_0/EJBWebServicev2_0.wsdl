@@ -4,6 +4,18 @@
 <xsd:import namespace="http://Webmet.core/" schemaLocation="http://50.56.249.199:8080/EJBWebServicev2_0/EJBWebServicev2_0?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="actualizaxmlW">
+<part name="parameters" element="tns:actualizaxmlW"/>
+</message>
+<message name="actualizaxmlWResponse">
+<part name="parameters" element="tns:actualizaxmlWResponse"/>
+</message>
+<message name="GET_PregunasW">
+<part name="parameters" element="tns:GET_PregunasW"/>
+</message>
+<message name="GET_PregunasWResponse">
+<part name="parameters" element="tns:GET_PregunasWResponse"/>
+</message>
 <message name="Abc_TenderW">
 <part name="parameters" element="tns:Abc_TenderW"/>
 </message>
@@ -2411,6 +2423,14 @@
 <part name="parameters" element="tns:GET_CVERolWResponse"/>
 </message>
 <portType name="EJBWebServicev2_0">
+<operation name="actualizaxmlW">
+<input wsam:Action="http://Webmet.core/EJBWebServicev2_0/actualizaxmlWRequest" message="tns:actualizaxmlW"/>
+<output wsam:Action="http://Webmet.core/EJBWebServicev2_0/actualizaxmlWResponse" message="tns:actualizaxmlWResponse"/>
+</operation>
+<operation name="GET_PregunasW">
+<input wsam:Action="http://Webmet.core/EJBWebServicev2_0/GET_PregunasWRequest" message="tns:GET_PregunasW"/>
+<output wsam:Action="http://Webmet.core/EJBWebServicev2_0/GET_PregunasWResponse" message="tns:GET_PregunasWResponse"/>
+</operation>
 <operation name="Abc_TenderW">
 <input wsam:Action="http://Webmet.core/EJBWebServicev2_0/Abc_TenderWRequest" message="tns:Abc_TenderW"/>
 <output wsam:Action="http://Webmet.core/EJBWebServicev2_0/Abc_TenderWResponse" message="tns:Abc_TenderWResponse"/>
@@ -4018,6 +4038,24 @@
 </portType>
 <binding name="EJBWebServicev2_0PortBinding" type="tns:EJBWebServicev2_0">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="actualizaxmlW">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="GET_PregunasW">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="Abc_TenderW">
 <soap:operation soapAction=""/>
 <input>

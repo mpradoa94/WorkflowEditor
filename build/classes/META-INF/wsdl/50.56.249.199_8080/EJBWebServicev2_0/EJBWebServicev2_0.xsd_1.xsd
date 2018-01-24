@@ -884,6 +884,10 @@
 
 <xs:element name="GET_PrecioTiendaALLWResponse" type="tns:GET_PrecioTiendaALLWResponse"/>
 
+<xs:element name="GET_PregunasW" type="tns:GET_PregunasW"/>
+
+<xs:element name="GET_PregunasWResponse" type="tns:GET_PregunasWResponse"/>
+
 <xs:element name="GET_ProVerEdoW" type="tns:GET_ProVerEdoW"/>
 
 <xs:element name="GET_ProVerEdoWResponse" type="tns:GET_ProVerEdoWResponse"/>
@@ -1824,6 +1828,10 @@
 <xs:element name="actualizaEstadowordW" type="tns:actualizaEstadowordW"/>
 
 <xs:element name="actualizaEstadowordWResponse" type="tns:actualizaEstadowordWResponse"/>
+
+<xs:element name="actualizaxmlW" type="tns:actualizaxmlW"/>
+
+<xs:element name="actualizaxmlWResponse" type="tns:actualizaxmlWResponse"/>
 
 <xs:element name="changePricePos" type="tns:changePricePos"/>
 
@@ -10369,6 +10377,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="actualizaxmlW">
+<xs:sequence>
+<xs:element name="parameter" type="tns:abcOperacionWord" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="actualizaxmlWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcOperacionwordResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="SET_Organization">
 <xs:sequence>
 <xs:element name="rst" type="tns:abcOrganization" minOccurs="0"/>
@@ -11566,6 +11586,128 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="GET_PregunasW">
+<xs:sequence>
+<xs:element name="parameter" type="tns:getModelo" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getModelo">
+<xs:sequence>
+<xs:element name="oper" type="xs:string"/>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="ID_MODELO" type="xs:int"/>
+<xs:element name="TY_MODELO" type="xs:string"/>
+<xs:element name="NOMBRE" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_PregunasWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:getPreguntasResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPreguntasResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+<xs:element name="preguntas" type="tns:preguntaDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="preguntaDTO">
+<xs:sequence>
+<xs:element name="condicion" type="tns:condicionDTO"/>
+<xs:element name="preguntaAbierta" type="tns:preguntaAbiertaDTO"/>
+<xs:element name="preguntaCerrada" type="tns:preguntaCerradaDTO"/>
+<xs:element name="preguntaMatriz" type="tns:preguntaMatrizDTO"/>
+</xs:sequence>
+<xs:attribute name="ayuda" type="xs:string"/>
+<xs:attribute name="descripcion" type="xs:string"/>
+<xs:attribute name="obligatoria" type="xs:string"/>
+<xs:attribute name="roles" type="xs:string"/>
+<xs:attribute name="sinRespuesta" type="xs:string"/>
+<xs:attribute name="usoPropietario" type="xs:string"/>
+<xs:attribute name="variable" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="condicionDTO">
+<xs:sequence>
+<xs:element name="condicion" type="tns:condicionDTO"/>
+<xs:element name="comparative" type="tns:comparativeDTO"/>
+<xs:element name="comparative2" type="tns:comparative2DTO" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="comparativeDTO">
+<xs:sequence>
+<xs:element name="variable" type="xs:string"/>
+<xs:element name="numeroOpcion" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="comparative2DTO">
+<xs:sequence>
+<xs:element name="opLogico" type="xs:string"/>
+<xs:element name="condicion" type="tns:condicionDTO"/>
+<xs:element name="comparative" type="tns:comparativeDTO"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="preguntaAbiertaDTO">
+<xs:sequence>
+<xs:element name="respuesta" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+<xs:attribute name="datos" type="xs:string"/>
+<xs:attribute name="noRenglones" type="xs:string"/>
+<xs:attribute name="tamanoMax" type="xs:string"/>
+<xs:attribute name="tamanoMin" type="xs:string"/>
+<xs:attribute name="tipoRespuesta" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="preguntaCerradaDTO">
+<xs:sequence>
+<xs:element name="opciones" type="tns:opcionesDTO"/>
+<xs:element name="respuestaOtros" type="xs:string"/>
+</xs:sequence>
+<xs:attribute name="incluirOtros" type="xs:string"/>
+<xs:attribute name="listaDesplegable" type="xs:string"/>
+<xs:attribute name="noColumnas" type="xs:string"/>
+<xs:attribute name="tipoPregunta" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="opcionesDTO">
+<xs:sequence>
+<xs:element name="opcion" type="tns:opcionDTO" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="opcionDTO">
+<xs:sequence>
+<xs:element name="seleccion" type="xs:string"/>
+</xs:sequence>
+<xs:attribute name="descripcion" type="xs:string"/>
+<xs:attribute name="descripcion1" type="xs:string"/>
+<xs:attribute name="genero" type="xs:string"/>
+<xs:attribute name="numero" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="preguntaMatrizDTO">
+<xs:sequence>
+<xs:element name="columna" type="xs:string" maxOccurs="unbounded"/>
+<xs:element name="preguntaRenglon" type="tns:preguntaRenglonDTO" maxOccurs="unbounded"/>
+</xs:sequence>
+<xs:attribute name="rotar" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="preguntaRenglonDTO">
+<xs:sequence>
+<xs:element name="idpRenglon" type="xs:string"/>
+<xs:element name="pregunta" type="xs:string"/>
+<xs:element name="respuesta" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="Search_TaxAuthorityForGroupW">
 <xs:sequence>
 <xs:element name="taxath" type="tns:searchTaxAuthority" minOccurs="0"/>
@@ -12151,6 +12293,7 @@
 <xs:element name="url_server" type="xs:string"/>
 <xs:element name="item" type="tns:item"/>
 <xs:element name="loghead" type="tns:logHead"/>
+<xs:element name="costo" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -12990,16 +13133,6 @@
 <xs:complexType name="GET_ModeloW">
 <xs:sequence>
 <xs:element name="in" type="tns:getModelo" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getModelo">
-<xs:sequence>
-<xs:element name="oper" type="xs:string"/>
-<xs:element name="ID_Instancia" type="xs:int"/>
-<xs:element name="ID_MODELO" type="xs:int"/>
-<xs:element name="TY_MODELO" type="xs:string"/>
-<xs:element name="NOMBRE" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

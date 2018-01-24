@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="url_server" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="item" type="{http://Webmet.core/}item"/>
  *         &lt;element name="loghead" type="{http://Webmet.core/}logHead"/>
+ *         &lt;element name="costo" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,7 +39,8 @@ import javax.xml.bind.annotation.XmlType;
     "databaseName",
     "urlServer",
     "item",
-    "loghead"
+    "loghead",
+    "costo"
 })
 public class AbcItem {
 
@@ -54,6 +56,7 @@ public class AbcItem {
     protected Item item;
     @XmlElement(required = true)
     protected LogHead loghead;
+    protected int costo;
 
     /**
      * Obtiene el valor de la propiedad operacion.
@@ -189,6 +192,22 @@ public class AbcItem {
      */
     public void setLoghead(LogHead value) {
         this.loghead = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad costo.
+     * 
+     */
+    public int getCosto() {
+        return costo;
+    }
+
+    /**
+     * Define el valor de la propiedad costo.
+     * 
+     */
+    public void setCosto(int value) {
+        this.costo = value;
     }
 
 }
