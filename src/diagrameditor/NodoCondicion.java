@@ -35,9 +35,9 @@ public class NodoCondicion implements Nodo {
     private int num;
     private TipoNodo tipo;
     private NodoRol rol;
-    public static Cuestionario selectedModel;
-    private PreguntaDTO selectedQuestion;
-    private OpcionDTO selectedOption;
+    private static Cuestionario cuestionarioSeleccionado;
+    private PreguntaDTO preguntaSeleccionada;
+    private OpcionDTO opcionSeleccionada;
     
 
     //Constructor vacio para guardar/cargar estas propiedades en graph
@@ -48,9 +48,10 @@ public class NodoCondicion implements Nodo {
         this.etiqueta = etiqueta;
         this.tipo = tipo;
         this.nombre = "";
-        this.num = 0;       
-        this.selectedOption = null;
-        this.selectedQuestion = null;
+        this.num = 0;
+        this.cuestionarioSeleccionado = null;
+        this.opcionSeleccionada = null;
+        this.preguntaSeleccionada = null;
     }
 
     public JPanel getPropertiesPanel() {
@@ -63,45 +64,7 @@ public class NodoCondicion implements Nodo {
     }
 
     private void createTextFields(JPanel panel) {
-        JTextField fieldName = new JTextField(10);
-        fieldName.setText(this.getNombre());
-        JSpinner fieldId = new JSpinner();
-        fieldId.setValue(this.getNum());
-        JTextField fieldType = new JTextField(10);
-        fieldType.setText(this.getTipo().toString());
-        fieldType.setEditable(false);
-        JTextField fieldRole = new JTextField(10);
-        fieldRole.setEditable(false);
 
-        if (getRol() != null) {
-            fieldRole.setText(getRol().getNombre());
-        }
-
-        fieldName.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                NodoCondicion.this.setNombre(fieldName.getText());
-                System.out.println("Name: " + NodoCondicion.this.getNombre());
-            }
-        });
-
-        fieldId.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                NodoCondicion.this.setNum((int) (Integer) fieldId.getValue());
-                System.out.println("Id: " + NodoCondicion.this.getNum());
-            }
-        });
-
-        panel.add(new JLabel("Name"));
-        panel.add(fieldName);
-        panel.add(new JLabel("Node num"));
-        panel.add(fieldId);
-
-        panel.add(new JLabel("Type"));
-        panel.add(fieldType);
-        panel.add(new JLabel("Role"));
-        panel.add(fieldRole);
 
         List<Pregunta> questions = setPreguntas();
 
@@ -110,8 +73,8 @@ public class NodoCondicion implements Nodo {
 
             @Override
             public void itemStateChanged(ItemEvent e) {
-                setSelectedQuestion(((Pregunta) e.getItem()).getPreguntaDTO());
-                setQuestionOptions(getSelectedQuestion(), panel);
+                setPreguntaSeleccionada(((Pregunta) e.getItem()).getPreguntaDTO());
+                setQuestionOptions(getPreguntaSeleccionada(), panel);
                 panel.revalidate();
             }
 
@@ -141,7 +104,7 @@ public class NodoCondicion implements Nodo {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
                     OpcionDTO opc = (OpcionDTO) e.getItem();
-                    setSelectedOption(opc);
+                    setOpcionSeleccionada(opc);
                     //pregunta.getPreguntaCerrada().
                 }
 
@@ -159,7 +122,7 @@ public class NodoCondicion implements Nodo {
             req.setIDInstancia(DiagramEditor.getInstancia().getIDINSTANCIA());
             req.setTYMODELO("F");
             req.setOper("SNG");
-            req.setIDMODELO(selectedModel.getIdModelo());
+            req.setIDMODELO(cuestionarioSeleccionado.getIdModelo());
             List<PreguntaDTO> preguntasDTO = DiagramEditor.getPort().getPregunasW(req).getPreguntas();
 
             for (PreguntaDTO pregunta : preguntasDTO) {
@@ -216,21 +179,29 @@ public class NodoCondicion implements Nodo {
     public TipoNodo getTipo() {
         return tipo;
     }
-
-    public void setSelectedQuestion(PreguntaDTO selectedQuestion) {
-        this.selectedQuestion = selectedQuestion;
+    
+     public void setPreguntaSeleccionada(PreguntaDTO preguntaSeleccionada) {
+        this.preguntaSeleccionada = preguntaSeleccionada;
     } 
 
-    public PreguntaDTO getSelectedQuestion() {
-        return selectedQuestion;
+    public PreguntaDTO getPreguntaSeleccionada() {
+        return preguntaSeleccionada;
+    }
+    
+    public void setcuestionarioSeleccionado(Cuestionario cuestionario) {
+        this.cuestionarioSeleccionado = cuestionario;
+    } 
+
+    public Cuestionario getcuestionarioSeleccionado() {
+        return cuestionarioSeleccionado;
     }
 
-   public void setSelectedOption(OpcionDTO selectedOption) {
-        this.selectedOption = selectedOption;
+   public void setOpcionSeleccionada(OpcionDTO opcionSeleccionada) {
+        this.opcionSeleccionada = opcionSeleccionada;
     }
 
-    public OpcionDTO getSelectedOption() {
-        return selectedOption;
+    public OpcionDTO getOpcionSeleccionada() {
+        return opcionSeleccionada;
     }
     
     @Override

@@ -52,7 +52,6 @@ public class DiagramPanel extends JPanel {
     protected final JTabbedPane libraryPane;
     
     private JPanel propertiesPanel;
-    private static JPanel modelsPanel;
     public static int idSelectedModel;
     
     public DiagramPanel(String appTitle, mxGraphComponent component) {
@@ -68,28 +67,31 @@ public class DiagramPanel extends JPanel {
     }
 
     private void setWindowPanels() {
-        // Creates the inner split pane that contains the library with the
-        // palettes and the graph outline on the left side of the window
-        JSplitPane inner = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-                libraryPane, graphOutline);
+        JSplitPane inner = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+        inner.setLeftComponent(libraryPane);
+        inner.setRightComponent(graphOutline);
         inner.setDividerLocation(320);
         inner.setDividerSize(6);
         inner.setBorder(null);
 
-        // Creates the outer split pane that contains the inner split pane and
-        // the graph component on the right side of the window
-        JSplitPane outer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, inner,
-                graphComponent);
+        JSplitPane outer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+        outer.setLeftComponent(inner);
+        outer.setRightComponent(graphComponent);
         outer.setDividerLocation(200);
         outer.setDividerSize(6);
         outer.setBorder(null);
         
+        //Not used for now
+        JSplitPane panel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+        panel.setLeftComponent(outer);
         propertiesPanel = new JPanel();
-        modelsPanel = new JPanel();
+        panel.add(propertiesPanel);
+        panel.setPreferredSize(panel.getPreferredSize());
+        
         setLayout(new BorderLayout());
         add(outer, BorderLayout.CENTER);
+        //add(panel, BorderLayout.CENTER);
         add(propertiesPanel, BorderLayout.EAST);
-        add(modelsPanel, BorderLayout.NORTH);
         this.setPreferredSize(this.getPreferredSize());
     }
 
@@ -185,25 +187,6 @@ public class DiagramPanel extends JPanel {
     
     public mxGraphComponent getGraphComponent() {
         return graphComponent;
-    }
-    
-    public static void modelOptions(){
-        JPanel propertiesPanel = new JPanel(new GridLayout(0, 1));
-        propertiesPanel.add(new JLabel("<html><h3>Models</h3></html>"));
-        
-        List<Cuestionario> models = Cuestionario.getOpcionesCuestionario();
-       
-        JComboBox modelsList = new JComboBox(new DefaultComboBoxModel(models.toArray()));
-        modelsList.addItemListener(new ItemListener(){
-
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                Cuestionario item =(Cuestionario) e.getItem();
-                idSelectedModel = item.getModelo().getIdModelo();
-            }
-        
-        });
-        modelsPanel.add(modelsList);
     }
     
     public void setListenerToGraph(MiGraph graph) {
