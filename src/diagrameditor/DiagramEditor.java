@@ -60,90 +60,39 @@ import javax.swing.UIManager;
  *
  * @author MPA
  */
-public class DiagramEditor extends JPanel {
+public class DiagramEditor {
 
-    protected String appTitle;
-    protected mxGraphComponent graphComponent;
-    protected mxGraphOutline graphOutline;
-    protected final JTabbedPane libraryPane;
+    private static EJBWebServicev20_Service webService;
+    private static EJBWebServicev20 puerto;
+    private static Instancia instancia;
+    
 
-    private static EJBWebServicev20_Service service;
-    private static EJBWebServicev20 port;
-    private static Instancia instance;
-    private JPanel propertiesPanel;
-    private static JPanel modelsPanel;
-    public static int idSelectedModel;
-
-    public DiagramEditor(String appTitle, mxGraphComponent component) {
-        this.appTitle = appTitle;
-        graphComponent = component;
-        graphOutline = new mxGraphOutline(graphComponent);
-        libraryPane = new JTabbedPane();
-        final mxGraph graph = graphComponent.getGraph();
-        this.setWindowPanels();
-        setShapeOptions(graph);
-        setMouseListener(graphComponent);
+    public DiagramEditor() {
+        instancia = null;
     }
 
     public static void main(String[] args) {
-        service = new EJBWebServicev20_Service();
-        port = service.getEJBWebServicev20Port();
-        LoginFrame login = new LoginFrame();
+        webService = new EJBWebServicev20_Service();
+        puerto = webService.getEJBWebServicev20Port();
+        LogIn login = new LogIn();
         login.setVisible(true);
     }
-
+    
     public static void startDiagramEditor() {
-        CustomGraph graph = new CustomGraph();
-        CustomGraphComponent graphComponent = new CustomGraphComponent(graph);
-        DiagramEditor editor = new DiagramEditor("mxGraph Editor", graphComponent);
-        editor.setListenerToGraph(graph);
+        MiGraph graph = new MiGraph();
+        MiGraphComponent graphComponent = new MiGraphComponent(graph);
+        
         new mxRubberband(graphComponent);
         new mxKeyboardHandler(graphComponent);
-
-        editor.setLookAndFeel();
-        editor.createFrame(new MenuBar(editor)).setVisible(true);
+        
+        DiagramPanel editor = new DiagramPanel("mxGraph Editor", graphComponent);
+        editor.setListenerToGraph(graph);
+        createFrame(new BarraMenuPrincipal(editor), editor).setVisible(true);
     }
-
-    public void setListenerToGraph(CustomGraph graph) {
-        graph.getSelectionModel().addListener(mxEvent.CHANGE, new mxIEventListener() {
-
-            @Override
-            public void invoke(Object sender, mxEventObject evt) {
-                System.out.println("Selection in graph component" + sender.toString());
-                if (sender instanceof mxGraphSelectionModel) {
-                    for (Object cell : ((mxGraphSelectionModel) sender).getCells()) {
-                        graph.setRoleToVertex((mxCell) cell);
-                        addNewCellPanel((mxCell) cell);
-                    }
-                }
-            }
-
-        });
-    }
-
-    public void addNewCellPanel(mxCell cell) {
-        Object value = cell.getValue();
-        if (value instanceof CustomVertex) {
-            propertiesPanel.removeAll();
-            CustomVertex custom = (CustomVertex) value;
-            JPanel newPane = custom.getPropertiesPanel();
-            propertiesPanel.add(newPane);
-        }
-        propertiesPanel.revalidate();
-        propertiesPanel.repaint();
-    }
-
-    public void setLookAndFeel() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
-    }
-
-    public JFrame createFrame(JMenuBar menuBar) {
+    
+    public static JFrame createFrame(JMenuBar menuBar, DiagramPanel editor) {
         JFrame frame = new JFrame();
-        frame.getContentPane().add(this);
+        frame.getContentPane().add(editor);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setJMenuBar(menuBar);
         frame.setSize(870, 640);
@@ -153,162 +102,20 @@ public class DiagramEditor extends JPanel {
         return frame;
     }
 
-    private void setWindowPanels() {
-        // Creates the inner split pane that contains the library with the
-        // palettes and the graph outline on the left side of the window
-        JSplitPane inner = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-                libraryPane, graphOutline);
-        inner.setDividerLocation(320);
-        inner.setDividerSize(6);
-        inner.setBorder(null);
-
-        // Creates the outer split pane that contains the inner split pane and
-        // the graph component on the right side of the window
-        JSplitPane outer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, inner,
-                graphComponent);
-        outer.setDividerLocation(200);
-        outer.setDividerSize(6);
-        outer.setBorder(null);
-
-        propertiesPanel = new JPanel();
-        modelsPanel = new JPanel(); 
-        setLayout(new BorderLayout());
-        add(outer, BorderLayout.CENTER);
-        add(propertiesPanel, BorderLayout.EAST);
-        add(modelsPanel, BorderLayout.NORTH);
-            
-        
-    }
-    
-    public static void modelOptions(){
-        JPanel propertiesPanel = new JPanel(new GridLayout(0, 1));
-        propertiesPanel.add(new JLabel("<html><h3>Models</h3></html>"));
-        
-        GetModeloResponse res;
-        GetModelo req = new GetModelo();
-        req.setIDInstancia(instance.getIDINSTANCIA());
-        req.setTYMODELO("F");
-        req.setOper("TYP");
-        req.setIDMODELO(0);
-        res = port.getModeloW(req);
-        List<Model> models = new ArrayList();
-        System.out.println(models);
-        for (Modelo model:res.getModelos()){
-            models.add(new Model(model));
-        }
-        JComboBox modelsList = new JComboBox(new DefaultComboBoxModel(models.toArray()));
-        modelsList.addItemListener(new ItemListener(){
-
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                Model item =(Model) e.getItem();
-                idSelectedModel = item.getModelo().getIdModelo();
-            }
-        
-        });
-        modelsPanel.add(modelsList);
+    public static void setInstancia(Instancia inst) {
+        instancia = inst;
     }
 
-    private void setShapeOptions(mxGraph graph) {
-        EditorOptionsMenu shapeOptions = insertOptionsMenu(mxResources.get("shapes"));
-
-        FlowVertex flow = new FlowVertex("Flow");
-        RoleVertex role = new RoleVertex("Role", "", "");
-        NodeVertex start = new NodeVertex("Start", "", NodeType.START);
-        NodeVertex process = new NodeVertex("Process", "", NodeType.PROCESS);
-        ConditionVertex ifNode = new ConditionVertex("Condition", "", NodeType.IF);
-        NodeVertex end = new NodeVertex("End", "", NodeType.END);
-
-        shapeOptions.addOption("Flowchart", new ImageIcon(
-                DiagramEditor.class.getResource("/images/swimlane.png")),
-                "swimlane", 160, 120, flow);
-        shapeOptions.addOption("Role", new ImageIcon(
-                DiagramEditor.class.getResource("/images/swimlane.png")),
-                "swimlane;horizontal=0;", 160, 120, role);
-        shapeOptions.addOption("Start", new ImageIcon(
-                DiagramEditor.class
-                .getResource("/images/ellipse.png")),
-                "swimlane", 60, 60, start);
-        shapeOptions.addOption("Process", new ImageIcon(
-                DiagramEditor.class.getResource("/images/rectangle.png")),
-                "swimlane", 160, 120, process);
-        shapeOptions.addOption("If", new ImageIcon(
-                DiagramEditor.class
-                .getResource("/images/rhombus.png")),
-                "swimlane", 160, 160, ifNode);
-        shapeOptions.addOption("End", new ImageIcon(
-                DiagramEditor.class
-                .getResource("/images/ellipse.png")),
-                "swimlane", 60, 60, end);
-        shapeOptions.addEdgeOption("Horizontal Connector", new ImageIcon(
-                DiagramEditor.class
-                .getResource("/images/connect.png")),
-                null, 100, 100, "");
-        shapeOptions.addEdgeOption("Vertical Connector", new ImageIcon(
-                DiagramEditor.class
-                .getResource("/images/vertical.png")),
-                "vertical", 100, 100, "");
+    public static Instancia getInstancia() {
+        return instancia;
     }
 
-    private EditorOptionsMenu insertOptionsMenu(String title) {
-        final EditorOptionsMenu optionsMenu = new EditorOptionsMenu();
-        final JScrollPane scrollPanel = new JScrollPane(optionsMenu);
-        scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        libraryPane.add(title, scrollPanel);
-        update_pane_width(scrollPanel, optionsMenu);
-        return optionsMenu;
-    }
-
-    private void update_pane_width(JScrollPane scrollPanel, EditorOptionsMenu menu) {
-        // Updates the widths of the palettes if the container size changes
-        libraryPane.addComponentListener(new ComponentAdapter() {
-            public void componentResized(ComponentEvent e) {
-                int w = scrollPanel.getWidth()
-                        - scrollPanel.getVerticalScrollBar().getWidth();
-                menu.setPreferredWidth(w);
-            }
-
-        });
-    }
-
-    public mxGraphComponent getGraphComponent() {
-        return graphComponent;
-    }
-
-    private void setMouseListener(mxGraphComponent graphComponent) {
-        // MouseListener that Prints the Cell on Doubleclick
-        graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    // Get Cell under Mousepointer
-                    mxCell cell = (mxCell) getGraphComponent().getCellAt(e.getX(), e.getY());
-                    String id = cell.getId();
-                    // Print Cell Label
-                    if (cell != null) {
-                        JOptionPane.showMessageDialog(null, "Id: " + id + " location: " + cell.getGeometry());
-                        System.out.println(cell);
-                    }
-                }
-            }
-        });
-    }
-    
-    public static void setInstance(Instancia inst){
-        instance = inst;
-    }
-    
-    public static Instancia getInstance() {
-        return instance;
-    }
-    
     public static EJBWebServicev20_Service getService() {
-        return service;
+        return webService;
     }
 
     public static EJBWebServicev20 getPort() {
-        return port;
+        return puerto;
     }
 
 }

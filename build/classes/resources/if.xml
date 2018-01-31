@@ -1,0 +1,35 @@
+<mxGraphModel>
+    <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="2" parent="1" style="swimlane" vertex="1">
+            <diagrameditor.ConditionVertex answer="alsld" as="value" label="Condition" name="f1" num="1">
+                <core.webmet.PreguntaDTO as="selectedQuestion" descripcion="Nombre:" obligatoria="Si" sinRespuesta="No" variable="EnCompaniade1">
+                    <core.webmet.PreguntaAbiertaDTO as="preguntaAbierta" respuesta="alsld" tipoRespuesta="String"/>
+                </core.webmet.PreguntaDTO>
+                <diagrameditor.NodeType as="type"/>
+            </diagrameditor.ConditionVertex>
+            <mxGeometry as="geometry" height="160.0" width="160.0" x="40.0" y="170.0"/>
+        </mxCell>
+        <mxCell id="3" parent="1" style="swimlane" vertex="1">
+            <diagrameditor.ConditionVertex answer="MADRE" as="value" label="Condition" name="f2" num="2">
+                <core.webmet.PreguntaDTO as="selectedQuestion" descripcion="Quién viaja con el menor/los menores" obligatoria="Si" variable="Quienviajamenor">
+                    <core.webmet.PreguntaCerradaDTO as="preguntaCerrada" incluirOtros="No" noColumnas="1" tipoPregunta="UnaSeleccion">
+                        <core.webmet.OpcionesDTO as="opciones">
+                            <Array as="opcion">
+                                <core.webmet.OpcionDTO descripcion="PADRE" numero="1"/>
+                                <core.webmet.OpcionDTO descripcion="MADRE" numero="2"/>
+                                <core.webmet.OpcionDTO descripcion="UNA TERCERA PERSONA" numero="3"/>
+                                <core.webmet.OpcionDTO descripcion="VIAJA SOLO" numero="4"/>
+                                <core.webmet.OpcionDTO descripcion="TERCERAS PERSONAS" numero="5"/>
+                            </Array>
+                        </core.webmet.OpcionesDTO>
+                    </core.webmet.PreguntaCerradaDTO>
+                </core.webmet.PreguntaDTO>
+                <core.webmet.OpcionDTO as="selectedOption" descripcion="MADRE" numero="2"/>
+                <diagrameditor.NodeType as="type"/>
+            </diagrameditor.ConditionVertex>
+            <mxGeometry as="geometry" height="160.0" width="160.0" x="400.0" y="210.0"/>
+        </mxCell>
+    </root>
+</mxGraphModel>

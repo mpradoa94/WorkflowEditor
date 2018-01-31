@@ -1,0 +1,60 @@
+<mxGraphModel>
+    <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="2" parent="1" style="swimlane" vertex="1">
+            <diagrameditor.NodoFlujo as="value" etiqueta="Flujo" idFlujo="1" idVersion="1" nombre="Flujo acta destacada"/>
+            <mxGeometry as="geometry" height="1000.0" width="770.0" x="30.0" y="40.0"/>
+        </mxCell>
+        <mxCell id="3" parent="2" style="swimlane;horizontal=0;" vertex="1">
+            <diagrameditor.NodoRol as="value" cveRol="CLI" etiqueta="Rol"/>
+            <mxGeometry as="geometry" height="310.0" width="700.0" x="30.0" y="60.0"/>
+        </mxCell>
+        <mxCell id="5" parent="3" style="ellipse" vertex="1">
+            <diagrameditor.NodoProceso as="value" etiqueta="Inicio" nombre="Solicitado" numNodo="1" tiempoNodo="1" tiempoNodoMax="2" tipo="Inicio">
+                <diagrameditor.NodoRol as="rol" cveRol="CLI" etiqueta="Rol"/>
+            </diagrameditor.NodoProceso>
+            <mxGeometry as="geometry" height="70.0" width="70.0" x="70.0" y="70.0"/>
+        </mxCell>
+        <mxCell id="4" parent="2" style="swimlane;horizontal=0;" vertex="1">
+            <diagrameditor.NodoRol as="value" cveRol="REC" etiqueta="Rol"/>
+            <mxGeometry as="geometry" height="450.0" width="690.0" x="30.0" y="420.0"/>
+        </mxCell>
+        <mxCell id="6" parent="4" style="swimlane" vertex="1">
+            <diagrameditor.NodoProceso as="value" etiqueta="Proceso" nombre="Agendado, listo para firmar y entrega" numNodo="3" tiempoNodo="5" tiempoNodoMax="6" tipo="Proceso">
+                <diagrameditor.NodoRol as="rol" cveRol="REC" etiqueta="Rol"/>
+            </diagrameditor.NodoProceso>
+            <mxGeometry as="geometry" height="120.0" width="160.0" x="80.0" y="130.0"/>
+        </mxCell>
+        <mxCell id="8" parent="4" style="swimlane" vertex="1">
+            <diagrameditor.NodoProceso as="value" etiqueta="Proceso" nombre="Agendado, listo para firmar y entrega" numNodo="3" tiempoNodo="5" tiempoNodoMax="6" tipo="Proceso">
+                <diagrameditor.NodoRol as="rol" cveRol="REC" etiqueta="Rol"/>
+            </diagrameditor.NodoProceso>
+            <mxGeometry as="geometry" height="120.0" width="160.0" x="370.0" y="140.0"/>
+        </mxCell>
+        <mxCell edge="1" id="9" parent="4" source="6" style="" target="8" value="">
+            <mxGeometry as="geometry" relative="1">
+                <mxPoint as="sourcePoint" x="160.0" y="190.0"/>
+                <mxPoint as="targetPoint" x="450.0" y="210.0"/>
+            </mxGeometry>
+        </mxCell>
+        <mxCell id="10" parent="4" style="ellipse" vertex="1">
+            <diagrameditor.NodoProceso as="value" etiqueta="Fin" nombre="Finalizado" numNodo="4" tipo="Fin">
+                <diagrameditor.NodoRol as="rol" cveRol="REC" etiqueta="Rol"/>
+            </diagrameditor.NodoProceso>
+            <mxGeometry as="geometry" height="70.0" width="70.0" x="550.0" y="330.0"/>
+        </mxCell>
+        <mxCell edge="1" id="11" parent="4" source="8" style="" target="10" value="">
+            <mxGeometry as="geometry" relative="1">
+                <mxPoint as="sourcePoint" x="450.0" y="200.0"/>
+                <mxPoint as="targetPoint" x="580.0" y="350.0"/>
+            </mxGeometry>
+        </mxCell>
+        <mxCell edge="1" id="7" parent="2" source="5" style="" target="6" value="">
+            <mxGeometry as="geometry" relative="1">
+                <mxPoint as="sourcePoint" x="140.0" y="170.0"/>
+                <mxPoint as="targetPoint" x="370.0" y="130.0"/>
+            </mxGeometry>
+        </mxCell>
+    </root>
+</mxGraphModel>
