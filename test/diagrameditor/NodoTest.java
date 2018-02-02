@@ -22,68 +22,59 @@ public class NodoTest {
     public void testSetEtiqueta() {
         System.out.println("setEtiqueta");
         String valor = "";
-        Nodo instance = new NodoImpl();
-        instance.setEtiqueta(valor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Nodo instancia = new NodoImpl();
+        instancia.setEtiqueta(valor);
+        assertEquals(valor, instancia.getEtiqueta());
     }
 
     @Test
     public void testGetEtiqueta() {
         System.out.println("getEtiqueta");
-        Nodo instance = new NodoImpl();
-        String expResult = "";
-        String result = instance.getEtiqueta();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Nodo instancia = new NodoImpl();
+        String espResult = "";
+        String result = instancia.getEtiqueta();
+        assertEquals(espResult, result);
     }
 
     @Test
     public void testSetNombre() {
         System.out.println("setNombre");
         String nombre = "";
-        Nodo instance = new NodoImpl();
-        instance.setNombre(nombre);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Nodo instancia = new NodoImpl();
+        instancia.setNombre(nombre);
+        assertEquals(nombre, instancia.getNombre());
     }
 
     @Test
     public void testGetNombre() {
         System.out.println("getNombre");
-        Nodo instance = new NodoImpl();
-        String expResult = "";
-        String result = instance.getNombre();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Nodo instancia = new NodoImpl();
+        String espResult = "";
+        String result = instancia.getNombre();
+        assertEquals(espResult, result);
     }
 
     @Test
-    public void testGenerateXMLstringInicio() {
+    public void testGenerarXMLstringInicio() {
         System.out.println("generateXMLstringInicio");
-        Nodo instance = new NodoImpl();
-        String expResult = "";
-        String result = instance.generateXMLstringInicio();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Nodo instancia = new NodoImpl();
+        String espResult = "";
+        String result = instancia.generarXMLstringInicio();
+        assertEquals(espResult, result);
     }
 
     @Test
-    public void testGenerateXMLstringFin() {
+    public void testGenerarXMLstringFin() {
         System.out.println("generateXMLstringFin");
-        Nodo instance = new NodoImpl();
-        String expResult = "";
-        String result = instance.generateXMLstringFin();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Nodo instancia = new NodoImpl();
+        String espResult = "";
+        String result = instancia.generarXMLstringFin();
+        assertEquals(espResult, result);
     }
 
     public class NodoImpl implements Nodo {
 
+        @Override
         public void setEtiqueta(String valor) {
         }
 
@@ -91,18 +82,22 @@ public class NodoTest {
             return "";
         }
 
+        @Override
         public void setNombre(String nombre) {
         }
 
+        @Override
         public String getNombre() {
             return "";
         }
 
-        public String generateXMLstringInicio() {
+        @Override
+        public String generarXMLstringInicio() {
             return "";
         }
 
-        public String generateXMLstringFin() {
+        @Override
+        public String generarXMLstringFin() {
             return "";
         }
     }

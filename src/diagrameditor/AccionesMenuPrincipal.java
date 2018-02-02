@@ -119,12 +119,16 @@ public class AccionesMenuPrincipal {
                     
                     GeneradorXML generador = new GeneradorXML(graphComponent);
                     generador.generate();
-                    System.out.println("XML: "+generador.getXMLstring());
-                            
+                    String xmlString = generador.getXMLstring();
+                    ParseMarshall esValido = new ParseMarshall();
+                           
                     mxCodec codec = new mxCodec();
                     String xml = mxXmlUtils.getXml(codec.encode(graph.getModel()));
                     mxUtils.writeFile(xml, nuevoNombre);
-                    mxUtils.writeFile(generador.getXMLstring(), nombreArchivo+"_CORE.xml");
+                    if (esValido.ValidaStringXML(xmlString))
+                        mxUtils.writeFile(generador.getXMLstring(), nombreArchivo+"_CORE.xml");
+                    else
+                        System.out.println("XML invalido");
 
                 } catch (IOException ioe) {
                     System.out.println("Error al guardar: " + ioe);

@@ -63,7 +63,7 @@ public class NodoRol implements Nodo {
     }
     
     @Override
-    public String generateXMLstringInicio(){
+    public String generarXMLstringInicio(){
         String XMLstring = "<rol>";
         XMLstring += "<cveRol>" + getCveRol() + "</cveRol>";
         XMLstring += "<nmRol>" + getNombre() + "</nmRol>";
@@ -71,7 +71,7 @@ public class NodoRol implements Nodo {
     }
     
     @Override
-    public String generateXMLstringFin(){
+    public String generarXMLstringFin(){
         String XMLstring = "</rol>";
         return XMLstring;
     }

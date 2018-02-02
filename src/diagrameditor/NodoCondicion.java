@@ -205,12 +205,12 @@ public class NodoCondicion implements Nodo {
     }
     
     @Override
-    public String generateXMLstringInicio(){
+    public String generarXMLstringInicio(){
         return "<condicion>";
     }
     
     @Override
-    public String generateXMLstringFin(){
+    public String generarXMLstringFin(){
         return "</condicion>";
     }
 

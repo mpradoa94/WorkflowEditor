@@ -34,12 +34,12 @@ public class GeneradorXML {
             mxCell cell = (mxCell) vertice;
             Nodo nodo = (Nodo) cell.getValue();
             if (nodo instanceof NodoRol == false) {
-                XMLstring += nodo.generateXMLstringInicio();
+                XMLstring += nodo.generarXMLstringInicio();
                 if (cell.getChildCount() > 0) {
                     generate(cell);
                 }
                 agregarReferenciaSiguiente(cell);
-                XMLstring += nodo.generateXMLstringFin();
+                XMLstring += nodo.generarXMLstringFin();
             } else {
                 if (cell.getChildCount() > 0) {
                     generate(cell);

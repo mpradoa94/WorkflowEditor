@@ -108,7 +108,7 @@ public class NodoProceso implements Nodo {
     }
     
     @Override
-    public String generateXMLstringInicio(){
+    public String generarXMLstringInicio(){
         String XMLstring = "";
         if (getTipo() == TipoNodo.Inicio){
             XMLstring += "<inicio ";
@@ -128,22 +128,21 @@ public class NodoProceso implements Nodo {
             XMLstring += "tiempoNodoMax=\"" + getTiempoNodoMax() + "\" ";
         }
         XMLstring += ">";
-        XMLstring += generateXMLrol();
         return XMLstring;
     }
     
     private String generateXMLrol(){
         String XMLstring = "";
         if (getRol() != null){
-            XMLstring += getRol().generateXMLstringInicio();
-            XMLstring += getRol().generateXMLstringFin();
+            XMLstring += getRol().generarXMLstringInicio();
+            XMLstring += getRol().generarXMLstringFin();
         }
         return XMLstring;
     } 
     
     @Override
-    public String generateXMLstringFin(){
-        String XMLstring = "";
+    public String generarXMLstringFin(){
+        String XMLstring = generateXMLrol();
         if (getTipo() == TipoNodo.Inicio){
             XMLstring += "</inicio>";
         }

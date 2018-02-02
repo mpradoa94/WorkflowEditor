@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by Dagoberto Prado (Computadoras y Redes Locales de) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:annotation>
+		<xs:documentation>
+			El esquema sirve para definir flujos de trabajo y roles de usuarios.
+		</xs:documentation>
+	</xs:annotation>
+	<xs:element name="flujo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="inicio" type="node" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="nodos" type="node" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="fin" type="node" minOccurs="1" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="idFlujo" type="xs:integer" use="required"/>
+			<xs:attribute name="nmFlujo" type="xs:string" use="required"/>
+			<xs:attribute name="idVersion" type="xs:integer" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="roles">
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="cveRol" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="nmRol" type="xs:string" maxOccurs="1" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="node">
+		<xs:sequence>
+			<xs:element name="siguiente" type="nodoSiguiente" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="propiedades" type="propiedadesNodo" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="rol" type="roles" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="numNodo" type="xs:integer" use="required"/>
+		<xs:attribute name="nombreNodo" type="xs:string" use="required"/>
+                <xs:attribute name="tipoProceso" type="xs:string" use="optional"/>
+		<xs:attribute name="tiempoNodo" type="xs:integer" use="optional"/>
+		<xs:attribute name="tiempoNodoMax" type="xs:integer" use="optional"/>
+		<xs:attribute name="tipoNodo" type="tipoNodo" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="nodoSiguiente">
+		<xs:sequence>
+			<xs:element name="condicion" type="condicion" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="numNodoSiguiente" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="tipoNodo">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Inicio"/>
+			<xs:enumeration value="Fin"/>
+			<xs:enumeration value="Proceso"/>
+			<xs:enumeration value="If"/>
+			<xs:enumeration value="Split"/>
+			<xs:enumeration value="Merge"/>
+                        <xs:enumeration value="Antilavado"/>
+		</xs:restriction>
+	</xs:simpleType>
+        <xs:complexType name="propiedadesNodo">
+		<xs:sequence>
+			<xs:element name="nmVariableInterna" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="tipo" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                        <xs:element name="variableCuestionario" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                        <xs:element name="cuerpoCorreo" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="asuntoCorreo" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="infohistory">
+		<xs:sequence>
+			<xs:element name="nombreNodo" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="llegada" type="xs:date" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="tomado" type="xs:date" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="usuario" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="instancia" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="condicion">
+		<xs:sequence>
+			<xs:choice minOccurs="1" maxOccurs="1">
+				<xs:element name="condicion" type="condicion"/>
+				<xs:element name="comparative" type="comparative"/>
+			</xs:choice>
+			<xs:element name="comparative2" type="comparative2" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="comparative">
+		<xs:sequence>
+			<xs:element name="variable1" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="oplogico" type="opLogico" minOccurs="1" maxOccurs="1"/>
+			<xs:choice minOccurs="1" maxOccurs="1">
+				<xs:element name="valuestring" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="valueinteger" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="valuedate" type="xs:date" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="valuedecimal" type="xs:decimal" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="variable2" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="comparative2">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="operador" type="operador" minOccurs="1" maxOccurs="1"/>
+			<xs:choice minOccurs="1" maxOccurs="1">
+				<xs:element name="condicion" type="condicion" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="comparative" type="comparative" minOccurs="1" maxOccurs="1"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="opLogico">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="equal"/>
+			<xs:enumeration value="mayor o igual"/>
+			<xs:enumeration value="menor o igual"/>
+			<xs:enumeration value="distinto"/>
+			<xs:enumeration value="mayor"/>
+			<xs:enumeration value="menor"/>
+		</xs:restriction>
+	</xs:simpleType>
+        <xs:simpleType name="operador">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AND"/>
+			<xs:enumeration value="OR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="información">
+		<xs:sequence>
+			<xs:element name="uRL" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="numNodo" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="usuarioactual" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="history" type="infohistory" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="copias" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="numCopia" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="numInfo" type="xs:integer" use="required"/>
+		<xs:attribute name="fechaCreacion" type="xs:date" use="required"/>
+		<xs:attribute name="usuariacrea" type="xs:string" use="required"/>
+		<xs:attribute name="nombreFlujo" type="xs:string" use="required"/>
+		<xs:attribute name="versionFlujo" type="xs:string" use="required"/>
+	</xs:complexType>
+</xs:schema>

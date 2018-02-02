@@ -19,6 +19,6 @@ public interface Nodo extends Serializable{
     public String getEtiqueta();
     public void setNombre(String nombre);
     public String getNombre();
-    public String generateXMLstringInicio();
-    public String generateXMLstringFin();
+    public String generarXMLstringInicio();
+    public String generarXMLstringFin();
 }

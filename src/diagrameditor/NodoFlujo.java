@@ -75,17 +75,17 @@ public class NodoFlujo implements Nodo {
     }
     
     @Override
-    public String generateXMLstringInicio(){
+    public String generarXMLstringInicio(){
         String XMLstring = "<flujo ";
         XMLstring += "idFlujo=\"" + getIdFlujo() + "\" ";
         XMLstring += "idVersion=\"" + getIdVersion() + "\" ";
-        XMLstring += "nmFlujo=\"" + getNombre() + "\" ";
+        XMLstring += "nmFlujo=\"" + getNombre() + "\"";
         XMLstring += ">";
         return XMLstring;
     }
     
     @Override
-    public String generateXMLstringFin(){
+    public String generarXMLstringFin(){
         String XMLstring = "</flujo>";
         return XMLstring;
     }
