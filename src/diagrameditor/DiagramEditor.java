@@ -2,11 +2,14 @@ package diagrameditor;
 
 import com.mxgraph.swing.handler.mxKeyboardHandler;
 import com.mxgraph.swing.handler.mxRubberband;
+import com.mxgraph.util.mxResources;
 import core.webmet.EJBWebServicev20;
 import core.webmet.EJBWebServicev20_Service;
 import core.webmet.Instancia;
+import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -17,7 +20,9 @@ public class DiagramEditor {
     private static EJBWebServicev20_Service webService;
     private static EJBWebServicev20 puerto;
     private static Instancia instancia;
-    
+    private static String tituloApp;
+    private static JFrame frameEditor;
+    private static File archivoActual;
 
     public DiagramEditor() {
         instancia = null;
@@ -28,20 +33,23 @@ public class DiagramEditor {
         puerto = webService.getEJBWebServicev20Port();
         LogIn login = new LogIn();
         login.setVisible(true);
+        tituloApp = "Editor";
     }
-    
+
     public static void startDiagramEditor() {
         MiGraph graph = new MiGraph();
         MiGraphComponent graphComponent = new MiGraphComponent(graph);
-        
+
         new mxRubberband(graphComponent);
         new mxKeyboardHandler(graphComponent);
-        
-        DiagramPanel editor = new DiagramPanel("mxGraph Editor", graphComponent);
+
+        DiagramPanel editor = new DiagramPanel(graphComponent);
         editor.setListenerToGraph(graph);
-        createFrame(new BarraMenuPrincipal(editor), editor).setVisible(true);
+        frameEditor = createFrame(new BarraMenuPrincipal(editor), editor);
+        frameEditor.setVisible(true);
+        actualizarTitulo();
     }
-    
+
     public static JFrame createFrame(JMenuBar menuBar, DiagramPanel editor) {
         JFrame frame = new JFrame();
         frame.getContentPane().add(editor);
@@ -49,9 +57,17 @@ public class DiagramEditor {
         frame.setJMenuBar(menuBar);
         frame.setSize(870, 640);
 
-        // Updates the frame title
-        //updateTitle();
         return frame;
+    }
+
+    private static void actualizarTitulo() {
+        if (frameEditor != null) {
+            String titulo = (archivoActual != null) ? archivoActual
+					.getAbsolutePath() : "Sin título";
+
+            frameEditor.setTitle(tituloApp + " - " + titulo);
+        }
+
     }
 
     public static void setInstancia(Instancia inst) {
@@ -68,6 +84,18 @@ public class DiagramEditor {
 
     public static EJBWebServicev20 getPort() {
         return puerto;
+    }
+
+    public static void setArchivoActual(File archivo) {
+        File aux = archivoActual;
+        archivoActual = archivo;
+        if (aux != archivo) {
+            actualizarTitulo();
+        }
+    }
+
+    public static File getArchivoActual() {
+        return archivoActual;
     }
 
 }

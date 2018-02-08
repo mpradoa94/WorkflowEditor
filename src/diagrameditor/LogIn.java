@@ -39,8 +39,8 @@ public class LogIn extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         campoNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        campoContrasena = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
+        campoContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,12 +54,6 @@ public class LogIn extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
-        campoContrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoContrasenaActionPerformed(evt);
-            }
-        });
-
         submitButton.setText("Login");
         submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -69,6 +63,12 @@ public class LogIn extends javax.swing.JFrame {
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
+            }
+        });
+
+        campoContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoContrasenaActionPerformed(evt);
             }
         });
 
@@ -82,12 +82,11 @@ public class LogIn extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(submitButton)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(campoNombre)
-                        .addComponent(campoContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                    .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                    .addComponent(campoContrasena))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,10 +114,6 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoNombreActionPerformed
 
-    private void campoContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoContrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoContrasenaActionPerformed
-
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_submitButtonActionPerformed
@@ -132,6 +127,10 @@ public class LogIn extends javax.swing.JFrame {
         respuesta = port.logInW(loginData);
         evaluarRespuesta();
     }//GEN-LAST:event_submitButtonMouseClicked
+
+    private void campoContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoContrasenaActionPerformed
 
     public LogInResponse getResponse(){
         return respuesta;
@@ -151,7 +150,7 @@ public class LogIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField campoContrasena;
+    private javax.swing.JPasswordField campoContrasena;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

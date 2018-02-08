@@ -13,36 +13,18 @@ import com.mxgraph.io.mxGdCodec;
 import com.mxgraph.io.mxModelCodec;
 import com.mxgraph.io.mxObjectCodec;
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.util.mxCellRenderer;
-import com.mxgraph.util.mxDomUtils;
-import com.mxgraph.util.mxPoint;
-import com.mxgraph.util.mxResources;
 import com.mxgraph.util.mxUtils;
 import com.mxgraph.util.mxXmlUtils;
 import com.mxgraph.util.png.mxPngEncodeParam;
 import com.mxgraph.util.png.mxPngImageEncoder;
 import com.mxgraph.view.mxGraph;
-import com.mxgraph.view.mxGraphView;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.Field;
-import java.net.URLEncoder;
-import java.util.HashSet;
-import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
 import org.w3c.dom.Document;
 
 /**
@@ -112,8 +94,8 @@ public class AccionesMenuPrincipal {
 
                 try {
                     mxGraph graph = graphComponent.getGraph();
-
-                    String nombreArchivo = seleccionadorArchivo.getSelectedFile().getAbsolutePath();
+                    File archivo = seleccionadorArchivo.getSelectedFile();
+                    String nombreArchivo = archivo.getAbsolutePath();
                     String extension = seleccionadorArchivo.getFileFilter().getDescription();
                     String nuevoNombre = cambiarExtensionXML(nombreArchivo, extension);
                     
@@ -129,6 +111,8 @@ public class AccionesMenuPrincipal {
                         mxUtils.writeFile(generador.getXMLstring(), nombreArchivo+"_CORE.xml");
                     else
                         System.out.println("XML invalido");
+                    
+                    DiagramEditor.setArchivoActual(archivo);
 
                 } catch (IOException ioe) {
                     System.out.println("Error al guardar: " + ioe);
@@ -167,12 +151,14 @@ public class AccionesMenuPrincipal {
 
                 try {
                     mxGraph graph = graphComponent.getGraph();
-
-                    String nombreArchivo = seleccionadorArchivo.getSelectedFile().getAbsolutePath();
+                    File archivo = seleccionadorArchivo.getSelectedFile();
+                    String nombreArchivo = archivo.getAbsolutePath();
                     
                     Document document = mxXmlUtils.parseXml( mxUtils.readFile( nombreArchivo));
                     mxCodec codec = new mxCodec(document);
                     codec.decode( document.getDocumentElement(), graph.getModel());
+                    
+                    DiagramEditor.setArchivoActual(archivo);
                 } catch (IOException ioe) {
                     System.out.println("Error while loading: " + ioe);
                 }

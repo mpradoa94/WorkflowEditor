@@ -39,6 +39,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
 /**
@@ -46,18 +47,18 @@ import javax.swing.UIManager;
  * @author MPA
  */
 public class DiagramPanel extends JPanel {
-
+    
     protected mxGraphComponent graphComponent;
-    protected mxGraphOutline graphOutline;
-    protected final JTabbedPane libraryPane;
+    private mxGraphOutline graphOutline;
+    private final JToolBar libraryPane;
     
-    private JPanel propertiesPanel;
-    public static int idSelectedModel;
+    private JPanel panelPropiedades;
     
-    public DiagramPanel(String appTitle, mxGraphComponent component) {
+    public DiagramPanel(mxGraphComponent component) {
         graphComponent = component;
         graphOutline = new mxGraphOutline(graphComponent);
-        libraryPane = new JTabbedPane();
+        libraryPane = new JToolBar();
+        
         final mxGraph graph = graphComponent.getGraph();
         graph.setResetViewOnRootChange(false);
         this.setWindowPanels();
@@ -84,14 +85,14 @@ public class DiagramPanel extends JPanel {
         //Not used for now
         JSplitPane panel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         panel.setLeftComponent(outer);
-        propertiesPanel = new JPanel();
-        panel.add(propertiesPanel);
+        panelPropiedades = new JPanel();
+        panel.add(panelPropiedades);
         panel.setPreferredSize(panel.getPreferredSize());
         
         setLayout(new BorderLayout());
         add(outer, BorderLayout.CENTER);
         //add(panel, BorderLayout.CENTER);
-        add(propertiesPanel, BorderLayout.EAST);
+        add(panelPropiedades, BorderLayout.EAST);
         this.setPreferredSize(this.getPreferredSize());
     }
 
@@ -209,12 +210,12 @@ public class DiagramPanel extends JPanel {
      public void addNewCellPanel(mxCell cell) {
         Object value = cell.getValue();
         if (value instanceof Nodo) {
-            propertiesPanel.removeAll();
+            panelPropiedades.removeAll();
             JPanelPropiedadesNodo panel = new JPanelPropiedadesNodo((Nodo) value);
-            propertiesPanel.add(panel);
+            panelPropiedades.add(panel);
         }
-        propertiesPanel.revalidate();
-        propertiesPanel.repaint();
+        panelPropiedades.revalidate();
+        panelPropiedades.repaint();
     }
         
 }
