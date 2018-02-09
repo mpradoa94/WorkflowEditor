@@ -97,5 +97,9 @@ public class DiagramEditor {
     public static File getArchivoActual() {
         return archivoActual;
     }
+    
+    public static JFrame getFrameEditor() {
+        return frameEditor;
+    }
 
 }

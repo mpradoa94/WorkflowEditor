@@ -28,6 +28,9 @@ public class MiGraphComponent extends mxGraphComponent {
         if (doc != null) {
             codec.decode(doc.getDocumentElement(), graph.getStylesheet());
         }
+
+        getViewport().setOpaque(true);
+        getViewport().setBackground(Color.WHITE);
     }
 
     private Document parse_doc(String uri) {

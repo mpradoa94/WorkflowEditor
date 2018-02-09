@@ -7,6 +7,7 @@ package diagrameditor;
 
 import core.webmet.OpcionDTO;
 import core.webmet.PreguntaDTO;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,8 +25,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -33,16 +38,19 @@ import javax.swing.event.ChangeListener;
 public class JPanelPropiedadesNodo extends JPanel {
 
     //TODO: refactor
-    private Nodo nodo;
+    private final Nodo nodo;
     private GridBagConstraints gridBagConstraints;
+    private int posY;
 
     public JPanelPropiedadesNodo(Nodo nodo) {
         this.nodo = nodo;
+        posY = 0;
         initComponents();
     }
 
     private void initComponents() {
-
+        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 20, 5));
+        
         JLabel titulo1 = new JLabel("Propiedades");
         JLabel titulo2 = new JLabel(nodo.getEtiqueta());
 
@@ -51,7 +59,8 @@ public class JPanelPropiedadesNodo extends JPanel {
 
         titulo1.setFont(new java.awt.Font("Tahoma", 1, 14));
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = posY;
+        posY += 1;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(11, 24, 0, 91);
@@ -59,42 +68,41 @@ public class JPanelPropiedadesNodo extends JPanel {
 
         titulo2.setFont(new java.awt.Font("Tahoma", 1, 12));
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = posY;
+        posY += 1;
         add(titulo2, gridBagConstraints);
 
         agregarPropiedadesNodo();
+
+        this.setPreferredSize(this.getPreferredSize());
     }
 
     private void agregarPropiedadesNodo() {
-        int posY = 2;
         for (Field propiedad : nodo.getClass().getDeclaredFields()) {
             if (!"etiqueta".equals(propiedad.getName())) {
                 propiedad.setAccessible(true);
-                crearComponente(propiedad, posY);
+                crearComponente(propiedad);
                 posY++;
             }
         }
     }
 
-    private void crearComponente(Field propiedad, int posY) {
-        agregarEtiquetaNombre(propiedad.getName(), posY);
-        agregarCampo(propiedad, posY);
+    private void crearComponente(Field propiedad) {
+        agregarEtiquetaNombre(propiedad.getName());
+        agregarCampo(propiedad);
 
     }
 
     private Object obtenerValor(Field propiedad) {
         try {
             return propiedad.get(nodo);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(JPanelPropiedadesNodo.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalArgumentException | IllegalAccessException ex) {
             Logger.getLogger(JPanelPropiedadesNodo.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
 
-    private void agregarEtiquetaNombre(String nombre, int posY) {
+    private void agregarEtiquetaNombre(String nombre) {
         JLabel nombrePropiedad = new JLabel(nombre);
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.gridx = 0;
@@ -102,7 +110,7 @@ public class JPanelPropiedadesNodo extends JPanel {
         add(nombrePropiedad, gridBagConstraints);
     }
 
-    private void agregarCampo(Field propiedad, int posY) {
+    private void agregarCampo(Field propiedad) {
         Class<?> tipo = propiedad.getType();
         Object valor = obtenerValor(propiedad);
 
@@ -122,9 +130,7 @@ public class JPanelPropiedadesNodo extends JPanel {
                 public void stateChanged(ChangeEvent e) {
                     try {
                         propiedad.setInt(nodo, (int) campo.getValue());
-                    } catch (IllegalArgumentException ex) {
-                        Logger.getLogger(JPanelPropiedadesNodo.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalAccessException ex) {
+                    } catch (IllegalArgumentException | IllegalAccessException ex) {
                         Logger.getLogger(JPanelPropiedadesNodo.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -154,10 +160,10 @@ public class JPanelPropiedadesNodo extends JPanel {
                 case "rol":
                     if (valor != null) {
                         add(crearCampoTexto(propiedad, ((Nodo) valor).getNombre(), false),
-                            gridBagConstraints);
+                                gridBagConstraints);
                     } else {
                         add(crearCampoTexto(propiedad, "", false),
-                            gridBagConstraints);
+                                gridBagConstraints);
                     }
                     break;
                 case "cuestionarioSeleccionado":
@@ -165,11 +171,11 @@ public class JPanelPropiedadesNodo extends JPanel {
                     break;
                 case "preguntaSeleccionada":
                     add(crearCampoTexto(propiedad, "", false),
-                        gridBagConstraints);
+                            gridBagConstraints);
                     break;
                 case "opcionSeleccionada":
-                    add(crearCampoTexto(propiedad,"", false),
-                        gridBagConstraints);
+                    add(crearCampoTexto(propiedad, "", false),
+                            gridBagConstraints);
                     break;
             }
         }
@@ -181,14 +187,26 @@ public class JPanelPropiedadesNodo extends JPanel {
         campo.setText(texto);
         campo.setEditable(editable);
 
-        campo.addActionListener(new ActionListener() {
+        campo.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void actionPerformed(ActionEvent event) {
+            public void insertUpdate(DocumentEvent e) {
+                setPropiedad();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                setPropiedad();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                setPropiedad();
+            }
+
+            public void setPropiedad() {
                 try {
                     propiedad.set(nodo, campo.getText());
-                } catch (IllegalArgumentException ex) {
-                    Logger.getLogger(JPanelPropiedadesNodo.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
+                } catch (IllegalArgumentException | IllegalAccessException ex) {
                     Logger.getLogger(JPanelPropiedadesNodo.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -235,7 +253,7 @@ public class JPanelPropiedadesNodo extends JPanel {
                     }
 
                 });
-                
+
                 gridBagConstraints.gridy = posY;
                 add(combo, gridBagConstraints);
                 revalidate();
@@ -248,9 +266,24 @@ public class JPanelPropiedadesNodo extends JPanel {
     private void agregarCampoOpcion(PreguntaDTO pregunta, int posY) {
         if (pregunta.getPreguntaAbierta() != null) {
             JTextField respuesta = new JTextField(10);
-            respuesta.addActionListener(new ActionListener() {
+            respuesta.getDocument().addDocumentListener(new DocumentListener() {
+
                 @Override
-                public void actionPerformed(ActionEvent event) {
+                public void insertUpdate(DocumentEvent e) {
+                    getPregunta();
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    getPregunta();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    getPregunta();
+                }
+
+                private void getPregunta() {
                     pregunta.getPreguntaAbierta().setRespuesta(respuesta.getText());
                 }
             });
@@ -263,7 +296,7 @@ public class JPanelPropiedadesNodo extends JPanel {
             List<OpcionDTO> opciones = pregunta.getPreguntaCerrada().getOpciones().getOpcion();
             DefaultComboBoxModel comboModel = new DefaultComboBoxModel(opciones.toArray());
             JComboBox combo = new JComboBox(comboModel);
-            
+
             combo.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
@@ -272,7 +305,7 @@ public class JPanelPropiedadesNodo extends JPanel {
                     nodoCond.setOpcionSeleccionada(opc);
                 }
             });
-            
+
             gridBagConstraints.gridy = posY;
             add(combo, gridBagConstraints);
             revalidate();

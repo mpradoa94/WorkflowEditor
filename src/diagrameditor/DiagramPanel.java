@@ -6,8 +6,6 @@
 package diagrameditor;
 
 import com.mxgraph.model.mxCell;
-import com.mxgraph.swing.handler.mxKeyboardHandler;
-import com.mxgraph.swing.handler.mxRubberband;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.mxGraphOutline;
 import com.mxgraph.util.mxEvent;
@@ -16,29 +14,24 @@ import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxResources;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxGraphSelectionModel;
-import core.webmet.GetModelo;
-import core.webmet.GetModeloResponse;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
@@ -82,17 +75,10 @@ public class DiagramPanel extends JPanel {
         outer.setDividerSize(6);
         outer.setBorder(null);
         
-        //Not used for now
-        JSplitPane panel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-        panel.setLeftComponent(outer);
-        panelPropiedades = new JPanel();
-        panel.add(panelPropiedades);
-        panel.setPreferredSize(panel.getPreferredSize());
         
         setLayout(new BorderLayout());
         add(outer, BorderLayout.CENTER);
-        //add(panel, BorderLayout.CENTER);
-        add(panelPropiedades, BorderLayout.EAST);
+        //add(panelPropiedades, BorderLayout.EAST);
         this.setPreferredSize(this.getPreferredSize());
     }
 
@@ -210,12 +196,37 @@ public class DiagramPanel extends JPanel {
      public void addNewCellPanel(mxCell cell) {
         Object value = cell.getValue();
         if (value instanceof Nodo) {
-            panelPropiedades.removeAll();
+            //panelPropiedades.removeAll();
             JPanelPropiedadesNodo panel = new JPanelPropiedadesNodo((Nodo) value);
-            panelPropiedades.add(panel);
+            JPanel pane = new JPanel();
+            pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
+            //panelPropiedades.add(panel);
+            JDialog dialog = new JDialog(DiagramEditor.getFrameEditor(), "JDialog", true);
+            JButton cerrar = new JButton("Cerrar");
+            cerrar.setAlignmentX(Component.CENTER_ALIGNMENT);
+            
+            cerrar.addActionListener(new ActionListener(){
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dialog.dispose();
+                }
+            });
+            
+            pane.add(panel);
+            pane.add(cerrar);
+            pane.setBorder(BorderFactory.createEmptyBorder(0,0,20,0));
+            
+            dialog.getContentPane().add(pane);
+            dialog.pack();
+            dialog.setLocationRelativeTo(null);
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
         }
-        panelPropiedades.revalidate();
-        panelPropiedades.repaint();
+        
+        //panelPropiedades.revalidate();
+        //panelPropiedades.repaint();
+        
     }
         
 }
