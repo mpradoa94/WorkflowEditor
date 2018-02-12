@@ -131,7 +131,6 @@ class MiGraph extends mxGraph {
                 + ", translate=[x=" + formatoNum.format(trans.getX())
                 + ",y=" + formatoNum.format(trans.getY()) + "]";
         tip += "<br>childs= " + mxcell.getChildCount();
-        tip += "<br>lalal= " + mxcell.getAttribute("name", "");
         tip += "</html>";
 
         return tip;

@@ -8,6 +8,7 @@ package diagrameditor;
 import core.webmet.OpcionDTO;
 import core.webmet.PreguntaDTO;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,7 +51,7 @@ public class JPanelPropiedadesNodo extends JPanel {
 
     private void initComponents() {
         this.setBorder(BorderFactory.createEmptyBorder(5, 5, 20, 5));
-        
+
         JLabel titulo1 = new JLabel("Propiedades");
         JLabel titulo2 = new JLabel(nodo.getEtiqueta());
 
@@ -217,25 +218,33 @@ public class JPanelPropiedadesNodo extends JPanel {
 
     private JComboBox crearCampoCuestionario(int posY) {
         List<Cuestionario> modelos = Cuestionario.getOpcionesCuestionario();
-        JComboBox combo = new JComboBox(new DefaultComboBoxModel(modelos.toArray()));
+        JComboBox combo = new JComboBox();
+        if (modelos.isEmpty()) {
+            combo.addItem("Sin cuestionarios disponibles");
+            combo.setEnabled(false);
+        } else {
+            combo = new JComboBox(new DefaultComboBoxModel(modelos.toArray()));
 
-        combo.addItemListener(new ItemListener() {
+            combo.addActionListener(new ActionListener() {
 
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                Cuestionario item = (Cuestionario) e.getItem();
-                if (nodo instanceof NodoCondicion) {
-                    ((NodoCondicion) nodo).setcuestionarioSeleccionado(item);
-                    agregarCampoPregunta(posY + 1);
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JComboBox comboBox = (JComboBox) e.getSource();
+                    Cuestionario item = (Cuestionario) comboBox.getSelectedItem();
+                    if (nodo instanceof NodoCondicion) {
+                        ((NodoCondicion) nodo).setcuestionarioSeleccionado(item);
+                        agregarCampoPregunta(posY + 1);
+                    }
                 }
-            }
 
-        });
+            });
+        }
 
         return combo;
     }
 
     private void agregarCampoPregunta(int posY) {
+        limpiarCampo(posY);
         if (nodo instanceof NodoCondicion) {
             NodoCondicion nodoCond = (NodoCondicion) nodo;
             Cuestionario cuestionario = nodoCond.getcuestionarioSeleccionado();
@@ -264,6 +273,7 @@ public class JPanelPropiedadesNodo extends JPanel {
     }
 
     private void agregarCampoOpcion(PreguntaDTO pregunta, int posY) {
+        limpiarCampo(posY);
         if (pregunta.getPreguntaAbierta() != null) {
             JTextField respuesta = new JTextField(10);
             respuesta.getDocument().addDocumentListener(new DocumentListener() {
@@ -293,7 +303,7 @@ public class JPanelPropiedadesNodo extends JPanel {
             repaint();
 
         } else if (pregunta.getPreguntaCerrada() != null) {
-            List<OpcionDTO> opciones = pregunta.getPreguntaCerrada().getOpciones().getOpcion();
+            List<OpcionCondicionales> opciones = OpcionCondicionales.getOpciones(pregunta.getPreguntaCerrada());
             DefaultComboBoxModel comboModel = new DefaultComboBoxModel(opciones.toArray());
             JComboBox combo = new JComboBox(comboModel);
 
@@ -311,6 +321,19 @@ public class JPanelPropiedadesNodo extends JPanel {
             revalidate();
             repaint();
         }
+    }
+
+    private void limpiarCampo(int posY) {
+        JComboBox componente = (JComboBox) this.getComponentAt(2, posY);
+        System.out.println(componente);
+        if (componente != null) {
+            this.remove(componente);
+            revalidate();
+            repaint();
+        }
+        componente = (JComboBox) this.getComponentAt(2, posY);
+        System.out.println(componente);
+
     }
 
 }

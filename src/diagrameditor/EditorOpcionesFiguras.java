@@ -44,6 +44,8 @@ public class EditorOpcionesFiguras extends JPanel {
 
     public EditorOpcionesFiguras() {
         setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
+        setOpaque(true);
+        setBackground(new Color(186, 199, 219));
         showDragAndDropIcon();
     }
 

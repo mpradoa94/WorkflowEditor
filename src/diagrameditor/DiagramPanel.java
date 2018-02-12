@@ -8,6 +8,8 @@ package diagrameditor;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.mxGraphOutline;
+import com.mxgraph.swing.util.mxSwingConstants;
+import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
@@ -15,6 +17,7 @@ import com.mxgraph.util.mxResources;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxGraphSelectionModel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -148,6 +151,9 @@ public class DiagramPanel extends JPanel {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
+        
+        mxSwingConstants.SHADOW_COLOR = Color.LIGHT_GRAY;
+        mxConstants.W3C_SHADOWCOLOR = "#D3D3D3";
     }
     
     private EditorOpcionesFiguras insertOptionsMenu(String title) {
