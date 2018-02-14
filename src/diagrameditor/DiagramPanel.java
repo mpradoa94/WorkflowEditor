@@ -14,6 +14,8 @@ import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxResources;
+import com.mxgraph.util.mxUndoManager;
+import com.mxgraph.util.mxUndoableEdit;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxGraphSelectionModel;
 import java.awt.BorderLayout;
@@ -25,6 +27,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -43,25 +46,48 @@ import javax.swing.UIManager;
  * @author MPA
  */
 public class DiagramPanel extends JPanel {
-    
+
     protected mxGraphComponent graphComponent;
     private mxGraphOutline graphOutline;
     private final JToolBar libraryPane;
-    
-    private JPanel panelPropiedades;
-    
+    private mxUndoManager undoManager;
+    private boolean modificado;
+
+    private mxEventSource.mxIEventListener undoHandler = new mxEventSource.mxIEventListener() {
+        @Override
+        public void invoke(Object source, mxEventObject evt) {
+            getUndoManager().undoableEditHappened((mxUndoableEdit) evt
+                    .getProperty("edit"));
+        }
+    };
+
+    protected mxEventSource.mxIEventListener changeTracker = new mxEventSource.mxIEventListener() {
+        public void invoke(Object source, mxEventObject evt) {
+            modificado = true;
+        }
+    };
+
+    //private JPanel panelPropiedades;
     public DiagramPanel(mxGraphComponent component) {
         graphComponent = component;
         graphOutline = new mxGraphOutline(graphComponent);
         libraryPane = new JToolBar();
         libraryPane.setFloatable(false);
-        
+
         final mxGraph graph = graphComponent.getGraph();
         graph.setResetViewOnRootChange(false);
-        this.setWindowPanels();
+
+        undoManager = crearUndoManager();
+        setWindowPanels();
         setShapeOptions(graph);
-        setMouseListener(graphComponent);
+
+        agregarListeners(graphComponent, graph);
+
         setLookAndFeel();
+    }
+    
+    private mxUndoManager crearUndoManager(){
+        return new mxUndoManager();
     }
 
     private void setWindowPanels() {
@@ -78,8 +104,7 @@ public class DiagramPanel extends JPanel {
         outer.setDividerLocation(200);
         outer.setDividerSize(6);
         outer.setBorder(null);
-        
-        
+
         setLayout(new BorderLayout());
         add(outer, BorderLayout.CENTER);
         //add(panelPropiedades, BorderLayout.EAST);
@@ -127,6 +152,12 @@ public class DiagramPanel extends JPanel {
                 "vertical", 100, 100, "");
     }
 
+    private void agregarListeners(mxGraphComponent graphComponent, mxGraph graph) {
+        setMouseListener(graphComponent);
+        setUndoListener(graph);
+        new EditorKeyboardHandler(graphComponent);
+    }
+
     private void setMouseListener(mxGraphComponent graphComponent) {
         // MouseListener that Prints the Cell on Doubleclick
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
@@ -146,17 +177,35 @@ public class DiagramPanel extends JPanel {
         });
     }
 
+    private void setUndoListener(mxGraph graph) {
+        graph.getModel().addListener(mxEvent.CHANGE, changeTracker);
+
+        graph.getModel().addListener(mxEvent.UNDO, undoHandler);
+        graph.getView().addListener(mxEvent.UNDO, undoHandler);
+
+        mxEventSource.mxIEventListener undoHandler = new mxEventSource.mxIEventListener() {
+            public void invoke(Object source, mxEventObject evt) {
+                List<mxUndoableEdit.mxUndoableChange> changes = ((mxUndoableEdit) evt
+                        .getProperty("edit")).getChanges();
+                graph.setSelectionCells(graph.getSelectionCellsForChanges(changes));
+            }
+        };
+
+        getUndoManager().addListener(mxEvent.UNDO, undoHandler);
+        getUndoManager().addListener(mxEvent.REDO, undoHandler);
+    }
+
     private void setLookAndFeel() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-        
+
         mxSwingConstants.SHADOW_COLOR = Color.LIGHT_GRAY;
         mxConstants.W3C_SHADOWCOLOR = "#D3D3D3";
     }
-    
+
     private EditorOpcionesFiguras insertOptionsMenu(String title) {
         EditorOpcionesFiguras optionsMenu = new EditorOpcionesFiguras();
         final JScrollPane scrollPanel = new JScrollPane(optionsMenu);
@@ -178,11 +227,11 @@ public class DiagramPanel extends JPanel {
 
         });
     }
-    
+
     public mxGraphComponent getGraphComponent() {
         return graphComponent;
     }
-    
+
     public void setListenerToGraph(MiGraph graph) {
         graph.getSelectionModel().addListener(mxEvent.CHANGE, new mxEventSource.mxIEventListener() {
 
@@ -199,8 +248,8 @@ public class DiagramPanel extends JPanel {
 
         });
     }
-    
-     public void addNewCellPanel(mxCell cell) {
+
+    public void addNewCellPanel(mxCell cell) {
         Object value = cell.getValue();
         if (value instanceof Nodo) {
             //panelPropiedades.removeAll();
@@ -211,29 +260,44 @@ public class DiagramPanel extends JPanel {
             JDialog dialog = new JDialog(DiagramEditor.getFrameEditor(), "Propiedades", true);
             JButton cerrar = new JButton("Cerrar");
             cerrar.setAlignmentX(Component.CENTER_ALIGNMENT);
-            
-            cerrar.addActionListener(new ActionListener(){
+
+            cerrar.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dialog.dispose();
                 }
             });
-            
+
             pane.add(panel);
             pane.add(cerrar);
-            pane.setBorder(BorderFactory.createEmptyBorder(0,0,20,0));
-            
+            pane.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
             dialog.getContentPane().add(pane);
             dialog.pack();
             dialog.setLocationRelativeTo(null);
             dialog.setAlwaysOnTop(true);
             dialog.setVisible(true);
         }
-        
+
         //panelPropiedades.revalidate();
         //panelPropiedades.repaint();
-        
     }
-        
+
+    public boolean isModificado() {
+        return modificado;
+    }
+
+    public void setModificado(boolean modificado) {
+        this.modificado = modificado;
+    }
+
+    public mxUndoManager getUndoManager() {
+        return undoManager;
+    }
+
+    public void setUndoManager(mxUndoManager undoManager) {
+        this.undoManager = undoManager;
+    }
+
 }

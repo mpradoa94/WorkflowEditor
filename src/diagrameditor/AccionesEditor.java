@@ -22,6 +22,7 @@ import com.mxgraph.util.png.mxPngImageEncoder;
 import com.mxgraph.util.png.mxPngTextDecoder;
 import com.mxgraph.view.mxGraph;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -46,7 +47,7 @@ import org.w3c.dom.Document;
  *
  * @author MPA
  */
-public class AccionesMenuPrincipal {
+public class AccionesEditor {
 
     static boolean registrado = false;
 
@@ -123,7 +124,7 @@ public class AccionesMenuPrincipal {
                     String xmlString = crearXML();
                     guardarXML(xmlString, nombreArchivo);
                 } catch (IOException ex) {
-                    Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AccionesEditor.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
@@ -166,11 +167,11 @@ public class AccionesMenuPrincipal {
                                 mxResources.get("noImageData"));
                     }
                 } catch (UnsupportedEncodingException ex) {
-                    Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AccionesEditor.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AccionesEditor.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
-                    Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AccionesEditor.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -254,11 +255,41 @@ public class AccionesMenuPrincipal {
                             mxResources.get("imageContainsNoDiagramData"));
                 }
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AccionesEditor.class.getName()).log(Level.SEVERE, null, ex);
             } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AccionesEditor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public static class AccionHistoria extends AbstractAction {
+
+        private boolean undo;
+
+        public AccionHistoria(boolean undo) {
+            this.undo = undo;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            DiagramPanel editor = null;
+            if (e.getSource() instanceof Component) {
+                Component componente = (Component) e.getSource();
+                while (componente != null && !(componente instanceof DiagramPanel)) {
+                    componente = componente.getParent();
+                }
+                editor = (DiagramPanel) componente;
+            }
+
+            if (editor != null) {
+                if (undo) {
+                    editor.getUndoManager().undo();
+                } else {
+                    editor.getUndoManager().redo();
+                }
+            }
+        }
+
     }
 
 }
