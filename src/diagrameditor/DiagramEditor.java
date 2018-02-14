@@ -9,6 +9,7 @@ import core.webmet.Instancia;
 import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -50,7 +51,7 @@ public class DiagramEditor {
         actualizarTitulo();
     }
 
-    public static JFrame createFrame(JMenuBar menuBar, DiagramPanel editor) {
+    public static JFrame createFrame(JMenuBar menuBar, JPanel editor) {
         JFrame frame = new JFrame();
         frame.getContentPane().add(editor);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

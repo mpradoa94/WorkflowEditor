@@ -54,6 +54,7 @@ public class DiagramPanel extends JPanel {
         graphComponent = component;
         graphOutline = new mxGraphOutline(graphComponent);
         libraryPane = new JToolBar();
+        libraryPane.setFloatable(false);
         
         final mxGraph graph = graphComponent.getGraph();
         graph.setResetViewOnRootChange(false);
@@ -207,7 +208,7 @@ public class DiagramPanel extends JPanel {
             JPanel pane = new JPanel();
             pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
             //panelPropiedades.add(panel);
-            JDialog dialog = new JDialog(DiagramEditor.getFrameEditor(), "JDialog", true);
+            JDialog dialog = new JDialog(DiagramEditor.getFrameEditor(), "Propiedades", true);
             JButton cerrar = new JButton("Cerrar");
             cerrar.setAlignmentX(Component.CENTER_ALIGNMENT);
             

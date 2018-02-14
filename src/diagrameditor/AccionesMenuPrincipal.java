@@ -13,18 +13,33 @@ import com.mxgraph.io.mxGdCodec;
 import com.mxgraph.io.mxModelCodec;
 import com.mxgraph.io.mxObjectCodec;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxCellRenderer;
+import com.mxgraph.util.mxResources;
 import com.mxgraph.util.mxUtils;
 import com.mxgraph.util.mxXmlUtils;
 import com.mxgraph.util.png.mxPngEncodeParam;
 import com.mxgraph.util.png.mxPngImageEncoder;
+import com.mxgraph.util.png.mxPngTextDecoder;
 import com.mxgraph.view.mxGraph;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
 import org.w3c.dom.Document;
 
 /**
@@ -84,47 +99,107 @@ public class AccionesMenuPrincipal {
             this.graphComponent = graphComponent;
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             JFileChooser seleccionadorArchivo = new JFileChooser();
+
+            seleccionadorArchivo.addChoosableFileFilter(
+                    new FiltroArchivo(".png", "PNG+XML " + mxResources.get("file") + " (.png)"));
+
             int respuesta = seleccionadorArchivo.showSaveDialog(editor);
+
             if (respuesta == JFileChooser.APPROVE_OPTION) {
-                if (!registrado) {
-                    registrarCodecs();
+                try {
+                    if (!registrado) {
+                        registrarCodecs();
+                    }
+
+                    File archivo = seleccionadorArchivo.getSelectedFile();
+                    FileFilter selectedFilter = seleccionadorArchivo.getFileFilter();
+                    String nombreArchivo = archivo.getAbsolutePath();
+
+                    nombreArchivo = cambiarExtension(nombreArchivo, selectedFilter);
+                    guardarXmlPng(nombreArchivo);
+                    String xmlString = crearXML();
+                    guardarXML(xmlString, nombreArchivo);
+                } catch (IOException ex) {
+                    Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
+            }
+        }
+
+        private String cambiarExtension(String nombreArchivo, FileFilter selectedFilter) {
+            if (selectedFilter instanceof FiltroArchivo) {
+                String ext = ((FiltroArchivo) selectedFilter).getExtension();
+
+                if (!nombreArchivo.toLowerCase().endsWith(ext)) {
+                    nombreArchivo += ext;
+                }
+            }
+            return nombreArchivo;
+        }
+
+        private void guardarXmlPng(String nombreArchivo) {
+            String ext = nombreArchivo.substring(nombreArchivo.lastIndexOf('.') + 1);
+
+            if (ext.equalsIgnoreCase("png")) {
                 try {
                     mxGraph graph = graphComponent.getGraph();
-                    File archivo = seleccionadorArchivo.getSelectedFile();
-                    String nombreArchivo = archivo.getAbsolutePath();
-                    String extension = seleccionadorArchivo.getFileFilter().getDescription();
-                    String nuevoNombre = cambiarExtensionXML(nombreArchivo, extension);
-                    
-                    GeneradorXML generador = new GeneradorXML(graphComponent);
-                    generador.generate();
-                    String xmlString = generador.getXMLstring();
-                    ParseMarshall esValido = new ParseMarshall();
-                           
-                    mxCodec codec = new mxCodec();
-                    String xml = mxXmlUtils.getXml(codec.encode(graph.getModel()));
-                    mxUtils.writeFile(xml, nuevoNombre);
-                    if (esValido.ValidaStringXML(xmlString))
-                        mxUtils.writeFile(generador.getXMLstring(), nombreArchivo+"_CORE.xml");
-                    else
-                        System.out.println("XML invalido");
-                    
-                    DiagramEditor.setArchivoActual(archivo);
 
-                } catch (IOException ioe) {
-                    System.out.println("Error al guardar: " + ioe);
+                    BufferedImage image = crearImagen(graph);
+                    String encodedXML = getXMLurl(graph);
+
+                    mxPngEncodeParam param = mxPngEncodeParam.getDefaultEncodeParam(image);
+                    param.setCompressedText(new String[]{"mxGraphModel", encodedXML});
+
+                    FileOutputStream outputStream = new FileOutputStream(new File(nombreArchivo));
+                    mxPngImageEncoder encoder = new mxPngImageEncoder(outputStream,
+                            param);
+
+                    if (image != null) {
+                        encoder.encode(image);
+                        //editor.setModified(false);
+                        DiagramEditor.setArchivoActual(new File(nombreArchivo));
+                    } else {
+                        JOptionPane.showMessageDialog(graphComponent,
+                                mxResources.get("noImageData"));
+                    }
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
 
-        private String cambiarExtensionXML(String nombreArchivo, String extension) {
-            if (!"xml".equals(extension)) {
-                return nombreArchivo + ".xml";
+        private String crearXML() {
+            GeneradorXML generador = new GeneradorXML(graphComponent);
+            generador.generate();
+            return generador.getXMLstring();
+        }
+
+        private void guardarXML(String xmlString, String nombreArchivo) throws IOException {
+            ParseMarshall esValido = new ParseMarshall();
+            if (esValido.ValidaStringXML(xmlString)) {
+                mxUtils.writeFile(xmlString, nombreArchivo + "_CORE.xml");
+            } else {
+                System.out.println("XML invalido");
             }
-            return nombreArchivo;
+        }
+
+        private BufferedImage crearImagen(mxGraph graph) {
+            return mxCellRenderer.createBufferedImage(graph,
+                    null, 1, Color.WHITE, graphComponent.isAntiAlias(), null,
+                    graphComponent.getCanvas());
+        }
+
+        private String getXMLurl(mxGraph graph) throws UnsupportedEncodingException {
+            mxCodec codec = new mxCodec();
+            String xml = mxXmlUtils.getXml(codec.encode(graph.getModel()));
+            return URLEncoder.encode(xml, "UTF-8");
         }
 
     }
@@ -149,21 +224,41 @@ public class AccionesMenuPrincipal {
                     registrarCodecs();
                 }
 
-                try {
-                    mxGraph graph = graphComponent.getGraph();
-                    File archivo = seleccionadorArchivo.getSelectedFile();
-                    String nombreArchivo = archivo.getAbsolutePath();
-                    
-                    Document document = mxXmlUtils.parseXml( mxUtils.readFile( nombreArchivo));
-                    mxCodec codec = new mxCodec(document);
-                    codec.decode( document.getDocumentElement(), graph.getModel());
-                    
-                    DiagramEditor.setArchivoActual(archivo);
-                } catch (IOException ioe) {
-                    System.out.println("Error while loading: " + ioe);
+                File archivo = seleccionadorArchivo.getSelectedFile();
+                String nombreArchivo = archivo.getAbsolutePath();
+
+                if (nombreArchivo.toLowerCase().endsWith(".png")) {
+                    abrirXmlPng(archivo);
                 }
             }
         }
+
+        private void abrirXmlPng(File archivo) {
+            try {
+                mxGraph graph = graphComponent.getGraph();
+                Map<String, String> texto;
+
+                texto = mxPngTextDecoder.decodeCompressedText(new FileInputStream(archivo));
+                if (texto != null) {
+                    String value = texto.get("mxGraphModel");
+
+                    if (value != null) {
+                        Document document = mxXmlUtils.parseXml(URLDecoder.decode(
+                                value, "UTF-8"));
+                        mxCodec codec = new mxCodec(document);
+                        codec.decode(document.getDocumentElement(), graph.getModel());
+                        DiagramEditor.setArchivoActual(archivo);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(editor,
+                            mxResources.get("imageContainsNoDiagramData"));
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(AccionesMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-    
+
 }

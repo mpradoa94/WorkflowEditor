@@ -10,6 +10,8 @@ import core.webmet.PreguntaDTO;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -41,11 +43,9 @@ public class JPanelPropiedadesNodo extends JPanel {
     //TODO: refactor
     private final Nodo nodo;
     private GridBagConstraints gridBagConstraints;
-    private int posY;
 
     public JPanelPropiedadesNodo(Nodo nodo) {
         this.nodo = nodo;
-        posY = 0;
         initComponents();
     }
 
@@ -54,8 +54,9 @@ public class JPanelPropiedadesNodo extends JPanel {
 
         JLabel titulo1 = new JLabel("Propiedades");
         JLabel titulo2 = new JLabel(nodo.getEtiqueta());
+        int posY = 0;
 
-        setLayout(new java.awt.GridBagLayout());
+        setLayout(new GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
 
         titulo1.setFont(new java.awt.Font("Tahoma", 1, 14));
@@ -73,24 +74,24 @@ public class JPanelPropiedadesNodo extends JPanel {
         posY += 1;
         add(titulo2, gridBagConstraints);
 
-        agregarPropiedadesNodo();
+        agregarPropiedadesNodo(posY);
 
         this.setPreferredSize(this.getPreferredSize());
     }
 
-    private void agregarPropiedadesNodo() {
+    private void agregarPropiedadesNodo(int posY) {
         for (Field propiedad : nodo.getClass().getDeclaredFields()) {
             if (!"etiqueta".equals(propiedad.getName())) {
                 propiedad.setAccessible(true);
-                crearComponente(propiedad);
+                crearComponente(propiedad, posY);
                 posY++;
             }
         }
     }
 
-    private void crearComponente(Field propiedad) {
-        agregarEtiquetaNombre(propiedad.getName());
-        agregarCampo(propiedad);
+    private void crearComponente(Field propiedad, int posY) {
+        agregarEtiquetaNombre(propiedad.getName(), posY);
+        agregarCampo(propiedad, posY);
 
     }
 
@@ -103,7 +104,7 @@ public class JPanelPropiedadesNodo extends JPanel {
         }
     }
 
-    private void agregarEtiquetaNombre(String nombre) {
+    private void agregarEtiquetaNombre(String nombre, int posY) {
         JLabel nombrePropiedad = new JLabel(nombre);
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.gridx = 0;
@@ -111,7 +112,7 @@ public class JPanelPropiedadesNodo extends JPanel {
         add(nombrePropiedad, gridBagConstraints);
     }
 
-    private void agregarCampo(Field propiedad) {
+    private void agregarCampo(Field propiedad, int posY) {
         Class<?> tipo = propiedad.getType();
         Object valor = obtenerValor(propiedad);
 
@@ -219,25 +220,30 @@ public class JPanelPropiedadesNodo extends JPanel {
     private JComboBox crearCampoCuestionario(int posY) {
         List<Cuestionario> modelos = Cuestionario.getOpcionesCuestionario();
         JComboBox combo = new JComboBox();
+
         if (modelos.isEmpty()) {
             combo.addItem("Sin cuestionarios disponibles");
             combo.setEnabled(false);
         } else {
             combo = new JComboBox(new DefaultComboBoxModel(modelos.toArray()));
 
-            combo.addActionListener(new ActionListener() {
+            if (nodo instanceof NodoCondicion) {
+                NodoCondicion nodoCond = (NodoCondicion) nodo;
+                combo.setSelectedItem(nodoCond.getcuestionarioSeleccionado());
 
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JComboBox comboBox = (JComboBox) e.getSource();
-                    Cuestionario item = (Cuestionario) comboBox.getSelectedItem();
-                    if (nodo instanceof NodoCondicion) {
-                        ((NodoCondicion) nodo).setcuestionarioSeleccionado(item);
+                combo.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JComboBox comboBox = (JComboBox) e.getSource();
+                        Cuestionario item = (Cuestionario) comboBox.getSelectedItem();
+                        nodoCond.setcuestionarioSeleccionado(item);
                         agregarCampoPregunta(posY + 1);
-                    }
-                }
 
-            });
+                    }
+
+                });
+            }
         }
 
         return combo;
@@ -252,7 +258,7 @@ public class JPanelPropiedadesNodo extends JPanel {
                 int idModelo = cuestionario.getModelo().getIdModelo();
                 List<Pregunta> preguntas = Pregunta.getPreguntas(idModelo);
                 JComboBox combo = new JComboBox(new DefaultComboBoxModel(preguntas.toArray()));
-
+                combo.setSelectedItem(nodoCond.getPreguntaSeleccionada());
                 combo.addItemListener(new ItemListener() {
 
                     @Override
@@ -306,12 +312,15 @@ public class JPanelPropiedadesNodo extends JPanel {
             List<OpcionCondicionales> opciones = OpcionCondicionales.getOpciones(pregunta.getPreguntaCerrada());
             DefaultComboBoxModel comboModel = new DefaultComboBoxModel(opciones.toArray());
             JComboBox combo = new JComboBox(comboModel);
-
+            NodoCondicion nodoCond = (NodoCondicion) nodo;
+            
+            combo.setSelectedItem(nodoCond.getOpcionSeleccionada());
+            
             combo.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
                     OpcionDTO opc = (OpcionDTO) e.getItem();
-                    NodoCondicion nodoCond = (NodoCondicion) nodo;
+                    
                     nodoCond.setOpcionSeleccionada(opc);
                 }
             });
@@ -324,16 +333,19 @@ public class JPanelPropiedadesNodo extends JPanel {
     }
 
     private void limpiarCampo(int posY) {
-        JComboBox componente = (JComboBox) this.getComponentAt(2, posY);
-        System.out.println(componente);
-        if (componente != null) {
-            this.remove(componente);
-            revalidate();
-            repaint();
-        }
-        componente = (JComboBox) this.getComponentAt(2, posY);
-        System.out.println(componente);
+        GridBagLayout layout = (GridBagLayout) getLayout();
 
+        for (Component component : getComponents()) {
+            component.getName();
+            GridBagConstraints gbc = layout.getConstraints(component);
+            if (gbc.gridy == posY && gbc.gridx == 2) {
+                System.out.println(component);
+                this.remove(component);
+                revalidate();
+                repaint();
+                break;
+            }
+        }
     }
 
 }
