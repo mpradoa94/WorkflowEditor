@@ -32,8 +32,9 @@ public class DiagramEditor {
     public static void main(String[] args) {
         webService = new EJBWebServicev20_Service();
         puerto = webService.getEJBWebServicev20Port();
-        LogIn login = new LogIn();
-        login.setVisible(true);
+        //LogIn login = new LogIn();
+        //login.setVisible(true);
+        startDiagramEditor();
         tituloApp = "Editor";
     }
 
@@ -44,9 +45,10 @@ public class DiagramEditor {
         new mxRubberband(graphComponent);
         new mxKeyboardHandler(graphComponent);
 
-        DiagramPanel editor = new DiagramPanel(graphComponent);
+        WorkflowPanel editor = new WorkflowPanel(graphComponent);
+        CuestionarioPanel editor1 = new CuestionarioPanel();
         editor.setListenerToGraph(graph);
-        frameEditor = createFrame(new BarraMenuPrincipal(editor), editor);
+        frameEditor = createFrame(new BarraMenuPrincipal(editor), editor1);
         frameEditor.setVisible(true);
         actualizarTitulo();
     }

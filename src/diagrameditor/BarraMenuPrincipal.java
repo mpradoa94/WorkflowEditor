@@ -27,7 +27,7 @@ public class BarraMenuPrincipal extends JMenuBar {
 
     Color bgColor = new Color(212, 214, 216);
 
-    public BarraMenuPrincipal(final DiagramPanel editor) {
+    public BarraMenuPrincipal(final WorkflowPanel editor) {
         final mxGraphComponent graphComponent = editor.getGraphComponent();
 
         JMenu menu = add(new JMenu("Archivo"));

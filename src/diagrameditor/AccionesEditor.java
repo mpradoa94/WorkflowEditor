@@ -91,10 +91,10 @@ public class AccionesEditor {
     public static class AccionGuardar extends AbstractAction {
 
         protected boolean mostrarCuadroDialogo;
-        private final DiagramPanel editor;
+        private final WorkflowPanel editor;
         private mxGraphComponent graphComponent;
 
-        public AccionGuardar(boolean showDialog, DiagramPanel editor, mxGraphComponent graphComponent) {
+        public AccionGuardar(boolean showDialog, WorkflowPanel editor, mxGraphComponent graphComponent) {
             this.mostrarCuadroDialogo = showDialog;
             this.editor = editor;
             this.graphComponent = graphComponent;
@@ -207,10 +207,10 @@ public class AccionesEditor {
 
     public static class AccionCargar extends AbstractAction {
 
-        private final DiagramPanel editor;
+        private final WorkflowPanel editor;
         private mxGraphComponent graphComponent;
 
-        public AccionCargar(DiagramPanel editor, mxGraphComponent graphComponent) {
+        public AccionCargar(WorkflowPanel editor, mxGraphComponent graphComponent) {
             this.editor = editor;
             this.graphComponent = graphComponent;
         }
@@ -272,13 +272,13 @@ public class AccionesEditor {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            DiagramPanel editor = null;
+            WorkflowPanel editor = null;
             if (e.getSource() instanceof Component) {
                 Component componente = (Component) e.getSource();
-                while (componente != null && !(componente instanceof DiagramPanel)) {
+                while (componente != null && !(componente instanceof WorkflowPanel)) {
                     componente = componente.getParent();
                 }
-                editor = (DiagramPanel) componente;
+                editor = (WorkflowPanel) componente;
             }
 
             if (editor != null) {

@@ -45,7 +45,7 @@ import javax.swing.UIManager;
  *
  * @author MPA
  */
-public class DiagramPanel extends JPanel {
+public class WorkflowPanel extends JPanel {
 
     protected mxGraphComponent graphComponent;
     private mxGraphOutline graphOutline;
@@ -68,7 +68,7 @@ public class DiagramPanel extends JPanel {
     };
 
     //private JPanel panelPropiedades;
-    public DiagramPanel(mxGraphComponent component) {
+    public WorkflowPanel(mxGraphComponent component) {
         graphComponent = component;
         graphOutline = new mxGraphOutline(graphComponent);
         libraryPane = new JToolBar();
