@@ -44,11 +44,10 @@ public class DiagramEditor {
 
         new mxRubberband(graphComponent);
         new mxKeyboardHandler(graphComponent);
-
+        
         WorkflowPanel editor = new WorkflowPanel(graphComponent);
-        CuestionarioPanel editor1 = new CuestionarioPanel();
         editor.setListenerToGraph(graph);
-        frameEditor = createFrame(new BarraMenuPrincipal(editor), editor1);
+        frameEditor = createFrame(new BarraMenuPrincipal(editor), editor);
         frameEditor.setVisible(true);
         actualizarTitulo();
     }
@@ -71,6 +70,10 @@ public class DiagramEditor {
             frameEditor.setTitle(tituloApp + " - " + titulo);
         }
 
+    }
+    
+    public static void limpiarFrameEditor(){
+        frameEditor.getContentPane().removeAll();
     }
 
     public static void setInstancia(Instancia inst) {

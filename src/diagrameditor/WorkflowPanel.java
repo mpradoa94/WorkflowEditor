@@ -45,7 +45,7 @@ import javax.swing.UIManager;
  *
  * @author MPA
  */
-public class WorkflowPanel extends JPanel {
+public class WorkflowPanel extends EditorPanel {
 
     protected mxGraphComponent graphComponent;
     private mxGraphOutline graphOutline;

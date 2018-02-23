@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author MPA
  */
-public class CuestionarioPanel extends javax.swing.JPanel {
+public class CuestionarioPanel extends EditorPanel {
 
     /**
      * Creates new form CuestionarioPanel
@@ -222,7 +222,6 @@ public class CuestionarioPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void miInit() {
-        String COMMIT_ACTION = "commit";
         List diccionario = new ArrayList();
         diccionario.add("Hola");
         diccionario.add("Hoaodlao");

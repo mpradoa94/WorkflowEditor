@@ -12,6 +12,8 @@ import com.mxgraph.io.mxCodecRegistry;
 import com.mxgraph.io.mxGdCodec;
 import com.mxgraph.io.mxModelCodec;
 import com.mxgraph.io.mxObjectCodec;
+import com.mxgraph.swing.handler.mxKeyboardHandler;
+import com.mxgraph.swing.handler.mxRubberband;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxCellRenderer;
 import com.mxgraph.util.mxResources;
@@ -86,6 +88,53 @@ public class AccionesEditor {
                 super.setFieldValue(obj, fieldname, value);
             }
         });
+    }
+
+    public static class AccionNuevo extends AbstractAction {
+
+        private TipoEditor tipoEditor;
+
+        public AccionNuevo(TipoEditor tipoEditor) {
+            this.tipoEditor = tipoEditor;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //getActualEditor
+            //if modified show dialog for saving before creating new
+            DiagramEditor.limpiarFrameEditor();
+            if (tipoEditor == TipoEditor.WorkFlow) {
+                nuevoWF();
+            } else if (tipoEditor == TipoEditor.Cuestionarios) {
+                nuevoCuestionario();
+            } else if (tipoEditor == TipoEditor.Reportes) {
+                nuevoReporte();
+            }
+            DiagramEditor.getFrameEditor().revalidate();
+            DiagramEditor.getFrameEditor().repaint();
+        }
+
+        private void nuevoWF() {
+            MiGraph graph = new MiGraph();
+            MiGraphComponent graphComponent = new MiGraphComponent(graph);
+
+            new mxRubberband(graphComponent);
+            new mxKeyboardHandler(graphComponent);
+
+            WorkflowPanel editor = new WorkflowPanel(graphComponent);
+            DiagramEditor.getFrameEditor().getContentPane().add(editor);
+        }
+
+        private void nuevoCuestionario() {
+            System.out.println("Holaaa");
+            CuestionarioPanel editor = new CuestionarioPanel();
+            DiagramEditor.getFrameEditor().getContentPane().add(editor);
+        }
+
+        private void nuevoReporte() {
+
+        }
+
     }
 
     public static class AccionGuardar extends AbstractAction {
