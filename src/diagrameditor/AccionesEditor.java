@@ -209,7 +209,7 @@ public class AccionesEditor {
 
                     if (image != null) {
                         encoder.encode(image);
-                        //editor.setModified(false);
+                        editor.setModificado(false);
                         DiagramEditor.setArchivoActual(new File(nombreArchivo));
                     } else {
                         JOptionPane.showMessageDialog(graphComponent,
@@ -328,9 +328,11 @@ public class AccionesEditor {
                     componente = componente.getParent();
                 }
                 editor = (WorkflowPanel) componente;
+                
             }
 
             if (editor != null) {
+                editor.setModificado(true);
                 if (undo) {
                     editor.getUndoManager().undo();
                 } else {
