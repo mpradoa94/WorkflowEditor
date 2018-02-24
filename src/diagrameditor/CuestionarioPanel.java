@@ -5,10 +5,26 @@
  */
 package diagrameditor;
 
+import core.webmet.EJBWebServicev20;
+import core.webmet.GenerateUrlIndata;
+import core.webmet.GenerateUrlResponse;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.Document;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -39,7 +55,10 @@ public class CuestionarioPanel extends EditorPanel {
         tabReporte = new javax.swing.JPanel();
         cardPanel = new javax.swing.JPanel();
         encabezadoCard = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         precondicionesCard = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -94,23 +113,39 @@ public class CuestionarioPanel extends EditorPanel {
 
         cardPanel.setLayout(new java.awt.CardLayout());
 
-        jLabel1.setText("Encabezado");
+        jLabel4.setText("Nombre propietario");
+
+        jLabel5.setText("Nombre reporte");
+
+        jLabel6.setText("Lugar");
+
+        jLabel7.setText("Prefix");
 
         javax.swing.GroupLayout encabezadoCardLayout = new javax.swing.GroupLayout(encabezadoCard);
         encabezadoCard.setLayout(encabezadoCardLayout);
         encabezadoCardLayout.setHorizontalGroup(
             encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, encabezadoCardLayout.createSequentialGroup()
-                .addContainerGap(164, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(133, 133, 133))
+            .addGroup(encabezadoCardLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
         encabezadoCardLayout.setVerticalGroup(
             encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(encabezadoCardLayout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(jLabel1)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         cardPanel.add(encabezadoCard, "encabezadoCard");
@@ -128,7 +163,7 @@ public class CuestionarioPanel extends EditorPanel {
             .addGroup(precondicionesCardLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(precondicionesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                     .addGroup(precondicionesCardLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -153,7 +188,7 @@ public class CuestionarioPanel extends EditorPanel {
         reporteCardLayout.setHorizontalGroup(
             reporteCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reporteCardLayout.createSequentialGroup()
-                .addContainerGap(166, Short.MAX_VALUE)
+                .addContainerGap(200, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(150, 150, 150))
         );
@@ -208,9 +243,12 @@ public class CuestionarioPanel extends EditorPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cardPanel;
     private javax.swing.JPanel encabezadoCard;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel precondicionesCard;
@@ -222,9 +260,12 @@ public class CuestionarioPanel extends EditorPanel {
     // End of variables declaration//GEN-END:variables
 
     private void miInit() {
-        List diccionario = new ArrayList();
-        diccionario.add("Hola");
-        diccionario.add("Hoaodlao");
-        new AutoCompletar(jTextArea1, diccionario).init();
+        //List diccionario = new ArrayList();
+        //diccionario.add("Hola");
+        //diccionario.add("Hoaodlao");
+        //new AutoCompletar(jTextArea1, diccionario).init();
+        Precondiciones precond = new Precondiciones();
+        new AutoCompletar(jTextArea1, precond.getFunciones()).init();
+        
     }
 }

@@ -70,7 +70,7 @@ public class AutoCompletar {
                     sugerencias.moverAbajo();
                 } else if (e.getKeyCode() == KeyEvent.VK_UP && sugerencias != null) {
                     sugerencias.moverArriba();
-                } else if (Character.isLetterOrDigit(e.getKeyChar())) {
+                } else if (Character.isLetterOrDigit(e.getKeyChar()) || e.getKeyChar() == '@') {
                     mostrarSugerenciaLater();
                 } else if (Character.isWhitespace(e.getKeyChar())) {
                     ocultarSugerencia();
@@ -169,10 +169,10 @@ public class AutoCompletar {
             }
         }
 
-        private JList CrearListaSugerencias(final String subWord) {
+        private JList CrearListaSugerencias(final String subStr) {
             List<String> sugerencias = new ArrayList();
             for (String str : diccionario) {
-                if (str.startsWith(subWord)) {
+                if (str.startsWith(subStr)) {           
                     sugerencias.add(str);
                 }
             }

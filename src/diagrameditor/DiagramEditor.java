@@ -6,6 +6,7 @@ import com.mxgraph.util.mxResources;
 import core.webmet.EJBWebServicev20;
 import core.webmet.EJBWebServicev20_Service;
 import core.webmet.Instancia;
+import core.webmet.LogInResponse;
 import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -20,6 +21,7 @@ public class DiagramEditor {
 
     private static EJBWebServicev20_Service webService;
     private static EJBWebServicev20 puerto;
+    private static LogInResponse respuestaLogIn;
     private static Instancia instancia;
     private static String tituloApp;
     private static JFrame frameEditor;
@@ -90,6 +92,14 @@ public class DiagramEditor {
 
     public static EJBWebServicev20 getPort() {
         return puerto;
+    }
+    
+    public static LogInResponse getRespuestaLogIn() {
+        return respuestaLogIn;
+    }
+
+    public static void setRespuestaLogIn(LogInResponse aRespuestaLogIn) {
+        respuestaLogIn = aRespuestaLogIn;
     }
 
     public static void setArchivoActual(File archivo) {

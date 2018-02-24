@@ -5,11 +5,8 @@
  */
 package diagrameditor;
 
-import com.mxgraph.canvas.mxICanvas;
-import com.mxgraph.canvas.mxSvgCanvas;
 import com.mxgraph.io.mxCodec;
 import com.mxgraph.io.mxCodecRegistry;
-import com.mxgraph.io.mxGdCodec;
 import com.mxgraph.io.mxModelCodec;
 import com.mxgraph.io.mxObjectCodec;
 import com.mxgraph.swing.handler.mxKeyboardHandler;
@@ -328,7 +325,7 @@ public class AccionesEditor {
                     componente = componente.getParent();
                 }
                 editor = (WorkflowPanel) componente;
-                
+
             }
 
             if (editor != null) {

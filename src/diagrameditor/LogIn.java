@@ -138,13 +138,11 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoContrasenaActionPerformed
 
-    public LogInResponse getResponse(){
-        return respuesta;
-    }
     
     private void evaluarRespuesta(){
         if (respuesta.getResultado() > 0){
             DiagramEditor.startDiagramEditor();
+            DiagramEditor.setRespuestaLogIn(respuesta);
             DiagramEditor.setInstancia(respuesta.getINSTANCIA());
         }
         else
