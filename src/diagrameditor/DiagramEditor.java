@@ -34,9 +34,9 @@ public class DiagramEditor {
     public static void main(String[] args) {
         webService = new EJBWebServicev20_Service();
         puerto = webService.getEJBWebServicev20Port();
-        //LogIn login = new LogIn();
-        //login.setVisible(true);
-        startDiagramEditor();
+        LogIn login = new LogIn();
+        login.setVisible(true);
+        //startDiagramEditor();
         tituloApp = "Editor";
     }
 

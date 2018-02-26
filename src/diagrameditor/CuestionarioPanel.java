@@ -9,22 +9,9 @@ import core.webmet.EJBWebServicev20;
 import core.webmet.GenerateUrlIndata;
 import core.webmet.GenerateUrlResponse;
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -59,6 +46,13 @@ public class CuestionarioPanel extends EditorPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        nombrePropietarioText = new javax.swing.JTextField();
+        lugarText = new javax.swing.JTextField();
+        prefixText = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        encabezadoOutput = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
         precondicionesCard = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -80,7 +74,7 @@ public class CuestionarioPanel extends EditorPanel {
         );
         tabEncabezadoLayout.setVerticalGroup(
             tabEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
+            .addGap(0, 299, Short.MAX_VALUE)
         );
 
         tabbedPanel.addTab("Encabezado", tabEncabezado);
@@ -93,7 +87,7 @@ public class CuestionarioPanel extends EditorPanel {
         );
         tabPrecondicionesLayout.setVerticalGroup(
             tabPrecondicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
+            .addGap(0, 299, Short.MAX_VALUE)
         );
 
         tabbedPanel.addTab("Precondiciones", tabPrecondiciones);
@@ -106,7 +100,7 @@ public class CuestionarioPanel extends EditorPanel {
         );
         tabReporteLayout.setVerticalGroup(
             tabReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
+            .addGap(0, 299, Short.MAX_VALUE)
         );
 
         tabbedPanel.addTab("Reporte", tabReporte);
@@ -121,6 +115,21 @@ public class CuestionarioPanel extends EditorPanel {
 
         jLabel7.setText("Prefix");
 
+        nombrePropietarioText.setEnabled(false);
+
+        lugarText.setEnabled(false);
+
+        prefixText.setText("Prefix");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        encabezadoOutput.setColumns(20);
+        encabezadoOutput.setRows(5);
+        encabezadoOutput.setEnabled(false);
+        jScrollPane2.setViewportView(encabezadoOutput);
+
+        jLabel1.setText("Output");
+
         javax.swing.GroupLayout encabezadoCardLayout = new javax.swing.GroupLayout(encabezadoCard);
         encabezadoCard.setLayout(encabezadoCardLayout);
         encabezadoCardLayout.setHorizontalGroup(
@@ -128,24 +137,47 @@ public class CuestionarioPanel extends EditorPanel {
             .addGroup(encabezadoCardLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addContainerGap(287, Short.MAX_VALUE))
+                    .addGroup(encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                        .addGroup(encabezadoCardLayout.createSequentialGroup()
+                            .addGroup(encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel5))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(nombrePropietarioText)
+                                .addComponent(lugarText)
+                                .addComponent(prefixText)
+                                .addComponent(jComboBox1, 0, 249, Short.MAX_VALUE))))
+                    .addComponent(jLabel1))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         encabezadoCardLayout.setVerticalGroup(
             encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(encabezadoCardLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel4)
+                .addGap(40, 40, 40)
+                .addGroup(encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(nombrePropietarioText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addGroup(encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
+                .addGroup(encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(lugarText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addGroup(encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(prefixText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         cardPanel.add(encabezadoCard, "encabezadoCard");
@@ -175,7 +207,7 @@ public class CuestionarioPanel extends EditorPanel {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -197,7 +229,7 @@ public class CuestionarioPanel extends EditorPanel {
             .addGroup(reporteCardLayout.createSequentialGroup()
                 .addGap(125, 125, 125)
                 .addComponent(jLabel3)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         cardPanel.add(reporteCard, "reporteCard");
@@ -243,6 +275,9 @@ public class CuestionarioPanel extends EditorPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cardPanel;
     private javax.swing.JPanel encabezadoCard;
+    private javax.swing.JTextArea encabezadoOutput;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -250,8 +285,12 @@ public class CuestionarioPanel extends EditorPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField lugarText;
+    private javax.swing.JTextField nombrePropietarioText;
     private javax.swing.JPanel precondicionesCard;
+    private javax.swing.JTextField prefixText;
     private javax.swing.JPanel reporteCard;
     private javax.swing.JPanel tabEncabezado;
     private javax.swing.JPanel tabPrecondiciones;
@@ -260,12 +299,40 @@ public class CuestionarioPanel extends EditorPanel {
     // End of variables declaration//GEN-END:variables
 
     private void miInit() {
-        //List diccionario = new ArrayList();
-        //diccionario.add("Hola");
-        //diccionario.add("Hoaodlao");
-        //new AutoCompletar(jTextArea1, diccionario).init();
         Precondiciones precond = new Precondiciones();
         new AutoCompletar(jTextArea1, precond.getFunciones()).init();
         
+        setEncabezado();
+        
     }
+    
+    private void setEncabezado(){
+        Encabezado encabezado = new Encabezado();
+        nombrePropietarioText.setText(encabezado.getNombrePropietario());
+        lugarText.setText(encabezado.getLugar());
+        prefixText.setText(encabezado.getPrefix());
+        encabezadoOutput.setText(encabezado.getXml());
+        
+        prefixText.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                setPropiedad();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                setPropiedad();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                setPropiedad();
+            }
+
+            public void setPropiedad() {
+                encabezado.setPrefix(prefixText.getText());
+            }
+        });
+    }
+    
 }
