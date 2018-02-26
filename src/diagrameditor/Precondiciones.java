@@ -42,7 +42,11 @@ public class Precondiciones {
                         new InputStreamReader(conn.getInputStream()));
                 String inputLine;
                 while ((inputLine = br.readLine()) != null) {
-                    funciones.add(inputLine);
+                    String[] inputSeparado = inputLine.split("=");
+                    if (inputSeparado.length == 2)
+                        funciones.add(new Precondicion(inputSeparado[0], inputSeparado[1]));
+                    else if (inputSeparado.length == 1)
+                        funciones.add(new Precondicion(inputSeparado[0]));
                 }
             } catch (MalformedURLException ex) {
                 Logger.getLogger(CuestionarioPanel.class.getName()).log(Level.SEVERE, null, ex);

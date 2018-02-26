@@ -27,9 +27,9 @@ public class AutoCompletar {
 
     private PanelSugerencias sugerencias;
     private JTextArea textarea;
-    private List<String> diccionario;
+    private List diccionario;
 
-    public AutoCompletar(JTextArea textarea, List<String> dicc) {
+    public AutoCompletar(JTextArea textarea, List dicc) {
         this.textarea = textarea;
         this.diccionario = dicc;
     }
@@ -49,14 +49,11 @@ public class AutoCompletar {
                         if (sugerencias.insertarSeleccion()) {
                             e.consume();
                             final int posicion = textarea.getCaretPosition();
-                            SwingUtilities.invokeLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        textarea.getDocument().remove(posicion - 1, 1);
-                                    } catch (BadLocationException e) {
-                                        e.printStackTrace();
-                                    }
+                            SwingUtilities.invokeLater(() -> {
+                                try {
+                                    textarea.getDocument().remove(posicion - 1, 1);
+                                } catch (BadLocationException e1) {
+                                    e1.printStackTrace();
                                 }
                             });
                         }
@@ -171,7 +168,8 @@ public class AutoCompletar {
 
         private JList CrearListaSugerencias(final String subStr) {
             List<String> sugerencias = new ArrayList();
-            for (String str : diccionario) {
+            for (Object elemento : diccionario) {
+                String str = elemento.toString();
                 if (str.startsWith(subStr)) {           
                     sugerencias.add(str);
                 }

@@ -62,13 +62,13 @@ public class Encabezado {
         return xml;
     }
     
-    private void setXml(){
+    public final void setXml(){
         xml = "<encabezado>\n";
         xml += "<nombrePropietario>" + getNombrePropietario() + "</nombrePropietario>\n";
         xml += "<nombreReporte>" + getNombreReporte() + "</nombreReporte>\n";
         xml += "<lugar>" + getLugar() + "</lugar>\n";
-        xml += "<prefix>" + getPrefix() + "</prefix>";
-        xml = "</encabezado>";
+        xml += "<prefix>" + getPrefix() + "</prefix>\n";
+        xml += "</encabezado>";
     }
     
 }

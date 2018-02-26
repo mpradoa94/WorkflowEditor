@@ -74,7 +74,7 @@ public class CuestionarioPanel extends EditorPanel {
         );
         tabEncabezadoLayout.setVerticalGroup(
             tabEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGap(0, 319, Short.MAX_VALUE)
         );
 
         tabbedPanel.addTab("Encabezado", tabEncabezado);
@@ -87,7 +87,7 @@ public class CuestionarioPanel extends EditorPanel {
         );
         tabPrecondicionesLayout.setVerticalGroup(
             tabPrecondicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGap(0, 319, Short.MAX_VALUE)
         );
 
         tabbedPanel.addTab("Precondiciones", tabPrecondiciones);
@@ -100,7 +100,7 @@ public class CuestionarioPanel extends EditorPanel {
         );
         tabReporteLayout.setVerticalGroup(
             tabReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGap(0, 319, Short.MAX_VALUE)
         );
 
         tabbedPanel.addTab("Reporte", tabReporte);
@@ -173,10 +173,10 @@ public class CuestionarioPanel extends EditorPanel {
                 .addGroup(encabezadoCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(prefixText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -207,7 +207,7 @@ public class CuestionarioPanel extends EditorPanel {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -229,7 +229,7 @@ public class CuestionarioPanel extends EditorPanel {
             .addGroup(reporteCardLayout.createSequentialGroup()
                 .addGap(125, 125, 125)
                 .addComponent(jLabel3)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         cardPanel.add(reporteCard, "reporteCard");
@@ -331,6 +331,8 @@ public class CuestionarioPanel extends EditorPanel {
 
             public void setPropiedad() {
                 encabezado.setPrefix(prefixText.getText());
+                encabezado.setXml();
+                encabezadoOutput.setText(encabezado.getXml());
             }
         });
     }
