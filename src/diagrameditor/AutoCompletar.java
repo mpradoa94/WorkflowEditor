@@ -36,7 +36,7 @@ public class AutoCompletar {
 
     public void init() {
         addKeyListener();
-        Collections.sort(diccionario);
+        //Collections.sort(diccionario);
     }
 
     private void addKeyListener() {
@@ -94,13 +94,13 @@ public class AutoCompletar {
 
     protected void mostrarSugerencia() {
         ocultarSugerencia();
-        
+
         final String subStr;
         final int caretPos = textarea.getCaretPosition();
-        String texto = textarea.getText();      
+        String texto = textarea.getText();
         Point posicion = getPosicion(caretPos);
         int inicio = Math.max(0, caretPos - 1);
-        
+
         while (inicio > 0) {
             if (!Character.isWhitespace(texto.charAt(inicio))) {
                 inicio--;
@@ -112,7 +112,7 @@ public class AutoCompletar {
         if (inicio > caretPos) {
             return;
         }
-        
+
         subStr = texto.substring(inicio, caretPos);
         if (subStr.length() < 1) {
             return;
@@ -131,8 +131,8 @@ public class AutoCompletar {
             sugerencias.ocultar();
         }
     }
-    
-    private Point getPosicion(int caretPos){
+
+    private Point getPosicion(int caretPos) {
         try {
             return textarea.modelToView(caretPos).getLocation();
         } catch (BadLocationException e2) {
@@ -167,33 +167,47 @@ public class AutoCompletar {
         }
 
         private JList CrearListaSugerencias(final String subStr) {
-            List<String> sugerencias = new ArrayList();
+            List sugerencias = new ArrayList();
             for (Object elemento : diccionario) {
                 String str = elemento.toString();
-                if (str.startsWith(subStr)) {           
-                    sugerencias.add(str);
+                if (str.startsWith(subStr)) {
+                    sugerencias.add(elemento);
                 }
             }
 
-            JList list = new JList(sugerencias.toArray());
+            JList list = new JList(sugerencias.toArray()) {
+                public String getToolTipText(MouseEvent evt) {
+                  int index = locationToIndex(evt.getPoint());
+                  Object elemento= getModel().getElementAt(index);
+                  //TODO: REFACTOR
+                  if (elemento instanceof Precondicion)
+                      return ((Precondicion)elemento).getDescripcion();
+                  return "tool tip: " + elemento;
+                }
+              };
+
             list.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
             list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
             list.setSelectedIndex(0);
-            list.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    if (e.getClickCount() == 2) {
-                        insertarSeleccion();
+            list.addMouseListener(
+                    new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e
+                        ) {
+                            if (e.getClickCount() == 2) {
+                                insertarSeleccion();
+                            }
+                        }
                     }
-                }
-            });
+            );
             return list;
         }
 
         public boolean insertarSeleccion() {
             if (list.getSelectedValue() != null) {
                 try {
-                    final String seleccionado = ((String) list.getSelectedValue()).substring(subStr.length());
+                    final String seleccionado = ((String) list.getSelectedValue().toString()).substring(subStr.length());
                     textarea.getDocument().insertString(insertionPosition, seleccionado, null);
                     return true;
                 } catch (BadLocationException e1) {

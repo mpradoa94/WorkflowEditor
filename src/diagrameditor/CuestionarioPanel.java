@@ -9,6 +9,8 @@ import core.webmet.EJBWebServicev20;
 import core.webmet.GenerateUrlIndata;
 import core.webmet.GenerateUrlResponse;
 import java.awt.CardLayout;
+import java.awt.event.MouseEvent;
+import javax.swing.JList;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
@@ -301,18 +303,25 @@ public class CuestionarioPanel extends EditorPanel {
     private void miInit() {
         Precondiciones precond = new Precondiciones();
         new AutoCompletar(jTextArea1, precond.getFunciones()).init();
-        
+        setAutoCompletarPrecond();
         setEncabezado();
-        
+
     }
-    
-    private void setEncabezado(){
+
+    private void setAutoCompletarPrecond() {
+        Precondiciones precond = new Precondiciones();
+        AutoCompletar autocompletar = new AutoCompletar(jTextArea1, precond.getFunciones());
+        autocompletar.init();
+       
+    }
+
+    private void setEncabezado() {
         Encabezado encabezado = new Encabezado();
         nombrePropietarioText.setText(encabezado.getNombrePropietario());
         lugarText.setText(encabezado.getLugar());
         prefixText.setText(encabezado.getPrefix());
         encabezadoOutput.setText(encabezado.getXml());
-        
+
         prefixText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -336,5 +345,5 @@ public class CuestionarioPanel extends EditorPanel {
             }
         });
     }
-    
+
 }
