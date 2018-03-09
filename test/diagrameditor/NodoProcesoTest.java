@@ -5,6 +5,9 @@
  */
 package diagrameditor;
 
+import diagrameditor.workfloweditor.NodoProceso;
+import diagrameditor.workfloweditor.NodoRol;
+import diagrameditor.workfloweditor.TipoNodo;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

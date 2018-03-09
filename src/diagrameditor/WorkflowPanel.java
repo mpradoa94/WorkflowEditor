@@ -5,6 +5,8 @@
  */
 package diagrameditor;
 
+import diagrameditor.workfloweditor.NodoFactory;
+import diagrameditor.workfloweditor.NodoBase;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.mxGraphOutline;
@@ -114,12 +116,12 @@ public class WorkflowPanel extends EditorPanel {
     private void setShapeOptions(mxGraph graph) {
         EditorOpcionesFiguras shapeOptions = insertOptionsMenu(mxResources.get("shapes"));
 
-        Nodo flujo = NodoFactory.getNodo("NodoFlujo");
-        Nodo rol = NodoFactory.getNodo("NodoRol");
-        Nodo Inicio = NodoFactory.getNodo("NodoInicio");
-        Nodo proceso = NodoFactory.getNodo("NodoProceso");
-        Nodo condicion = NodoFactory.getNodo("NodoCondicion");
-        Nodo fin = NodoFactory.getNodo("NodoFin");
+        NodoBase flujo = NodoFactory.getNodo("NodoFlujo");
+        NodoBase rol = NodoFactory.getNodo("NodoRol");
+        NodoBase Inicio = NodoFactory.getNodo("NodoInicio");
+        NodoBase proceso = NodoFactory.getNodo("NodoProceso");
+        NodoBase condicion = NodoFactory.getNodo("NodoCondicion");
+        NodoBase fin = NodoFactory.getNodo("NodoFin");
 
         shapeOptions.addOption("Flowchart", new ImageIcon(
                 DiagramEditor.class.getResource("/images/swimlane.png")),
@@ -251,9 +253,9 @@ public class WorkflowPanel extends EditorPanel {
 
     public void addNewCellPanel(mxCell cell) {
         Object value = cell.getValue();
-        if (value instanceof Nodo) {
+        if (value instanceof NodoBase) {
             //panelPropiedades.removeAll();
-            JPanelPropiedadesNodo panel = new JPanelPropiedadesNodo((Nodo) value);
+            JPanelPropiedadesNodo panel = new JPanelPropiedadesNodo((NodoBase) value);
             JPanel pane = new JPanel();
             pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
             //panelPropiedades.add(panel);

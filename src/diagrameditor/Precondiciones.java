@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * @author MPA
  */
 public class Precondiciones {
-    private List funciones;
+    private final List funciones;
     
     public Precondiciones (){
         funciones = new ArrayList();

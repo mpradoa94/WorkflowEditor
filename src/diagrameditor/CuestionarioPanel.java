@@ -9,6 +9,7 @@ import core.webmet.EJBWebServicev20;
 import core.webmet.GenerateUrlIndata;
 import core.webmet.GenerateUrlResponse;
 import java.awt.CardLayout;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import javax.swing.JList;
 import javax.swing.event.DocumentEvent;
@@ -24,6 +25,7 @@ public class CuestionarioPanel extends EditorPanel {
     /**
      * Creates new form CuestionarioPanel
      */
+    private Boolean boldSeleccionado;
     public CuestionarioPanel() {
         initComponents();
         miInit();
@@ -41,6 +43,7 @@ public class CuestionarioPanel extends EditorPanel {
         tabbedPanel = new javax.swing.JTabbedPane();
         tabEncabezado = new javax.swing.JPanel();
         tabPrecondiciones = new javax.swing.JPanel();
+        boldBtn = new javax.swing.JButton();
         tabReporte = new javax.swing.JPanel();
         cardPanel = new javax.swing.JPanel();
         encabezadoCard = new javax.swing.JPanel();
@@ -58,7 +61,7 @@ public class CuestionarioPanel extends EditorPanel {
         precondicionesCard = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        precondicionesText = new javax.swing.JTextArea();
         reporteCard = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -81,15 +84,28 @@ public class CuestionarioPanel extends EditorPanel {
 
         tabbedPanel.addTab("Encabezado", tabEncabezado);
 
+        boldBtn.setText("N");
+        boldBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boldBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout tabPrecondicionesLayout = new javax.swing.GroupLayout(tabPrecondiciones);
         tabPrecondiciones.setLayout(tabPrecondicionesLayout);
         tabPrecondicionesLayout.setHorizontalGroup(
             tabPrecondicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 206, Short.MAX_VALUE)
+            .addGroup(tabPrecondicionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(boldBtn)
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         tabPrecondicionesLayout.setVerticalGroup(
             tabPrecondicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 319, Short.MAX_VALUE)
+            .addGroup(tabPrecondicionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(boldBtn)
+                .addContainerGap(285, Short.MAX_VALUE))
         );
 
         tabbedPanel.addTab("Precondiciones", tabPrecondiciones);
@@ -186,9 +202,9 @@ public class CuestionarioPanel extends EditorPanel {
 
         jLabel2.setText("Precondiciones");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        precondicionesText.setColumns(20);
+        precondicionesText.setRows(5);
+        jScrollPane1.setViewportView(precondicionesText);
 
         javax.swing.GroupLayout precondicionesCardLayout = new javax.swing.GroupLayout(precondicionesCard);
         precondicionesCard.setLayout(precondicionesCardLayout);
@@ -221,17 +237,17 @@ public class CuestionarioPanel extends EditorPanel {
         reporteCard.setLayout(reporteCardLayout);
         reporteCardLayout.setHorizontalGroup(
             reporteCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reporteCardLayout.createSequentialGroup()
-                .addContainerGap(200, Short.MAX_VALUE)
+            .addGroup(reporteCardLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(150, 150, 150))
+                .addContainerGap(340, Short.MAX_VALUE))
         );
         reporteCardLayout.setVerticalGroup(
             reporteCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reporteCardLayout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
 
         cardPanel.add(reporteCard, "reporteCard");
@@ -273,8 +289,22 @@ public class CuestionarioPanel extends EditorPanel {
         }
     }//GEN-LAST:event_tabbedPanelStateChanged
 
+    private void boldBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boldBtnMouseClicked
+        boldSeleccionado = !boldSeleccionado;
+        int style = 0;
+        Font fuenteActual = precondicionesText.getFont();
+        if(boldSeleccionado) {
+            style |= Font.BOLD;
+        }
+        else {
+            style = Font.PLAIN;
+        }
+        precondicionesText.setFont(new Font(fuenteActual.getFontName(), style, fuenteActual.getSize()));
+    }//GEN-LAST:event_boldBtnMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boldBtn;
     private javax.swing.JPanel cardPanel;
     private javax.swing.JPanel encabezadoCard;
     private javax.swing.JTextArea encabezadoOutput;
@@ -288,10 +318,10 @@ public class CuestionarioPanel extends EditorPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField lugarText;
     private javax.swing.JTextField nombrePropietarioText;
     private javax.swing.JPanel precondicionesCard;
+    private javax.swing.JTextArea precondicionesText;
     private javax.swing.JTextField prefixText;
     private javax.swing.JPanel reporteCard;
     private javax.swing.JPanel tabEncabezado;
@@ -301,8 +331,9 @@ public class CuestionarioPanel extends EditorPanel {
     // End of variables declaration//GEN-END:variables
 
     private void miInit() {
+        boldSeleccionado = false;
         Precondiciones precond = new Precondiciones();
-        new AutoCompletar(jTextArea1, precond.getFunciones()).init();
+        new AutoCompletar(precondicionesText, precond.getFunciones()).init();
         setAutoCompletarPrecond();
         setEncabezado();
 
@@ -310,7 +341,7 @@ public class CuestionarioPanel extends EditorPanel {
 
     private void setAutoCompletarPrecond() {
         Precondiciones precond = new Precondiciones();
-        AutoCompletar autocompletar = new AutoCompletar(jTextArea1, precond.getFunciones());
+        AutoCompletar autocompletar = new AutoCompletar(precondicionesText, precond.getFunciones());
         autocompletar.init();
        
     }

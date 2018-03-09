@@ -1168,6 +1168,10 @@
 
 <xs:element name="Get_Ghist_CobrosWResponse" type="tns:Get_Ghist_CobrosWResponse"/>
 
+<xs:element name="Get_InternosXRol" type="tns:Get_InternosXRol"/>
+
+<xs:element name="Get_InternosXRolResponse" type="tns:Get_InternosXRolResponse"/>
+
 <xs:element name="Get_InventoryControlDocumentW" type="tns:Get_InventoryControlDocumentW"/>
 
 <xs:element name="Get_InventoryControlDocumentWResponse" type="tns:Get_InventoryControlDocumentWResponse"/>
@@ -2882,40 +2886,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="ABC_TimeCardEmployeeW">
-<xs:sequence>
-<xs:element name="tcard" type="tns:abcTCE" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcTCE">
-<xs:sequence>
-<xs:element name="ID_Instancia" type="xs:int"/>
-<xs:element name="tce" type="tns:timeCardEmployee"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="timeCardEmployee">
-<xs:sequence>
-<xs:element name="ID_ACCESO" type="xs:int"/>
-<xs:element name="ID_EM" type="xs:int"/>
-<xs:element name="FECHA" type="xs:string" minOccurs="0"/>
-<xs:element name="ENTRADASALIDA" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_TimeCardEmployeeWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:abcTCEResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcTCEResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="GET_ServicioProveedorDashW">
 <xs:sequence>
 <xs:element name="entra" type="tns:getServicioProveedorDash" minOccurs="0"/>
@@ -2948,6 +2918,40 @@
 <xs:element name="variedad" type="xs:double"/>
 <xs:element name="surtido" type="xs:double"/>
 <xs:element name="supplier" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_TimeCardEmployeeW">
+<xs:sequence>
+<xs:element name="tcard" type="tns:abcTCE" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcTCE">
+<xs:sequence>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="tce" type="tns:timeCardEmployee"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="timeCardEmployee">
+<xs:sequence>
+<xs:element name="ID_ACCESO" type="xs:int"/>
+<xs:element name="ID_EM" type="xs:int"/>
+<xs:element name="FECHA" type="xs:string" minOccurs="0"/>
+<xs:element name="ENTRADASALIDA" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_TimeCardEmployeeWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcTCEResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcTCEResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -4799,31 +4803,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="GET_CountriesW">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="GET_CountriesWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:getCountryResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getCountryResponse">
-<xs:sequence>
-<xs:element name="countries" type="tns:country" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="country">
-<xs:sequence>
-<xs:element name="ID_COUNTRY" type="xs:int"/>
-<xs:element name="ID_CNY" type="xs:int"/>
-<xs:element name="NOMBRE" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="GET_EventW">
 <xs:sequence>
 <xs:element name="evt" type="tns:getEvent" minOccurs="0"/>
@@ -4918,6 +4897,31 @@
 <xs:element name="AI_LN_PRC" type="xs:int"/>
 <xs:element name="PRICE" type="xs:double"/>
 <xs:element name="NPRICE" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_CountriesW">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="GET_CountriesWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:getCountryResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCountryResponse">
+<xs:sequence>
+<xs:element name="countries" type="tns:country" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="country">
+<xs:sequence>
+<xs:element name="ID_COUNTRY" type="xs:int"/>
+<xs:element name="ID_CNY" type="xs:int"/>
+<xs:element name="NOMBRE" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -5071,26 +5075,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="ActivaCuentaW">
-<xs:sequence>
-<xs:element name="cadenaActivacion" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ActivaCuentaWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:abcActivaCuenta" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcActivaCuenta">
-<xs:sequence>
-<xs:element name="VALIDO" type="xs:int"/>
-<xs:element name="usuario" type="xs:string" minOccurs="0"/>
-<xs:element name="password" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="GET_TablaInventarioDashW">
 <xs:sequence>
 <xs:element name="entra" type="tns:getTablaInventarioDash" minOccurs="0"/>
@@ -5125,6 +5109,26 @@
 <xs:element name="compras" type="xs:double"/>
 <xs:element name="cambio" type="xs:double"/>
 <xs:element name="tax" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ActivaCuentaW">
+<xs:sequence>
+<xs:element name="cadenaActivacion" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ActivaCuentaWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcActivaCuenta" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcActivaCuenta">
+<xs:sequence>
+<xs:element name="VALIDO" type="xs:int"/>
+<xs:element name="usuario" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -5250,6 +5254,31 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="GET_CategoriasAllW">
+<xs:sequence>
+<xs:element name="innn" type="tns:getCategoriasAll" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCategoriasAll">
+<xs:sequence>
+<xs:element name="ID_Instancia" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_CategoriasAllWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:getCategoriasAllResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCategoriasAllResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+<xs:element name="categorias" type="tns:merchandiseHierarchyGroup" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="Get_ReportesFormatosW">
 <xs:sequence>
 <xs:element name="parameter" type="tns:getReportesFormatos" minOccurs="0"/>
@@ -5284,31 +5313,6 @@
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="repFormatos" type="tns:reportesFormatos" minOccurs="0"/>
 <xs:element name="repsFor" type="tns:reportesFormatos" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_CategoriasAllW">
-<xs:sequence>
-<xs:element name="innn" type="tns:getCategoriasAll" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getCategoriasAll">
-<xs:sequence>
-<xs:element name="ID_Instancia" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_CategoriasAllWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:getCategoriasAllResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getCategoriasAllResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-<xs:element name="categorias" type="tns:merchandiseHierarchyGroup" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -5369,6 +5373,59 @@
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="costo" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Search_EventW">
+<xs:sequence>
+<xs:element name="evt" type="tns:searchEvent" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchEvent">
+<xs:sequence>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="nm_ev" type="xs:string"/>
+<xs:element name="ty_ev" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Search_EventWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:searchEventResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchEventResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+<xs:element name="listevent" type="tns:event" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_ModeloW">
+<xs:sequence>
+<xs:element name="in" type="tns:abcModelo" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcModelo">
+<xs:sequence>
+<xs:element name="Operacion" type="xs:string"/>
+<xs:element name="Id_instancia" type="xs:int"/>
+<xs:element name="modelo" type="tns:modelo"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_ModeloWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcModeloResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcModeloResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -5434,59 +5491,6 @@
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="ID_ICD" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Search_EventW">
-<xs:sequence>
-<xs:element name="evt" type="tns:searchEvent" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="searchEvent">
-<xs:sequence>
-<xs:element name="ID_Instancia" type="xs:int"/>
-<xs:element name="nm_ev" type="xs:string"/>
-<xs:element name="ty_ev" type="xs:string"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Search_EventWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:searchEventResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="searchEventResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-<xs:element name="listevent" type="tns:event" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_ModeloW">
-<xs:sequence>
-<xs:element name="in" type="tns:abcModelo" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcModelo">
-<xs:sequence>
-<xs:element name="Operacion" type="xs:string"/>
-<xs:element name="Id_instancia" type="xs:int"/>
-<xs:element name="modelo" type="tns:modelo"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_ModeloWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:abcModeloResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcModeloResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -6243,6 +6247,25 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="GET_ITMFORPSW">
+<xs:sequence>
+<xs:element name="itm" type="tns:getItemforPosi" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getItemforPosi">
+<xs:sequence>
+<xs:element name="NM_ITM" type="xs:string" minOccurs="0"/>
+<xs:element name="ID_INSTANCIA" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_ITMFORPSWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:getItemResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="Search_TenderListW">
 <xs:sequence>
 <xs:element name="te" type="tns:searchTender" minOccurs="0"/>
@@ -6267,25 +6290,6 @@
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="btnAsg" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 <xs:element name="tender" type="tns:tender" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_ITMFORPSW">
-<xs:sequence>
-<xs:element name="itm" type="tns:getItemforPosi" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getItemforPosi">
-<xs:sequence>
-<xs:element name="NM_ITM" type="xs:string" minOccurs="0"/>
-<xs:element name="ID_INSTANCIA" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_ITMFORPSWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:getItemResponse" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -6830,18 +6834,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="Get_ItemQFRW">
-<xs:sequence>
-<xs:element name="in" type="tns:getItem" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Get_ItemQFRWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:getItemResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="GET_TSW">
 <xs:sequence>
 <xs:element name="in" type="tns:getInventoryControlDocument" minOccurs="0"/>
@@ -6851,6 +6843,18 @@
 <xs:complexType name="GET_TSWResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:getInventoryControlDocumentALLResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Get_ItemQFRW">
+<xs:sequence>
+<xs:element name="in" type="tns:getItem" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Get_ItemQFRWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:getItemResponse" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -6884,6 +6888,35 @@
 <xs:sequence>
 <xs:element name="ID_BTN" type="xs:int"/>
 <xs:element name="NM_BTN" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_Documentos">
+<xs:sequence>
+<xs:element name="parameter" type="tns:getDocumentD" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDocumentD">
+<xs:sequence>
+<xs:element name="Operacion" type="xs:string"/>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="TY_DCTO" type="xs:int"/>
+<xs:element name="ID_ICD" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_DocumentosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:getDocumentDResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDocumentDResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+<xs:element name="document" type="tns:document" minOccurs="0"/>
+<xs:element name="documents" type="tns:document" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -6925,35 +6958,6 @@
 <xs:element name="CANTIDAD" type="xs:double"/>
 <xs:element name="TOTAL" type="xs:double"/>
 <xs:element name="TOTALFOODSTAMP" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_Documentos">
-<xs:sequence>
-<xs:element name="parameter" type="tns:getDocumentD" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getDocumentD">
-<xs:sequence>
-<xs:element name="Operacion" type="xs:string"/>
-<xs:element name="ID_Instancia" type="xs:int"/>
-<xs:element name="TY_DCTO" type="xs:int"/>
-<xs:element name="ID_ICD" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_DocumentosResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:getDocumentDResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getDocumentDResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-<xs:element name="document" type="tns:document" minOccurs="0"/>
-<xs:element name="documents" type="tns:document" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -7019,6 +7023,32 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="ABC_AnexosCuestionarioW">
+<xs:sequence>
+<xs:element name="in" type="tns:abcAnexosCuestionario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcAnexosCuestionario">
+<xs:sequence>
+<xs:element name="Operacion" type="xs:string"/>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="anexos" type="tns:anexosCuestionario"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_AnexosCuestionarioWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcAnexosCuestionarioResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcAnexosCuestionarioResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="GET_CVERolW">
 <xs:sequence>
 <xs:element name="parameter" type="tns:getCveRol" minOccurs="0"/>
@@ -7043,32 +7073,6 @@
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="cve_rol" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_AnexosCuestionarioW">
-<xs:sequence>
-<xs:element name="in" type="tns:abcAnexosCuestionario" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcAnexosCuestionario">
-<xs:sequence>
-<xs:element name="Operacion" type="xs:string"/>
-<xs:element name="ID_Instancia" type="xs:int"/>
-<xs:element name="anexos" type="tns:anexosCuestionario"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_AnexosCuestionarioWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:abcAnexosCuestionarioResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcAnexosCuestionarioResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -7665,33 +7669,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="ABC_TaxGroupRuleW">
-<xs:sequence>
-<xs:element name="tgr" type="tns:abcTaxGroupRule" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcTaxGroupRule">
-<xs:sequence>
-<xs:element name="Operacion" type="xs:string"/>
-<xs:element name="ID_Instancia" type="xs:int"/>
-<xs:element name="taxgrouprule" type="tns:taxGroupRule"/>
-<xs:element name="loghead" type="tns:logHead"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_TaxGroupRuleWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:abcTaxGroupRuleResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcTaxGroupRuleResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="GET_AnalisisCostoVentaW">
 <xs:sequence>
 <xs:element name="in" type="tns:getAnalisisVC" minOccurs="0"/>
@@ -7724,6 +7701,33 @@
 <xs:element name="categoria" type="xs:string" minOccurs="0"/>
 <xs:element name="costo" type="xs:double"/>
 <xs:element name="utilidad" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_TaxGroupRuleW">
+<xs:sequence>
+<xs:element name="tgr" type="tns:abcTaxGroupRule" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcTaxGroupRule">
+<xs:sequence>
+<xs:element name="Operacion" type="xs:string"/>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="taxgrouprule" type="tns:taxGroupRule"/>
+<xs:element name="loghead" type="tns:logHead"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_TaxGroupRuleWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcTaxGroupRuleResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcTaxGroupRuleResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -7855,6 +7859,33 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="Search_ScheduleEmployeeW">
+<xs:sequence>
+<xs:element name="scem" type="tns:searchScheduleEmployee" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchScheduleEmployee">
+<xs:sequence>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="ID_EM" type="xs:int"/>
+<xs:element name="ID_SC" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Search_ScheduleEmployeeWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:searchScheduleEmployeeResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchScheduleEmployeeResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+<xs:element name="listemleados" type="tns:scheduleEmployee" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="ABC_PhisicalCountDocumentW">
 <xs:sequence>
 <xs:element name="pcd" type="tns:abcPhisicalCountDocument" minOccurs="0"/>
@@ -7914,33 +7945,6 @@
 <xs:complexType name="abcPhisicalCountDocumentResponse">
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Search_ScheduleEmployeeW">
-<xs:sequence>
-<xs:element name="scem" type="tns:searchScheduleEmployee" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="searchScheduleEmployee">
-<xs:sequence>
-<xs:element name="ID_Instancia" type="xs:int"/>
-<xs:element name="ID_EM" type="xs:int"/>
-<xs:element name="ID_SC" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Search_ScheduleEmployeeWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:searchScheduleEmployeeResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="searchScheduleEmployeeResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-<xs:element name="listemleados" type="tns:scheduleEmployee" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -8058,18 +8062,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="Search_TSW">
-<xs:sequence>
-<xs:element name="in" type="tns:searchInventoryControlDocument" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Search_TSWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:searchInventoryControlDocumentResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="Search_DescuentosW">
 <xs:sequence>
 <xs:element name="entra" type="tns:searchDescuentos" minOccurs="0"/>
@@ -8093,6 +8085,18 @@
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="list" type="tns:descuentos" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Search_TSW">
+<xs:sequence>
+<xs:element name="in" type="tns:searchInventoryControlDocument" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Search_TSWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:searchInventoryControlDocumentResponse" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -9537,6 +9541,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="GET_DocForIDICD">
+<xs:sequence>
+<xs:element name="parameter" type="tns:getDocumentD" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_DocForIDICDResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:getDocumentDResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="GET_RepExplosionMaterialesW">
 <xs:sequence>
 <xs:element name="entra" type="tns:getRepExplosionMateriales" minOccurs="0"/>
@@ -9574,18 +9590,6 @@
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="lista" type="tns:repExplosionMaterialesDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_DocForIDICD">
-<xs:sequence>
-<xs:element name="parameter" type="tns:getDocumentD" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_DocForIDICDResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:getDocumentDResponse" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -10227,34 +10231,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="GET_AgendaW">
-<xs:sequence>
-<xs:element name="parameter" type="tns:getAgenda" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getAgenda">
-<xs:sequence>
-<xs:element name="ID_Instancia" type="xs:int"/>
-<xs:element name="dFecha" type="xs:string"/>
-<xs:element name="desde" type="xs:string"/>
-<xs:element name="hasta" type="xs:string"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_AgendaWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:getAgendaResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getAgendaResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-<xs:element name="citas" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="ABC_LectoresW">
 <xs:sequence>
 <xs:element name="ABCZ" type="tns:abcLectores" minOccurs="0"/>
@@ -10340,6 +10316,34 @@
 <xs:complexType name="abcCustomerResponse">
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_AgendaW">
+<xs:sequence>
+<xs:element name="parameter" type="tns:getAgenda" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAgenda">
+<xs:sequence>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="dFecha" type="xs:string"/>
+<xs:element name="desde" type="xs:string"/>
+<xs:element name="hasta" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_AgendaWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:getAgendaResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAgendaResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+<xs:element name="citas" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -10837,6 +10841,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="DevolucionW">
+<xs:sequence>
+<xs:element name="dev" type="tns:abcBuy" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="DevolucionWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcBuyResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="ActualizadorW">
 <xs:sequence>
 <xs:element name="entra" type="tns:actualizador" minOccurs="0"/>
@@ -10860,18 +10876,6 @@
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="log" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="DevolucionW">
-<xs:sequence>
-<xs:element name="dev" type="tns:abcBuy" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="DevolucionWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:abcBuyResponse" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -10901,45 +10905,6 @@
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="empleado" type="tns:gEmpleado" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Search_InvLocW">
-<xs:sequence>
-<xs:element name="inv" type="tns:searchInventoryLocation" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Search_InvLocWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:searchInventoryLocationResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_GastosW">
-<xs:sequence>
-<xs:element name="in" type="tns:abcDisbursementFundsReceiptReason" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcDisbursementFundsReceiptReason">
-<xs:sequence>
-<xs:element name="Operacion" type="xs:string"/>
-<xs:element name="ID_Instancia" type="xs:int"/>
-<xs:element name="disbursementfundsreceiptreason" type="tns:disbursementFundsReceiptReason"/>
-<xs:element name="loghead" type="tns:logHead"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_GastosWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:abcDisbursementFundsReceiptReasonResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcDisbursementFundsReceiptReasonResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -10981,6 +10946,45 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="ABC_GastosW">
+<xs:sequence>
+<xs:element name="in" type="tns:abcDisbursementFundsReceiptReason" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcDisbursementFundsReceiptReason">
+<xs:sequence>
+<xs:element name="Operacion" type="xs:string"/>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="disbursementfundsreceiptreason" type="tns:disbursementFundsReceiptReason"/>
+<xs:element name="loghead" type="tns:logHead"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_GastosWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcDisbursementFundsReceiptReasonResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcDisbursementFundsReceiptReasonResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Search_InvLocW">
+<xs:sequence>
+<xs:element name="inv" type="tns:searchInventoryLocation" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Search_InvLocWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:searchInventoryLocationResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="GET_ProductosSinCostosW">
 <xs:sequence>
 <xs:element name="entra" type="tns:getProductosSinCosto" minOccurs="0"/>
@@ -11007,6 +11011,42 @@
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="list" type="tns:productosSinCostos" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Get_InternosXRol">
+<xs:sequence>
+<xs:element name="parameter" type="tns:getInternosRol" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getInternosRol">
+<xs:sequence>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="id_proceso" type="xs:int"/>
+<xs:element name="id_ver" type="xs:int"/>
+<xs:element name="cverol" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Get_InternosXRolResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:getInternosRolResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getInternosRolResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+<xs:element name="usuarios" type="tns:usuarioRol" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="usuarioRol">
+<xs:sequence>
+<xs:element name="id_opr" type="xs:int"/>
+<xs:element name="id_usr" type="xs:int"/>
+<xs:element name="nm_usr" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -11448,6 +11488,32 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="ABC_UserExternoW">
+<xs:sequence>
+<xs:element name="entra" type="tns:abcUserExterno" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcUserExterno">
+<xs:sequence>
+<xs:element name="Operacion" type="xs:string"/>
+<xs:element name="ID_INSTANCIA" type="xs:int"/>
+<xs:element name="operator" type="tns:operator"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_UserExternoWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcUserExternoResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcUserExternoResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="Get_UOMW">
 <xs:sequence>
 <xs:element name="UOM" type="tns:getUOM" minOccurs="0"/>
@@ -11475,29 +11541,15 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="ABC_UserExternoW">
+<xs:complexType name="GET_FlujosVersionW">
 <xs:sequence>
-<xs:element name="entra" type="tns:abcUserExterno" minOccurs="0"/>
+<xs:element name="parameter" type="tns:getFlujoVersion" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="abcUserExterno">
+<xs:complexType name="GET_FlujosVersionWResponse">
 <xs:sequence>
-<xs:element name="Operacion" type="xs:string"/>
-<xs:element name="ID_INSTANCIA" type="xs:int"/>
-<xs:element name="operator" type="tns:operator"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_UserExternoWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:abcUserExternoResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcUserExternoResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+<xs:element name="return" type="tns:getFlujoVersionResponse" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -11510,18 +11562,6 @@
 <xs:complexType name="procesaDocRecWResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:abcDocReceivableResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_FlujosVersionW">
-<xs:sequence>
-<xs:element name="parameter" type="tns:getFlujoVersion" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_FlujosVersionWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:getFlujoVersionResponse" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -12403,6 +12443,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="Search_PrepadosW">
+<xs:sequence>
+<xs:element name="entra" type="tns:searchItem" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Search_PrepadosWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:searchItemResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="GET_FlujoW">
 <xs:sequence>
 <xs:element name="parameter" type="tns:getFlujo" minOccurs="0"/>
@@ -12427,18 +12479,6 @@
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="idFlujo" type="xs:int"/>
 <xs:element name="flujos" type="tns:flujoVersion" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Search_PrepadosW">
-<xs:sequence>
-<xs:element name="entra" type="tns:searchItem" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Search_PrepadosWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:searchItemResponse" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -12715,18 +12755,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="ABC_MerchandiseHierarchyGroupW">
-<xs:sequence>
-<xs:element name="mhg" type="tns:abcMerchandiseHierarchyGroup" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_MerchandiseHierarchyGroupWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:abcMerchandiseHierarchyGroupResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="GET_CameraW">
 <xs:sequence>
 <xs:element name="get" type="tns:getCamera" minOccurs="0"/>
@@ -12752,6 +12780,18 @@
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="camera" type="tns:camera" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_MerchandiseHierarchyGroupW">
+<xs:sequence>
+<xs:element name="mhg" type="tns:abcMerchandiseHierarchyGroup" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_MerchandiseHierarchyGroupWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcMerchandiseHierarchyGroupResponse" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -13398,18 +13438,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="GET_ItemForBrandW">
-<xs:sequence>
-<xs:element name="itm" type="tns:getItemFor" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_ItemForBrandWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:getItemForResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="GET_UsuariosEIW">
 <xs:sequence>
 <xs:element name="parameter" type="tns:getUsuariosEI" minOccurs="0"/>
@@ -13432,6 +13460,18 @@
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="listUsu" type="tns:usuariosEI" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_ItemForBrandW">
+<xs:sequence>
+<xs:element name="itm" type="tns:getItemFor" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_ItemForBrandWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:getItemForResponse" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -13777,33 +13817,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="ABC_FlujoW">
-<xs:sequence>
-<xs:element name="parameter" type="tns:abcFlujo" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcFlujo">
-<xs:sequence>
-<xs:element name="Operacion" type="xs:string"/>
-<xs:element name="Id_instancia" type="xs:int"/>
-<xs:element name="Flujo" type="tns:flujo"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_FlujoWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:abcFlujoResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcFlujoResponse">
-<xs:sequence>
-<xs:element name="idFlujo" type="xs:int"/>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="ABC_EventW">
 <xs:sequence>
 <xs:element name="evt" type="tns:abcEvent" minOccurs="0"/>
@@ -13827,6 +13840,33 @@
 
 <xs:complexType name="abcEventResponse">
 <xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_FlujoW">
+<xs:sequence>
+<xs:element name="parameter" type="tns:abcFlujo" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcFlujo">
+<xs:sequence>
+<xs:element name="Operacion" type="xs:string"/>
+<xs:element name="Id_instancia" type="xs:int"/>
+<xs:element name="Flujo" type="tns:flujo"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_FlujoWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcFlujoResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcFlujoResponse">
+<xs:sequence>
+<xs:element name="idFlujo" type="xs:int"/>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
@@ -14573,32 +14613,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="ABC_ReportesFormatosW">
-<xs:sequence>
-<xs:element name="parameter" type="tns:abcReportesFormatos" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcReportesFormatos">
-<xs:sequence>
-<xs:element name="Operacion" type="xs:string"/>
-<xs:element name="ID_Instancia" type="xs:int"/>
-<xs:element name="repFor" type="tns:reportesFormatos"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ABC_ReportesFormatosWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:abcReportesFormatosResponse" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="abcReportesFormatosResponse">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="ABC_OperatorGroupW">
 <xs:sequence>
 <xs:element name="opg" type="tns:abcOperatorGroup" minOccurs="0"/>
@@ -14629,6 +14643,32 @@
 </xs:complexType>
 
 <xs:complexType name="abcOperatorGroupResponse">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_ReportesFormatosW">
+<xs:sequence>
+<xs:element name="parameter" type="tns:abcReportesFormatos" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcReportesFormatos">
+<xs:sequence>
+<xs:element name="Operacion" type="xs:string"/>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="repFor" type="tns:reportesFormatos"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ABC_ReportesFormatosWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:abcReportesFormatosResponse" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="abcReportesFormatosResponse">
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 </xs:sequence>
@@ -14934,6 +14974,33 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="GET_PrecioTiendaALLW">
+<xs:sequence>
+<xs:element name="pt" type="tns:getPrecioTiendaALL" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPrecioTiendaALL">
+<xs:sequence>
+<xs:element name="Operacion" type="xs:string"/>
+<xs:element name="ID_Instancia" type="xs:int"/>
+<xs:element name="ID_ITM" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GET_PrecioTiendaALLWResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:getPrecioTiendaResponseALL" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPrecioTiendaResponseALL">
+<xs:sequence>
+<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
+<xs:element name="response" type="tns:precioTienda" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="GET_FingerPrintW">
 <xs:sequence>
 <xs:element name="fp" type="tns:getFingerprint" minOccurs="0"/>
@@ -14959,33 +15026,6 @@
 <xs:sequence>
 <xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
 <xs:element name="fingerprint" type="tns:fingerprints" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_PrecioTiendaALLW">
-<xs:sequence>
-<xs:element name="pt" type="tns:getPrecioTiendaALL" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getPrecioTiendaALL">
-<xs:sequence>
-<xs:element name="Operacion" type="xs:string"/>
-<xs:element name="ID_Instancia" type="xs:int"/>
-<xs:element name="ID_ITM" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="GET_PrecioTiendaALLWResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:getPrecioTiendaResponseALL" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getPrecioTiendaResponseALL">
-<xs:sequence>
-<xs:element name="resultado" type="tns:resultado" minOccurs="0"/>
-<xs:element name="response" type="tns:precioTienda" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

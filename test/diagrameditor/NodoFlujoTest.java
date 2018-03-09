@@ -6,6 +6,7 @@
 
 package diagrameditor;
 
+import diagrameditor.workfloweditor.NodoFlujo;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 
-package diagrameditor;
+package diagrameditor.workfloweditor;
 
 /**
  *
  * @author MPA
  */
-public enum TipoNodo {
-    Inicio, Fin, Proceso, If, Split, Merge, TESTNODE
+public enum TipoDato {
+    string, integer, date, decimal
 }
+

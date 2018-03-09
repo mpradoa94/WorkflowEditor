@@ -5,9 +5,16 @@
  */
 package diagrameditor;
 
+import diagrameditor.workfloweditor.NodoRol;
+import diagrameditor.workfloweditor.NodoCondicion;
+import diagrameditor.workfloweditor.Nodo;
+import diagrameditor.workfloweditor.NodoBase;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
+import diagrameditor.exceptions.ExcepcionNodo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,20 +39,21 @@ public class GeneradorXML {
         Object[] vertices = graph.getChildVertices(parent);
         for (Object vertice : vertices) {
             mxCell cell = (mxCell) vertice;
-            Nodo nodo = (Nodo) cell.getValue();
+            NodoBase nodo = (NodoBase) cell.getValue();
             if (nodo instanceof NodoRol == false) {
-                XMLstring += nodo.generarXMLstringInicio();
+                try {
+                    XMLstring += nodo.generarXML();
+                } catch (ExcepcionNodo ex) {
+                    Logger.getLogger(GeneradorXML.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 if (cell.getChildCount() > 0) {
                     generate(cell);
                 }
-                agregarReferenciaSiguiente(cell);
-                XMLstring += nodo.generarXMLstringFin();
             } else {
                 if (cell.getChildCount() > 0) {
                     generate(cell);
                 }
             }
-
         }
     }
 
@@ -55,16 +63,16 @@ public class GeneradorXML {
         if (edgesNum > 0) {
             for (i = 0; i < edgesNum; i++) {
                 Object terminal = ((mxCell) cell.getEdgeAt(i).getTerminal(true)).getValue();
-                if (terminal instanceof Nodo) {
-                    Nodo siguiente = (Nodo) terminal;
+                if (terminal instanceof NodoBase) {
+                    NodoBase siguiente = (NodoBase) terminal;
                     if (siguiente instanceof NodoCondicion) {
                         XMLstring += "<siguiente>";
-                        XMLstring += "<numNodoSiguiente>" + ((NodoCondicion) siguiente).getNum();
+                        //XMLstring += "<numNodoSiguiente>" + ((NodoCondicion) siguiente).getNum();
                         XMLstring += "</numNodoSiguiente>";
                         XMLstring += "</siguiente>";
-                    } else if (siguiente instanceof NodoProceso) {
+                    } else if (siguiente instanceof Nodo) {
                         XMLstring += "<siguiente>";
-                        XMLstring += "<numNodoSiguiente>" + ((NodoProceso) siguiente).getNumNodo();
+                        XMLstring += "<numNodoSiguiente>" + ((Nodo) siguiente).getNumNodo();
                         XMLstring += "</numNodoSiguiente>";
                         XMLstring += "</siguiente>";
                     }

@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package diagrameditor;
+package diagrameditor.workfloweditor;
 
+import diagrameditor.exceptions.ExcepcionNodo;
 import java.io.Serializable;
 import javax.swing.JPanel;
 
@@ -13,12 +14,11 @@ import javax.swing.JPanel;
  *
  * @author MPA
  */
-public interface Nodo extends Serializable{
+public interface NodoBase extends Serializable{
     
     public void setEtiqueta(String valor);
     public String getEtiqueta();
     public void setNombre(String nombre);
     public String getNombre();
-    public String generarXMLstringInicio();
-    public String generarXMLstringFin();
+    public String generarXML() throws ExcepcionNodo;
 }

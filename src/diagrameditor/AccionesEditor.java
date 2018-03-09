@@ -5,6 +5,9 @@
  */
 package diagrameditor;
 
+import diagrameditor.workfloweditor.NodoRol;
+import diagrameditor.workfloweditor.NodoFlujo;
+import diagrameditor.workfloweditor.Nodo;
 import com.mxgraph.io.mxCodec;
 import com.mxgraph.io.mxCodecRegistry;
 import com.mxgraph.io.mxModelCodec;
@@ -61,7 +64,7 @@ public class AccionesEditor {
         mxCodecRegistry.register(new mxObjectCodec(new NodoRol()));
 
         //Registrar NodoProceso con enum
-        mxCodecRegistry.register(new mxObjectCodec(new NodoProceso()) {
+        mxCodecRegistry.register(new mxObjectCodec(new Nodo()) {
             @Override
             protected boolean isPrimitiveValue(Object value) {
                 return super.isPrimitiveValue(value) || value.getClass().isEnum();

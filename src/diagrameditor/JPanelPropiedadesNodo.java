@@ -5,6 +5,8 @@
  */
 package diagrameditor;
 
+import diagrameditor.workfloweditor.NodoCondicion;
+import diagrameditor.workfloweditor.NodoBase;
 import core.webmet.OpcionDTO;
 import core.webmet.PreguntaDTO;
 import java.awt.Color;
@@ -41,10 +43,10 @@ import javax.swing.event.DocumentListener;
 public class JPanelPropiedadesNodo extends JPanel {
 
     //TODO: refactor
-    private final Nodo nodo;
+    private final NodoBase nodo;
     private GridBagConstraints gridBagConstraints;
 
-    public JPanelPropiedadesNodo(Nodo nodo) {
+    public JPanelPropiedadesNodo(NodoBase nodo) {
         this.nodo = nodo;
         initComponents();
     }
@@ -161,7 +163,7 @@ public class JPanelPropiedadesNodo extends JPanel {
                     break;
                 case "rol":
                     if (valor != null) {
-                        add(crearCampoTexto(propiedad, ((Nodo) valor).getNombre(), false),
+                        add(crearCampoTexto(propiedad, ((NodoBase) valor).getNombre(), false),
                                 gridBagConstraints);
                     } else {
                         add(crearCampoTexto(propiedad, "", false),
@@ -216,7 +218,8 @@ public class JPanelPropiedadesNodo extends JPanel {
 
         return campo;
     }
-
+    
+    //TODO: refactor código repetido en CuestionarioPanel
     private JComboBox crearCampoCuestionario(int posY) {
         List<Cuestionario> modelos = Cuestionario.getOpcionesCuestionario();
         JComboBox combo = new JComboBox();
@@ -229,7 +232,7 @@ public class JPanelPropiedadesNodo extends JPanel {
 
             if (nodo instanceof NodoCondicion) {
                 NodoCondicion nodoCond = (NodoCondicion) nodo;
-                combo.setSelectedItem(nodoCond.getcuestionarioSeleccionado());
+                combo.setSelectedItem(nodoCond.getComparativo().getcuestionarioSeleccionado());
 
                 combo.addActionListener(new ActionListener() {
 
@@ -237,7 +240,7 @@ public class JPanelPropiedadesNodo extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         JComboBox comboBox = (JComboBox) e.getSource();
                         Cuestionario item = (Cuestionario) comboBox.getSelectedItem();
-                        nodoCond.setcuestionarioSeleccionado(item);
+                        nodoCond.getComparativo().setcuestionarioSeleccionado(item);
                         agregarCampoPregunta(posY + 1);
 
                     }
@@ -253,18 +256,18 @@ public class JPanelPropiedadesNodo extends JPanel {
         limpiarCampo(posY);
         if (nodo instanceof NodoCondicion) {
             NodoCondicion nodoCond = (NodoCondicion) nodo;
-            Cuestionario cuestionario = nodoCond.getcuestionarioSeleccionado();
+            Cuestionario cuestionario = nodoCond.getComparativo().getcuestionarioSeleccionado();
             if (cuestionario != null) {
                 int idModelo = cuestionario.getModelo().getIdModelo();
                 List<Pregunta> preguntas = Pregunta.getPreguntas(idModelo);
                 JComboBox combo = new JComboBox(new DefaultComboBoxModel(preguntas.toArray()));
-                combo.setSelectedItem(nodoCond.getPreguntaSeleccionada());
+                combo.setSelectedItem(nodoCond.getComparativo().getPreguntaSeleccionada());
                 combo.addItemListener(new ItemListener() {
 
                     @Override
                     public void itemStateChanged(ItemEvent e) {
-                        nodoCond.setPreguntaSeleccionada(((Pregunta) e.getItem()).getPreguntaDTO());
-                        agregarCampoOpcion(nodoCond.getPreguntaSeleccionada(), posY + 1);
+                        nodoCond.getComparativo().setPreguntaSeleccionada(((Pregunta) e.getItem()).getPreguntaDTO());
+                        agregarCampoOpcion(nodoCond.getComparativo().getPreguntaSeleccionada(), posY + 1);
                     }
 
                 });
@@ -314,14 +317,14 @@ public class JPanelPropiedadesNodo extends JPanel {
             JComboBox combo = new JComboBox(comboModel);
             NodoCondicion nodoCond = (NodoCondicion) nodo;
             
-            combo.setSelectedItem(nodoCond.getOpcionSeleccionada());
+            combo.setSelectedItem(nodoCond.getComparativo().getOpcionSeleccionada());
             
             combo.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
                     OpcionDTO opc = (OpcionDTO) e.getItem();
                     
-                    nodoCond.setOpcionSeleccionada(opc);
+                    nodoCond.getComparativo().setOpcionSeleccionada(opc);
                 }
             });
 

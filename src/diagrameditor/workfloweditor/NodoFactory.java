@@ -1,22 +1,22 @@
-package diagrameditor;
+package diagrameditor.workfloweditor;
 
 public class NodoFactory {
 
-    public static Nodo getNodo(String tipoNodo) {
+    public static NodoBase getNodo(String tipoNodo) {
         if (tipoNodo == null) {
             return null;
         }
         switch (tipoNodo) {
             case "NodoCondicion":
-                return new NodoCondicion("Condición", TipoNodo.Fin);
+                return new NodoCondicion("Condición");
             case "NodoFlujo":
                 return new NodoFlujo("Flujo");
             case "NodoInicio":
-                return new NodoProceso("Inicio", TipoNodo.Inicio);
+                return new Nodo("Inicio", TipoNodo.Inicio);
             case "NodoFin":
-                return new NodoProceso("Fin", TipoNodo.Fin);
+                return new Nodo("Fin", TipoNodo.Fin);
             case "NodoProceso":
-                return new NodoProceso("Proceso", TipoNodo.Proceso);
+                return new Nodo("Proceso", TipoNodo.Proceso);
             case "NodoRol":
                 return new NodoRol("Rol");
         }

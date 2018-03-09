@@ -1,5 +1,9 @@
 package diagrameditor;
 
+import diagrameditor.workfloweditor.NodoRol;
+import diagrameditor.workfloweditor.NodoCondicion;
+import diagrameditor.workfloweditor.Nodo;
+import diagrameditor.workfloweditor.NodoBase;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxICell;
@@ -33,8 +37,8 @@ class MiGraph extends mxGraph {
             if(resultado instanceof String){
                 return (resultado != null) ? resultado.toString() : "";
             }
-            else if(resultado instanceof Nodo){
-                Nodo nodo = (Nodo)resultado;
+            else if(resultado instanceof NodoBase){
+                NodoBase nodo = (NodoBase)resultado;
                 return nodo.getEtiqueta();
             }
             else{
@@ -47,16 +51,16 @@ class MiGraph extends mxGraph {
         mxCell mxcell = (mxCell) cell;
         Object valor = mxcell.getValue();
         mxICell padre = mxcell.getParent();
-        if (valor instanceof NodoProceso){
-            NodoProceso nodo = (NodoProceso) valor; 
+        if (valor instanceof Nodo){
+            Nodo nodo = (Nodo) valor; 
             if (padre.getValue() instanceof NodoRol){
-                nodo.setRol((NodoRol) padre.getValue());
+                nodo.addRol((NodoRol) padre.getValue());
             }
         }
         else if (valor instanceof NodoCondicion){
             NodoCondicion nodo = (NodoCondicion) valor;         
             if (padre.getValue() instanceof NodoRol){
-                nodo.setRol((NodoRol) padre.getValue());
+                //nodo.setRol((NodoRol) padre.getValue());
             }
         }
     }

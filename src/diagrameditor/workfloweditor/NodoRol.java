@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package diagrameditor;
+package diagrameditor.workfloweditor;
 
+import diagrameditor.exceptions.ExcepcionNodo;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,7 @@ import javax.swing.JTextField;
  *
  * @author MPA
  */
-public class NodoRol implements Nodo {
+public class NodoRol implements NodoBase {
 
     private String etiqueta;
     private String cveRol;
@@ -62,18 +63,19 @@ public class NodoRol implements Nodo {
         return cveRol;
     }
     
-    @Override
-    public String generarXMLstringInicio(){
-        String XMLstring = "<rol>";
-        XMLstring += "<cveRol>" + getCveRol() + "</cveRol>";
-        XMLstring += "<nmRol>" + getNombre() + "</nmRol>";
-        return XMLstring;
+    public String generarXML() throws ExcepcionNodo{
+        if(estaCompleto()) {
+            String XMLstring = "<cveRol> "+getCveRol() + "</cveRol>";
+            XMLstring += "<nmRol>"+ getNombre() + "</nmRol>";
+            return XMLstring;
+        }
+        else{
+            throw new ExcepcionNodo("falta informacion en campos obligatorios");
+        }
     }
     
-    @Override
-    public String generarXMLstringFin(){
-        String XMLstring = "</rol>";
-        return XMLstring;
+    private boolean estaCompleto(){
+        return getCveRol() != null && getNombre() != null;
     }
     
 }

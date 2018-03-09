@@ -274,6 +274,7 @@ public class ObjectFactory {
     private final static QName _CorteZWResponse_QNAME = new QName("http://Webmet.core/", "CorteZWResponse");
     private final static QName _GETImpuestosGeneralesW_QNAME = new QName("http://Webmet.core/", "GET_ImpuestosGeneralesW");
     private final static QName _ReporteFormasPagoW_QNAME = new QName("http://Webmet.core/", "ReporteFormasPagoW");
+    private final static QName _GetInternosXRolResponse_QNAME = new QName("http://Webmet.core/", "Get_InternosXRolResponse");
     private final static QName _OrdenesCompraPorRecibirWResponse_QNAME = new QName("http://Webmet.core/", "OrdenesCompraPorRecibirWResponse");
     private final static QName _BlockUserWResponse_QNAME = new QName("http://Webmet.core/", "BlockUserWResponse");
     private final static QName _ABCContratosWResponse_QNAME = new QName("http://Webmet.core/", "ABC_ContratosWResponse");
@@ -411,8 +412,8 @@ public class ObjectFactory {
     private final static QName _ABCTyIdW_QNAME = new QName("http://Webmet.core/", "ABC_TyIdW");
     private final static QName _GETTablaInventarioDashWResponse_QNAME = new QName("http://Webmet.core/", "GET_TablaInventarioDashWResponse");
     private final static QName _SearchOperatorWResponse_QNAME = new QName("http://Webmet.core/", "Search_OperatorWResponse");
-    private final static QName _ABCEventW_QNAME = new QName("http://Webmet.core/", "ABC_EventW");
     private final static QName _ABCRetailStoreGroupWResponse_QNAME = new QName("http://Webmet.core/", "ABC_RetailStoreGroupWResponse");
+    private final static QName _ABCEventW_QNAME = new QName("http://Webmet.core/", "ABC_EventW");
     private final static QName _ReporteAdeudosGeneradosResponse_QNAME = new QName("http://Webmet.core/", "ReporteAdeudosGeneradosResponse");
     private final static QName _GETRolesProcesoW_QNAME = new QName("http://Webmet.core/", "GET_RolesProcesoW");
     private final static QName _GETReporteFaltantesW_QNAME = new QName("http://Webmet.core/", "GET_ReporteFaltantesW");
@@ -727,8 +728,8 @@ public class ObjectFactory {
     private final static QName _GETReporteVentasUtilidadesW_QNAME = new QName("http://Webmet.core/", "GET_ReporteVentasUtilidadesW");
     private final static QName _GETFormatoSOPRWResponse_QNAME = new QName("http://Webmet.core/", "GET_FormatoSOPRWResponse");
     private final static QName _SearchGClienteWResponse_QNAME = new QName("http://Webmet.core/", "Search_GClienteWResponse");
-    private final static QName _SearchZonaWResponse_QNAME = new QName("http://Webmet.core/", "Search_ZonaWResponse");
     private final static QName _SearchGastosW_QNAME = new QName("http://Webmet.core/", "Search_GastosW");
+    private final static QName _SearchZonaWResponse_QNAME = new QName("http://Webmet.core/", "Search_ZonaWResponse");
     private final static QName _ABCCameraWResponse_QNAME = new QName("http://Webmet.core/", "ABC_CameraWResponse");
     private final static QName _SearchLocationItemWResponse_QNAME = new QName("http://Webmet.core/", "Search_LocationItemWResponse");
     private final static QName _GETReportePedidosSugW_QNAME = new QName("http://Webmet.core/", "GET_ReportePedidosSugW");
@@ -769,6 +770,7 @@ public class ObjectFactory {
     private final static QName _ActualizadorW_QNAME = new QName("http://Webmet.core/", "ActualizadorW");
     private final static QName _SearchCamW_QNAME = new QName("http://Webmet.core/", "Search_CamW");
     private final static QName _ABCGastosW_QNAME = new QName("http://Webmet.core/", "ABC_GastosW");
+    private final static QName _GetInternosXRol_QNAME = new QName("http://Webmet.core/", "Get_InternosXRol");
     private final static QName _ALLWorkstationlistW_QNAME = new QName("http://Webmet.core/", "ALL_WorkstationlistW");
     private final static QName _ReporteMercanciaEnTransitoW_QNAME = new QName("http://Webmet.core/", "ReporteMercanciaEnTransitoW");
     private final static QName _InsertMasivoW_QNAME = new QName("http://Webmet.core/", "InsertMasivoW");
@@ -2904,6 +2906,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetInternosXRol }
+     * 
+     */
+    public GetInternosXRol createGetInternosXRol() {
+        return new GetInternosXRol();
+    }
+
+    /**
      * Create an instance of {@link ALLWorkstationlistW }
      * 
      */
@@ -3712,19 +3722,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SearchGastosW }
-     * 
-     */
-    public SearchGastosW createSearchGastosW() {
-        return new SearchGastosW();
-    }
-
-    /**
      * Create an instance of {@link SearchZonaWResponse }
      * 
      */
     public SearchZonaWResponse createSearchZonaWResponse() {
         return new SearchZonaWResponse();
+    }
+
+    /**
+     * Create an instance of {@link SearchGastosW }
+     * 
+     */
+    public SearchGastosW createSearchGastosW() {
+        return new SearchGastosW();
     }
 
     /**
@@ -7069,6 +7079,14 @@ public class ObjectFactory {
      */
     public GETImpuestosGeneralesW createGETImpuestosGeneralesW() {
         return new GETImpuestosGeneralesW();
+    }
+
+    /**
+     * Create an instance of {@link GetInternosXRolResponse }
+     * 
+     */
+    public GetInternosXRolResponse createGetInternosXRolResponse() {
+        return new GetInternosXRolResponse();
     }
 
     /**
@@ -11896,6 +11914,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link UsuarioRol }
+     * 
+     */
+    public UsuarioRol createUsuarioRol() {
+        return new UsuarioRol();
+    }
+
+    /**
      * Create an instance of {@link GetReporteImpuestosVenta }
      * 
      */
@@ -12040,19 +12066,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SearchEventResponse }
-     * 
-     */
-    public SearchEventResponse createSearchEventResponse() {
-        return new SearchEventResponse();
-    }
-
-    /**
      * Create an instance of {@link SearchItemResponse }
      * 
      */
     public SearchItemResponse createSearchItemResponse() {
         return new SearchItemResponse();
+    }
+
+    /**
+     * Create an instance of {@link SearchEventResponse }
+     * 
+     */
+    public SearchEventResponse createSearchEventResponse() {
+        return new SearchEventResponse();
     }
 
     /**
@@ -12765,6 +12791,14 @@ public class ObjectFactory {
      */
     public FormatoEstado createFormatoEstado() {
         return new FormatoEstado();
+    }
+
+    /**
+     * Create an instance of {@link GetInternosRol }
+     * 
+     */
+    public GetInternosRol createGetInternosRol() {
+        return new GetInternosRol();
     }
 
     /**
@@ -14293,6 +14327,14 @@ public class ObjectFactory {
      */
     public ReporteConcentradoMovimientos createReporteConcentradoMovimientos() {
         return new ReporteConcentradoMovimientos();
+    }
+
+    /**
+     * Create an instance of {@link GetInternosRolResponse }
+     * 
+     */
+    public GetInternosRolResponse createGetInternosRolResponse() {
+        return new GetInternosRolResponse();
     }
 
     /**
@@ -16722,6 +16764,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetInternosXRolResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "Get_InternosXRolResponse")
+    public JAXBElement<GetInternosXRolResponse> createGetInternosXRolResponse(GetInternosXRolResponse value) {
+        return new JAXBElement<GetInternosXRolResponse>(_GetInternosXRolResponse_QNAME, GetInternosXRolResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link OrdenesCompraPorRecibirWResponse }{@code >}}
      * 
      */
@@ -17955,21 +18006,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ABCEventW }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://Webmet.core/", name = "ABC_EventW")
-    public JAXBElement<ABCEventW> createABCEventW(ABCEventW value) {
-        return new JAXBElement<ABCEventW>(_ABCEventW_QNAME, ABCEventW.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ABCRetailStoreGroupWResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://Webmet.core/", name = "ABC_RetailStoreGroupWResponse")
     public JAXBElement<ABCRetailStoreGroupWResponse> createABCRetailStoreGroupWResponse(ABCRetailStoreGroupWResponse value) {
         return new JAXBElement<ABCRetailStoreGroupWResponse>(_ABCRetailStoreGroupWResponse_QNAME, ABCRetailStoreGroupWResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ABCEventW }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "ABC_EventW")
+    public JAXBElement<ABCEventW> createABCEventW(ABCEventW value) {
+        return new JAXBElement<ABCEventW>(_ABCEventW_QNAME, ABCEventW.class, null, value);
     }
 
     /**
@@ -20799,21 +20850,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SearchZonaWResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://Webmet.core/", name = "Search_ZonaWResponse")
-    public JAXBElement<SearchZonaWResponse> createSearchZonaWResponse(SearchZonaWResponse value) {
-        return new JAXBElement<SearchZonaWResponse>(_SearchZonaWResponse_QNAME, SearchZonaWResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SearchGastosW }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://Webmet.core/", name = "Search_GastosW")
     public JAXBElement<SearchGastosW> createSearchGastosW(SearchGastosW value) {
         return new JAXBElement<SearchGastosW>(_SearchGastosW_QNAME, SearchGastosW.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SearchZonaWResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "Search_ZonaWResponse")
+    public JAXBElement<SearchZonaWResponse> createSearchZonaWResponse(SearchZonaWResponse value) {
+        return new JAXBElement<SearchZonaWResponse>(_SearchZonaWResponse_QNAME, SearchZonaWResponse.class, null, value);
     }
 
     /**
@@ -21174,6 +21225,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://Webmet.core/", name = "ABC_GastosW")
     public JAXBElement<ABCGastosW> createABCGastosW(ABCGastosW value) {
         return new JAXBElement<ABCGastosW>(_ABCGastosW_QNAME, ABCGastosW.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetInternosXRol }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Webmet.core/", name = "Get_InternosXRol")
+    public JAXBElement<GetInternosXRol> createGetInternosXRol(GetInternosXRol value) {
+        return new JAXBElement<GetInternosXRol>(_GetInternosXRol_QNAME, GetInternosXRol.class, null, value);
     }
 
     /**

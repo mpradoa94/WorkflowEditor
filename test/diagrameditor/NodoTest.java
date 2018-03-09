@@ -6,6 +6,7 @@
 
 package diagrameditor;
 
+import diagrameditor.workfloweditor.NodoBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -22,7 +23,7 @@ public class NodoTest {
     public void testSetEtiqueta() {
         System.out.println("setEtiqueta");
         String valor = "";
-        Nodo instancia = new NodoImpl();
+        NodoBase instancia = new NodoImpl();
         instancia.setEtiqueta(valor);
         assertEquals(valor, instancia.getEtiqueta());
     }
@@ -30,7 +31,7 @@ public class NodoTest {
     @Test
     public void testGetEtiqueta() {
         System.out.println("getEtiqueta");
-        Nodo instancia = new NodoImpl();
+        NodoBase instancia = new NodoImpl();
         String espResult = "";
         String result = instancia.getEtiqueta();
         assertEquals(espResult, result);
@@ -40,7 +41,7 @@ public class NodoTest {
     public void testSetNombre() {
         System.out.println("setNombre");
         String nombre = "";
-        Nodo instancia = new NodoImpl();
+        NodoBase instancia = new NodoImpl();
         instancia.setNombre(nombre);
         assertEquals(nombre, instancia.getNombre());
     }
@@ -48,7 +49,7 @@ public class NodoTest {
     @Test
     public void testGetNombre() {
         System.out.println("getNombre");
-        Nodo instancia = new NodoImpl();
+        NodoBase instancia = new NodoImpl();
         String espResult = "";
         String result = instancia.getNombre();
         assertEquals(espResult, result);
@@ -57,7 +58,7 @@ public class NodoTest {
     @Test
     public void testGenerarXMLstringInicio() {
         System.out.println("generateXMLstringInicio");
-        Nodo instancia = new NodoImpl();
+        NodoBase instancia = new NodoImpl();
         String espResult = "";
         String result = instancia.generarXMLstringInicio();
         assertEquals(espResult, result);
@@ -66,13 +67,13 @@ public class NodoTest {
     @Test
     public void testGenerarXMLstringFin() {
         System.out.println("generateXMLstringFin");
-        Nodo instancia = new NodoImpl();
+        NodoBase instancia = new NodoImpl();
         String espResult = "";
         String result = instancia.generarXMLstringFin();
         assertEquals(espResult, result);
     }
 
-    public class NodoImpl implements Nodo {
+    public class NodoImpl implements NodoBase {
 
         @Override
         public void setEtiqueta(String valor) {
