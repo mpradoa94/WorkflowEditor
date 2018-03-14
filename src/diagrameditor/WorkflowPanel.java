@@ -20,6 +20,7 @@ import com.mxgraph.util.mxUndoManager;
 import com.mxgraph.util.mxUndoableEdit;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxGraphSelectionModel;
+import diagrameditor.exceptions.ExcepcionNodo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -29,7 +30,10 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -41,6 +45,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 /**
@@ -121,6 +126,8 @@ public class WorkflowPanel extends EditorPanel {
         NodoBase Inicio = NodoFactory.getNodo("NodoInicio");
         NodoBase proceso = NodoFactory.getNodo("NodoProceso");
         NodoBase condicion = NodoFactory.getNodo("NodoCondicion");
+        NodoBase comparativo = NodoFactory.getNodo("NodoComparativo");
+        NodoBase comparativo2 = NodoFactory.getNodo("NodoComparativo2");
         NodoBase fin = NodoFactory.getNodo("NodoFin");
 
         shapeOptions.addOption("Flowchart", new ImageIcon(
@@ -140,6 +147,14 @@ public class WorkflowPanel extends EditorPanel {
                 DiagramEditor.class
                 .getResource("/images/rhombus.png")),
                 "swimlane", 160, 160, condicion);
+        shapeOptions.addOption("Comparativo", new ImageIcon(
+                DiagramEditor.class
+                .getResource("/images/rhombus.png")),
+                "swimlane", 160, 160, comparativo);
+        shapeOptions.addOption("Comparativo2", new ImageIcon(
+                DiagramEditor.class
+                .getResource("/images/rhombus.png")),
+                "swimlane", 160, 160, comparativo2);
         shapeOptions.addOption("End", new ImageIcon(
                 DiagramEditor.class
                 .getResource("/images/ellipse.png")),
@@ -161,19 +176,25 @@ public class WorkflowPanel extends EditorPanel {
     }
 
     private void setMouseListener(mxGraphComponent graphComponent) {
-        // MouseListener that Prints the Cell on Doubleclick
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    // Get Cell under Mousepointer
                     mxCell cell = (mxCell) getGraphComponent().getCellAt(e.getX(), e.getY());
                     String id = cell.getId();
-                    // Print Cell Label
                     if (cell != null) {
                         JOptionPane.showMessageDialog(null, "Id: " + id + " location: " + cell.getGeometry());
                         System.out.println(cell);
                     }
+                }
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)){
+                    Object cell = graphComponent.getCellAt(e.getX(), e.getY());
+                    if (cell != null)
+                        addNewCellPanel((mxCell) cell);
                 }
             }
         });
@@ -234,16 +255,18 @@ public class WorkflowPanel extends EditorPanel {
         return graphComponent;
     }
 
-    public void setListenerToGraph(MiGraph graph) {
+    public void setListenersToGraph(MiGraph graph) {
         graph.getSelectionModel().addListener(mxEvent.CHANGE, new mxEventSource.mxIEventListener() {
-
             @Override
             public void invoke(Object sender, mxEventObject evt) {
-                System.out.println("Selection in graph component" + sender.toString());
                 if (sender instanceof mxGraphSelectionModel) {
-                    for (Object cell : ((mxGraphSelectionModel) sender).getCells()) {
-                        graph.setRoleToVertex((mxCell) cell);
-                        addNewCellPanel((mxCell) cell);
+                    Object [] cells = ((mxGraphSelectionModel) sender).getCells();                                  
+                    for (Object cell : cells) {
+                        mxCell mxcell = (mxCell)cell;
+                        if (mxcell.isEdge()) { 
+                            CellNodo nodo = new CellNodo((mxCell)cell, null);
+                            nodo.setUniones();
+                        }
                     }
                 }
             }

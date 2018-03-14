@@ -17,7 +17,9 @@ import diagrameditor.exceptions.ExcepcionNodo;
  *
  * @author MPA
  */
-public class Comparativo {
+public class Comparativo implements NodoBase{
+    private String nombre;
+    private String etiqueta;
     private static Cuestionario cuestionarioSeleccionado;
     private PreguntaDTO preguntaSeleccionada;
     private OpcionDTO opcionSeleccionada;
@@ -27,6 +29,35 @@ public class Comparativo {
     
     public Comparativo(){
         
+    }
+    
+    public Comparativo(String etiqueta){
+        this.etiqueta = etiqueta;
+    }
+    
+    @Override
+    public String toString(){
+        return nombre;
+    }
+    
+     @Override
+    public String getEtiqueta() {
+        return etiqueta;
+    }
+
+    @Override
+    public void setEtiqueta(String etiqueta) {
+        this.etiqueta = etiqueta;
+    }
+
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public void setNombre(String nombreNodo) {
+        this.nombre = nombreNodo;
     }
 
     public String getVariable1() {
@@ -84,7 +115,7 @@ public class Comparativo {
             return XMLstring;
         }
         else {
-            throw new ExcepcionNodo("falta informacion en campos obligatorios");
+            throw new ExcepcionNodo("Comparativo: falta informacion en campos obligatorios");
         }
     }
     

@@ -6,7 +6,10 @@
 
 package diagrameditor;
 
+import diagrameditor.exceptions.ExcepcionNodo;
 import diagrameditor.workfloweditor.NodoFlujo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -96,30 +99,25 @@ public class NodoFlujoTest {
     }
 
     @Test
-    public void testGenerateXMLstringInicio() {
-        System.out.println("generateXMLstringInicio");
-        
-        NodoFlujo instancia = new NodoFlujo();
-        instancia.setNombre("test");
-        instancia.setIdFlujo(0);
-        instancia.setIdVersion(0);
-        
-        String expResult = "<flujo "
-                + "idFlujo=\"0\" "
-                + "idVersion=\"0\" "
-                + "nmFlujo=\"test\">";
-        
-        String result = instancia.generarXMLstringInicio();
-        assertEquals(expResult, result);
-    }
-
-    @Test
-    public void testGenerateXMLstringFin() {
-        System.out.println("generateXMLstringFin");
-        NodoFlujo instancia = new NodoFlujo();
-        String expResult = "</flujo>";
-        String result = instancia.generarXMLstringFin();
-        assertEquals(expResult, result);
+    public void testGenerateXML() {
+        try {
+            System.out.println("generateXMLstringInicio");
+            
+            NodoFlujo instancia = new NodoFlujo();
+            instancia.setNombre("test");
+            instancia.setIdFlujo(0);
+            instancia.setIdVersion(0);
+            
+            String expResult = "<flujo "
+                    + "idFlujo=\"0\" "
+                    + "idVersion=\"0\" "
+                    + "nmFlujo=\"test\">";
+            
+            String result = instancia.generarXML();
+            assertEquals(expResult, result);
+        } catch (ExcepcionNodo ex) {
+            Logger.getLogger(NodoFlujoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

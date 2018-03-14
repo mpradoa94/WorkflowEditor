@@ -3,8 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/DiagramEditor.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/workfloweditor/Comparativo.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/CellNodo.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/WorkflowPanel.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/workfloweditor/TipoDato.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/workfloweditor/NodoRol.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/AccionesEditor.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/MiGraphComponent.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/MiGraph.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/GeneradorXML.java</file>
             <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/LogIn.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/workfloweditor/NodoFlujo.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/workfloweditor/NodoCondicion.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/workfloweditor/NodoSiguiente.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/workfloweditor/NodoBase.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/exceptions/ExcepcionNodo.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/workfloweditor/NodoFactory.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/TipoEditor.java</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/JPanelPropiedadesNodo.java</file>
             <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/resources/nuevoFlujo.xml</file>
+            <file>file:/C:/Users/MPA/Documents/NetBeansProjects/DiagramEditor/src/diagrameditor/workfloweditor/PropiedadesNodo.java</file>
         </group>
     </open-files>
 </project-private>

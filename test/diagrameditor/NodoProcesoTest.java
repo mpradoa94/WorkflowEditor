@@ -5,9 +5,12 @@
  */
 package diagrameditor;
 
-import diagrameditor.workfloweditor.NodoProceso;
+import diagrameditor.exceptions.ExcepcionNodo;
+import diagrameditor.workfloweditor.Nodo;
 import diagrameditor.workfloweditor.NodoRol;
 import diagrameditor.workfloweditor.TipoNodo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -24,7 +27,7 @@ public class NodoProcesoTest {
     public void testSetGetEtiqueta() {
         System.out.println("setEtiqueta");
         String value = "Proceso";
-        NodoProceso instancia = new NodoProceso();
+        Nodo instancia = new Nodo();
         instancia.setEtiqueta(value);
         assertEquals(value, instancia.getEtiqueta());
     }
@@ -33,7 +36,7 @@ public class NodoProcesoTest {
     public void testSetGetNombre() {
         System.out.println("setNombre");
         String nombre = "Nombre";
-        NodoProceso instancia = new NodoProceso();
+        Nodo instancia = new Nodo();
         instancia.setNombre(nombre);
         assertEquals(nombre, instancia.getNombre());
     }
@@ -42,7 +45,7 @@ public class NodoProcesoTest {
     public void testSetGetNumNodo() {
         System.out.println("setNumNodo");
         int numNodo = 0;
-        NodoProceso instancia = new NodoProceso();
+        Nodo instancia = new Nodo();
         instancia.setNumNodo(numNodo);
         assertEquals(numNodo, instancia.getNumNodo());
     }
@@ -51,17 +54,17 @@ public class NodoProcesoTest {
     public void testSetGetTipo() {
         System.out.println("setTipo");
         TipoNodo tipo = TipoNodo.Proceso;
-        NodoProceso instancia = new NodoProceso();
-        instancia.setTipo(tipo);
-        assertEquals(tipo, instancia.getTipo());
+        Nodo instancia = new Nodo();
+        instancia.setTipoNodo(tipo);
+        assertEquals(tipo, instancia.getTipoNodo());
     }
 
     @Test
     public void testSetGetRol() {
         System.out.println("setRol");
         NodoRol rol = null;
-        NodoProceso instancia = new NodoProceso();
-        instancia.setRol(rol);
+        Nodo instancia = new Nodo();
+        instancia.addRol(rol);
         assertEquals(rol, instancia.getRol());
     }
 
@@ -69,7 +72,7 @@ public class NodoProcesoTest {
     public void testSetGetTiempoNodo() {
         System.out.println("setTiempoNodo");
         int tiempoNodo = 0;
-        NodoProceso instancia = new NodoProceso();
+        Nodo instancia = new Nodo();
         instancia.setTiempoNodo(tiempoNodo);
         assertEquals(tiempoNodo, instancia.getTiempoNodo());
     }
@@ -78,49 +81,35 @@ public class NodoProcesoTest {
     public void testSetGetTiempoNodoMax() {
         System.out.println("setTiempoNodoMax");
         int tiempoNodoMax = 0;
-        NodoProceso instancia = new NodoProceso();
+        Nodo instancia = new Nodo();
         instancia.setTiempoNodoMax(tiempoNodoMax);
         assertEquals(tiempoNodoMax, instancia.getTiempoNodoMax());
     }
 
     @Test
-    public void testGenerateXMLstringInicio() {
-        System.out.println("generateXMLstringInicio");
-
-        NodoProceso instancia = new NodoProceso();
-        instancia.setNombre("Proceso");
-        instancia.setNumNodo(0);
-        instancia.setTipo(TipoNodo.Proceso);
-        instancia.setTiempoNodo(0);
-        instancia.setTiempoNodoMax(2);
-
-        String expResult = "<nodos "
-                + "numNodo=\"0\" "
-                + "nombreNodo=\"Proceso\" "
-                + "tipoNodo=\"Proceso\" "
-                + "tiempoNodo=\"0\" "
-                + "tiempoNodoMax=\"2\" >";
-
-        String result = instancia.generarXMLstringInicio();
-        assertEquals(expResult, result);
-    }
-
-    @Test
-    public void testGenerateXMLstringFin() {
-        System.out.println("generateXMLstringFin");
-
-        NodoProceso instancia = new NodoProceso();
-        instancia.setRol(new NodoRol());
-        instancia.setTipo(TipoNodo.Proceso);
-
-        String expResult = "<rol>"
-                + "<cveRol>null</cveRol>"
-                + "<nmRol>null</nmRol>"
-                + "</rol>"
-                + "</nodos>";
-
-        String result = instancia.generarXMLstringFin();
-        assertEquals(expResult, result);
+    public void testGenerateXML() {
+        try {
+            System.out.println("generateXMLstringInicio");
+            
+            Nodo instancia = new Nodo();
+            instancia.setNombre("Proceso");
+            instancia.setNumNodo(0);
+            instancia.setTipoNodo(TipoNodo.Proceso);
+            instancia.setTiempoNodo(0);
+            instancia.setTiempoNodoMax(2);
+            
+            String expResult = "<nodos "
+                    + "numNodo=\"0\" "
+                    + "nombreNodo=\"Proceso\" "
+                    + "tipoNodo=\"Proceso\" "
+                    + "tiempoNodo=\"0\" "
+                    + "tiempoNodoMax=\"2\" >";
+            
+            String result = instancia.generarXML();
+            assertEquals(expResult, result);
+        } catch (ExcepcionNodo ex) {
+            Logger.getLogger(NodoProcesoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

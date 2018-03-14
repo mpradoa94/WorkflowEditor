@@ -44,13 +44,18 @@ public class Nodo implements NodoBase{
         this.nombre = nombreNodo;
         this.tipoNodo = tipoNodo;
     }
+    
+    @Override
+    public String toString(){
+        return nombre;
+    }
 
     public int getNumNodo() {
         return numNodo;
     }
 
     public void setNumNodo(int numNodo) {
-        this.numNodo = numNodo;
+        this.numNodo = new Integer(numNodo);
     }
     
     @Override
@@ -128,7 +133,8 @@ public class Nodo implements NodoBase{
     public void addRol(NodoRol rol){
         if(roles == null)
             roles = new ArrayList();
-        this.roles.add(rol);
+        if (!roles.contains(rol))
+            this.roles.add(rol);
     }
     
     @Override
@@ -167,7 +173,7 @@ public class Nodo implements NodoBase{
             return XMLstring;
         }
         else {
-            throw new ExcepcionNodo("falta informacion en campos obligatorios");
+            throw new ExcepcionNodo("Nodo: falta informacion en campos obligatorios");
         }
     }
     

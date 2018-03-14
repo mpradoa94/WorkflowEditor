@@ -6,6 +6,7 @@
 
 package diagrameditor;
 
+import diagrameditor.exceptions.ExcepcionNodo;
 import diagrameditor.workfloweditor.NodoBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -56,20 +57,11 @@ public class NodoTest {
     }
 
     @Test
-    public void testGenerarXMLstringInicio() {
+    public void testGenerarXMLstringInicio() throws ExcepcionNodo {
         System.out.println("generateXMLstringInicio");
         NodoBase instancia = new NodoImpl();
         String espResult = "";
-        String result = instancia.generarXMLstringInicio();
-        assertEquals(espResult, result);
-    }
-
-    @Test
-    public void testGenerarXMLstringFin() {
-        System.out.println("generateXMLstringFin");
-        NodoBase instancia = new NodoImpl();
-        String espResult = "";
-        String result = instancia.generarXMLstringFin();
+        String result = instancia.generarXML();
         assertEquals(espResult, result);
     }
 
@@ -93,12 +85,7 @@ public class NodoTest {
         }
 
         @Override
-        public String generarXMLstringInicio() {
-            return "";
-        }
-
-        @Override
-        public String generarXMLstringFin() {
+        public String generarXML() {
             return "";
         }
     }

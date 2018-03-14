@@ -1,5 +1,6 @@
 package diagrameditor;
 
+import com.mxgraph.swing.handler.mxGraphHandler;
 import com.mxgraph.swing.handler.mxKeyboardHandler;
 import com.mxgraph.swing.handler.mxRubberband;
 import com.mxgraph.util.mxResources;
@@ -48,7 +49,7 @@ public class DiagramEditor {
         new mxKeyboardHandler(graphComponent);
         
         WorkflowPanel editor = new WorkflowPanel(graphComponent);
-        editor.setListenerToGraph(graph);
+        editor.setListenersToGraph(graph);
         frameEditor = createFrame(new BarraMenuPrincipal(editor), editor);
         frameEditor.setVisible(true);
         actualizarTitulo();

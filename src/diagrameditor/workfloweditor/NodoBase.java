@@ -16,6 +16,8 @@ import javax.swing.JPanel;
  */
 public interface NodoBase extends Serializable{
     
+    @Override
+    public String toString();
     public void setEtiqueta(String valor);
     public String getEtiqueta();
     public void setNombre(String nombre);

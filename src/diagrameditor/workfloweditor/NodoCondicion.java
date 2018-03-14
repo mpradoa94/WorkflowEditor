@@ -36,6 +36,11 @@ public class NodoCondicion implements NodoBase{
     }
     
     @Override
+    public String toString(){
+        return nombre;
+    }
+    
+    @Override
     public String getEtiqueta() {
         return etiqueta;
     }
@@ -57,6 +62,12 @@ public class NodoCondicion implements NodoBase{
 
     public NodoCondicion getCondicion() {
         return condicion;
+    }
+    
+    public void setCondicion(NodoCondicion condicion) throws ExcepcionNodo {
+        if (comparativo == null)
+            this.condicion = condicion;
+        else throw new ExcepcionNodo("");
     }
 
     public Comparativo getComparativo() {
@@ -87,7 +98,7 @@ public class NodoCondicion implements NodoBase{
             XMLstring += getComparativo().generarXML();
         }
         else {
-            throw new ExcepcionNodo("falta informacion en campos obligatorios");
+            throw new ExcepcionNodo("Condicion: falta informacion en campos obligatorios");
         }
         
         if (getComparativo2() != null) {

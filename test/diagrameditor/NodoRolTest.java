@@ -5,7 +5,10 @@
  */
 package diagrameditor;
 
+import diagrameditor.exceptions.ExcepcionNodo;
 import diagrameditor.workfloweditor.NodoRol;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -47,28 +50,21 @@ public class NodoRolTest {
 
     @Test
     public void testGenerarXMLstringInicio() {
-        System.out.println("generarXMLstringInicio");
-        NodoRol instancia = new NodoRol();
-        instancia.setCveRol("CVE");
-        instancia.setNombre("Rol");
-        
-        String expResult = "<rol>"
-                + "<cveRol>CVE</cveRol>"
-                + "<nmRol>Rol</nmRol>";
-        
-        String result = instancia.generarXMLstringInicio();
-        assertEquals(expResult, result);
-    }
-
-    @Test
-    public void testGenerarXMLstringFin() {
-        System.out.println("generarXMLstringFin");
-        NodoRol instancia = new NodoRol();
-        
-        String expResult = "</rol>";
-        
-        String result = instancia.generarXMLstringFin();
-        assertEquals(expResult, result);
+        try {
+            System.out.println("generarXMLstringInicio");
+            NodoRol instancia = new NodoRol();
+            instancia.setCveRol("CVE");
+            instancia.setNombre("Rol");
+            
+            String expResult = "<rol>"
+                    + "<cveRol>CVE</cveRol>"
+                    + "<nmRol>Rol</nmRol>";
+            
+            String result = instancia.generarXML();
+            assertEquals(expResult, result);
+        } catch (ExcepcionNodo ex) {
+            Logger.getLogger(NodoRolTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

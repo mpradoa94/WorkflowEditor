@@ -34,6 +34,11 @@ public class NodoRol implements NodoBase {
         this.etiqueta = etiqueta;
         this.nmRol = "";
     }
+    
+    @Override
+    public String toString(){
+        return nmRol;
+    }
 
     @Override
     public void setEtiqueta(String value) {
@@ -70,7 +75,7 @@ public class NodoRol implements NodoBase {
             return XMLstring;
         }
         else{
-            throw new ExcepcionNodo("falta informacion en campos obligatorios");
+            throw new ExcepcionNodo("Rol: falta informacion en campos obligatorios");
         }
     }
     

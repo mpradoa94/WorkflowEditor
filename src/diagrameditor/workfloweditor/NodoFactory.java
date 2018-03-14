@@ -9,6 +9,10 @@ public class NodoFactory {
         switch (tipoNodo) {
             case "NodoCondicion":
                 return new NodoCondicion("Condición");
+            case "NodoComparativo":
+                return new Comparativo("Comparativo");
+            case "NodoComparativo2":
+                return new Comparativo2("Comparativo2");
             case "NodoFlujo":
                 return new NodoFlujo("Flujo");
             case "NodoInicio":

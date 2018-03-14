@@ -37,7 +37,6 @@ public class NodoFlujo implements NodoBase {
         this.idFlujo = idFlujo;
         this.nombre = nmFlujo;
         this.idVersion = idVersion;
-        this.nodos = new ArrayList();
     }
 
     public int getIdFlujo() {
@@ -90,7 +89,10 @@ public class NodoFlujo implements NodoBase {
     }
     
     public void addNodo(NodoBase nodo){
-        this.nodos.add(nodo);
+        if (nodos == null)
+            this.nodos = new ArrayList();
+        if(!nodos.contains(nodo))
+            this.nodos.add(nodo);
     }
 
     public NodoBase getFin() {

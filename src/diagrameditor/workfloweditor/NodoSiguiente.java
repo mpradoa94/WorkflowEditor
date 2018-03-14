@@ -16,14 +16,24 @@ public class NodoSiguiente implements NodoBase{
     private String etiqueta;
     private String nombre;
     private NodoCondicion condicion;
-    private Nodo nodoSiguiente;
+    private int numNodoSiguiente;
     
     public NodoSiguiente(){
         
     }
     
-    public NodoSiguiente(Nodo nodoSiguiente){
-        this.nodoSiguiente = nodoSiguiente;
+    public NodoSiguiente(int numNodoSiguiente){
+        this.numNodoSiguiente = numNodoSiguiente;
+    }
+    
+    public NodoSiguiente(int numNodoSiguiente, NodoCondicion condicion){
+        this.numNodoSiguiente = numNodoSiguiente;
+        this.condicion = condicion;
+    }
+    
+    @Override
+    public String toString(){
+        return ""+numNodoSiguiente;
     }
 
     public NodoCondicion getCondicion() {
@@ -35,11 +45,7 @@ public class NodoSiguiente implements NodoBase{
     }
 
     public int getNumNodoSiguiente() {
-        return nodoSiguiente.getNumNodo();
-    }
-
-    public void setNodoSiguiente(Nodo nodoSiguiente) {
-        this.nodoSiguiente = nodoSiguiente;
+        return numNodoSiguiente;
     }
     
     @Override

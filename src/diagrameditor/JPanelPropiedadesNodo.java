@@ -123,7 +123,7 @@ public class JPanelPropiedadesNodo extends JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = posY;
 
-        if (tipo.isAssignableFrom(Integer.TYPE)) {
+        if (tipo.isAssignableFrom(Integer.TYPE) || tipo.isAssignableFrom(Integer.class)) {
             JSpinner campo = new JSpinner();
             if (valor != null) {
                 campo.setValue(valor);
@@ -173,13 +173,15 @@ public class JPanelPropiedadesNodo extends JPanel {
                 case "cuestionarioSeleccionado":
                     add(crearCampoCuestionario(posY), gridBagConstraints);
                     break;
-                case "preguntaSeleccionada":
-                    add(crearCampoTexto(propiedad, "", false),
-                            gridBagConstraints);
-                    break;
-                case "opcionSeleccionada":
-                    add(crearCampoTexto(propiedad, "", false),
-                            gridBagConstraints);
+                default:
+                    if (valor != null) {
+                        add(crearCampoTexto(propiedad, valor.toString(), false),
+                                gridBagConstraints);
+                    }
+                    else{
+                        add(crearCampoTexto(propiedad, "", false),
+                                gridBagConstraints);
+                    }
                     break;
             }
         }

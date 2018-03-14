@@ -1,16 +1,13 @@
 package diagrameditor;
 
-import diagrameditor.workfloweditor.NodoRol;
-import diagrameditor.workfloweditor.NodoCondicion;
-import diagrameditor.workfloweditor.Nodo;
 import diagrameditor.workfloweditor.NodoBase;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
-import com.mxgraph.model.mxICell;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,57 +18,51 @@ import java.util.List;
 class MiGraph extends mxGraph {
 
     protected Object edgeTemplate;
+    private final List<String> errors;
 
     public MiGraph() {
         setAlternateEdgeStyle("edgeStyle=mxEdgeStyle.ElbowConnector;elbow=vertical");
+        errors = new ArrayList();
     }
 
     public void setEdgeTemplate(Object template) {
         edgeTemplate = template;
     }
-    
+
     @Override
-    public String convertValueToString(Object cell)
-    {
-            Object resultado = model.getValue(cell);
-            if(resultado instanceof String){
-                return (resultado != null) ? resultado.toString() : "";
-            }
-            else if(resultado instanceof NodoBase){
-                NodoBase nodo = (NodoBase)resultado;
-                return nodo.getEtiqueta();
-            }
-            else{
-                return "";          
-            }
-    }
-    
-    public void setRoleToVertex(Object cell)
-    {
-        mxCell mxcell = (mxCell) cell;
-        Object valor = mxcell.getValue();
-        mxICell padre = mxcell.getParent();
-        if (valor instanceof Nodo){
-            Nodo nodo = (Nodo) valor; 
-            if (padre.getValue() instanceof NodoRol){
-                nodo.addRol((NodoRol) padre.getValue());
-            }
-        }
-        else if (valor instanceof NodoCondicion){
-            NodoCondicion nodo = (NodoCondicion) valor;         
-            if (padre.getValue() instanceof NodoRol){
-                //nodo.setRol((NodoRol) padre.getValue());
-            }
+    public String convertValueToString(Object cell) {
+        Object resultado = model.getValue(cell);
+        if (resultado instanceof String) {
+            return (resultado != null) ? resultado.toString() : "";
+        } else if (resultado instanceof NodoBase) {
+            NodoBase nodo = (NodoBase) resultado;
+            return nodo.getEtiqueta();
+        } else {
+            return "";
         }
     }
 
+    @Override
+    public boolean isValidDropTarget(Object cell, Object[] cells) {
+        boolean res = (cell == null || isSwimlane(cell));
+        for (Object cel : cells) {
+            CellNodo cellNodo = new CellNodo((mxCell) cel, cell);
+            if (res) {
+                res = cellNodo.dropValido();
+                errors.addAll(cellNodo.getErrors());
+            }
+        }
+        return res;
+    }
+
+    @Override
     public String getToolTipForCell(Object cell) {
         String tip = "<html>";
         mxGeometry geo = getModel().getGeometry(cell);
         mxCellState estado = getView().getState(cell);
         NumberFormat formatoNum = NumberFormat.getInstance();
         mxCell mxcell = (mxCell) cell;
-        
+
         if (getModel().isEdge(cell)) {
             tip += "points={";
 
@@ -139,7 +130,9 @@ class MiGraph extends mxGraph {
 
         return tip;
     }
-    
-    
+
+    public List<String> getErrors() {
+        return errors;
+    }
 
 }

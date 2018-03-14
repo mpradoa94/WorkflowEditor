@@ -96,7 +96,7 @@ public class PropiedadesNodo {
             return XMLstring;
         }
         else {
-            throw new ExcepcionNodo("falta informacion en campos obligatorios");
+            throw new ExcepcionNodo("Propiedades: falta informacion en campos obligatorios");
         }
     }
     

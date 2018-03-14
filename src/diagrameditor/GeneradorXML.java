@@ -13,6 +13,7 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 import diagrameditor.exceptions.ExcepcionNodo;
+import diagrameditor.workfloweditor.NodoFlujo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,9 +41,10 @@ public class GeneradorXML {
         for (Object vertice : vertices) {
             mxCell cell = (mxCell) vertice;
             NodoBase nodo = (NodoBase) cell.getValue();
-            if (nodo instanceof NodoRol == false) {
+            if (nodo instanceof NodoFlujo) {
                 try {
                     XMLstring += nodo.generarXML();
+                    break;
                 } catch (ExcepcionNodo ex) {
                     Logger.getLogger(GeneradorXML.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -55,6 +57,7 @@ public class GeneradorXML {
                 }
             }
         }
+        
     }
 
     private void agregarReferenciaSiguiente(mxCell cell) {
