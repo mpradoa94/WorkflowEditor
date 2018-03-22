@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 
-package diagrameditor;
+package diagrameditor.cuestionario;
 
 import core.webmet.EJBWebServicev20;
+import core.webmet.EJBWebServicev20_Service;
 import core.webmet.GenerateUrlIndata;
 import core.webmet.GenerateUrlResponse;
 import java.io.BufferedReader;
@@ -24,15 +25,20 @@ import java.util.logging.Logger;
  *
  * @author MPA
  */
-public class Precondiciones {
+public class Funciones {
+    private static Funciones instancia;
     private final List funciones;
     
-    public Precondiciones (){
+    private Funciones (){
         funciones = new ArrayList();
-        getPrecondiciones(getUri());
+        getFuncionesWebService(getUri());
     }
     
-    private void getPrecondiciones(String uri){
+    static {
+        instancia = new Funciones();
+    }
+    
+    private void getFuncionesWebService(String uri){
         if (uri.length() > 0) {
            
             try {
@@ -49,22 +55,27 @@ public class Precondiciones {
                         funciones.add(new Precondicion(inputSeparado[0]));
                 }
             } catch (MalformedURLException ex) {
-                Logger.getLogger(CuestionarioPanel.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
             } catch (IOException ex) {
-                Logger.getLogger(CuestionarioPanel.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
             }
 
         }
     }
 
     private String getUri() {
-        EJBWebServicev20 port = DiagramEditor.getPort();
+        EJBWebServicev20_Service webService = new EJBWebServicev20_Service();
+        EJBWebServicev20 port = webService.getEJBWebServicev20Port();
         GenerateUrlIndata indata = new GenerateUrlIndata();
         indata.setNmArchivo("funciones.txt");
         indata.setNmContenedor("LegalPro Produccion/Notaria 52/23_307");
         
         GenerateUrlResponse respuesta = port.generaUrlW(indata);
         return respuesta.getURI();
+    }
+    
+    public static Funciones getInstancia(){
+        return instancia;
     }
     
     public List getFunciones(){

@@ -42,8 +42,9 @@ public class CuestionarioPanel extends EditorPanel {
 
         tabbedPanel = new javax.swing.JTabbedPane();
         tabEncabezado = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         tabPrecondiciones = new javax.swing.JPanel();
-        boldBtn = new javax.swing.JButton();
+        agregarPrecond = new javax.swing.JButton();
         tabReporte = new javax.swing.JPanel();
         cardPanel = new javax.swing.JPanel();
         encabezadoCard = new javax.swing.JPanel();
@@ -71,23 +72,31 @@ public class CuestionarioPanel extends EditorPanel {
             }
         });
 
+        jButton1.setText("jButton1");
+
         javax.swing.GroupLayout tabEncabezadoLayout = new javax.swing.GroupLayout(tabEncabezado);
         tabEncabezado.setLayout(tabEncabezadoLayout);
         tabEncabezadoLayout.setHorizontalGroup(
             tabEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 206, Short.MAX_VALUE)
+            .addGroup(tabEncabezadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addContainerGap())
         );
         tabEncabezadoLayout.setVerticalGroup(
             tabEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 319, Short.MAX_VALUE)
+            .addGroup(tabEncabezadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addContainerGap(285, Short.MAX_VALUE))
         );
 
         tabbedPanel.addTab("Encabezado", tabEncabezado);
 
-        boldBtn.setText("N");
-        boldBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        agregarPrecond.setText("Agregar precondicion");
+        agregarPrecond.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                boldBtnMouseClicked(evt);
+                agregarPrecondMouseClicked(evt);
             }
         });
 
@@ -97,14 +106,14 @@ public class CuestionarioPanel extends EditorPanel {
             tabPrecondicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabPrecondicionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(boldBtn)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addComponent(agregarPrecond, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addContainerGap())
         );
         tabPrecondicionesLayout.setVerticalGroup(
             tabPrecondicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabPrecondicionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(boldBtn)
+                .addComponent(agregarPrecond)
                 .addContainerGap(285, Short.MAX_VALUE))
         );
 
@@ -225,8 +234,8 @@ public class CuestionarioPanel extends EditorPanel {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(275, Short.MAX_VALUE))
         );
 
         cardPanel.add(precondicionesCard, "precondicionesCard");
@@ -289,25 +298,17 @@ public class CuestionarioPanel extends EditorPanel {
         }
     }//GEN-LAST:event_tabbedPanelStateChanged
 
-    private void boldBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boldBtnMouseClicked
-        boldSeleccionado = !boldSeleccionado;
-        int style = 0;
-        Font fuenteActual = precondicionesText.getFont();
-        if(boldSeleccionado) {
-            style |= Font.BOLD;
-        }
-        else {
-            style = Font.PLAIN;
-        }
-        precondicionesText.setFont(new Font(fuenteActual.getFontName(), style, fuenteActual.getSize()));
-    }//GEN-LAST:event_boldBtnMouseClicked
+    private void agregarPrecondMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarPrecondMouseClicked
+        
+    }//GEN-LAST:event_agregarPrecondMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton boldBtn;
+    private javax.swing.JButton agregarPrecond;
     private javax.swing.JPanel cardPanel;
     private javax.swing.JPanel encabezadoCard;
     private javax.swing.JTextArea encabezadoOutput;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -332,15 +333,14 @@ public class CuestionarioPanel extends EditorPanel {
 
     private void miInit() {
         boldSeleccionado = false;
-        Precondiciones precond = new Precondiciones();
+        Funciones precond = Funciones.getInstancia();
         new AutoCompletar(precondicionesText, precond.getFunciones()).init();
         setAutoCompletarPrecond();
         setEncabezado();
-
     }
 
     private void setAutoCompletarPrecond() {
-        Precondiciones precond = new Precondiciones();
+        Funciones precond = Funciones.getInstancia();
         AutoCompletar autocompletar = new AutoCompletar(precondicionesText, precond.getFunciones());
         autocompletar.init();
        

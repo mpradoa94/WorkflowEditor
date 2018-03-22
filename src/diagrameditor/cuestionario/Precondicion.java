@@ -3,45 +3,48 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package diagrameditor;
+package diagrameditor.cuestionario;
 
 /**
  *
  * @author MPA
  */
 public class Precondicion {
-    
+
     private String funcion;
     private String nombre;
-    private String params;
     private String descripcion;
-    
+
     public Precondicion(String funcion, String descripcion) {
         this.funcion = funcion;
-        obtenerElementosFunc();
         this.descripcion = descripcion;
+        obtenerNombreFunc();
     }
-    
+
     public Precondicion(String nombre) {
         this.nombre = nombre;
         this.descripcion = "";
-    }   
-    
+    }
+
     @Override
     public String toString() {
-        return getNombre();
+        return getFuncion();
     }
-    
-    private void obtenerElementosFunc(){
-        nombre = funcion;
-        if (nombre.startsWith("@@"))
-            nombre = nombre.substring(2);
-        int posDerParen = funcion.indexOf('(');
-        int posIzqParen = funcion.indexOf(')');
-        params = funcion.substring(posDerParen, posIzqParen);
+
+    private void obtenerNombre() {
+        nombre = funcion.replace("@@", "");
     }
-    
+
+    private void obtenerNombreFunc() {
+        int indexIzq = funcion.indexOf("(");
+        if (indexIzq >= 0) {
+            nombre = funcion.substring(0, indexIzq);
+            nombre = nombre.replace("@@", "");
+        }
+        else
+            nombre = funcion.replace("@@", "");
+    }
+
     public String getFuncion() {
         return funcion;
     }
@@ -65,5 +68,4 @@ public class Precondicion {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
 }
